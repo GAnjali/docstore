@@ -20,6 +20,15 @@ class FileService {
             throw error;
         }
     }
+
+    static async getAFile(id) {
+        try {
+            const {rows} = await db.query(queries.GET_A_FILE, [id]);
+            return rows[0];
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default FileService;

@@ -38,6 +38,23 @@ class FileController {
             return util.send(res);
         }
     }
+
+    static async getAFile(req, res) {
+        const {id} = req.params;
+        try {
+            const theFile = await FileService.getAFile(id);
+
+            if (!theFile) {
+                util.setError(404, `Cannot find file with the id ${id}`);
+            } else {
+                util.setSuccess(200, 'Found File!', theFile);
+            }
+            return util.send(res);
+        } catch (error) {
+            util.setError(404, error);
+            return util.send(res);
+        }
+    }
 }
 
 export default FileController;
