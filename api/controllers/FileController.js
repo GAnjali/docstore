@@ -32,7 +32,7 @@ class FileController {
             util.setSuccess(201, 'File Added!', newFile);
             return util.send(res);
         } catch (error) {
-            if((error.message).includes("duplicate key value violates unique constraint"))
+            if ((error.message).includes("duplicate key value violates unique constraint"))
                 util.setError(400, "Cannot create a File with Duplicate name, Please provide unique file name");
             else util.setError(400, error.message);
             return util.send(res);
@@ -52,6 +52,39 @@ class FileController {
             return util.send(res);
         } catch (error) {
             util.setError(404, error);
+            return util.send(res);
+        }
+    }
+
+    static async updateFile(req, res) {
+        const updateData = req.body;
+        const {id} = req.params;
+        try {
+            const updateFile = await FileService.update(id, updateData);
+            if (!updateFile) {
+                util.setError(404, `Cannot find file with the id: ${id}`);
+            } else {
+                util.setSuccess(200, 'File updated', updateFile);
+            }
+            return util.send(res);
+        } catch (error) {
+            util.setError(404, error);
+            return util.send(res);
+        }
+    }
+
+    static async deleteFile(req, res) {
+        const {id} = req.params;
+        try {
+            const fileToDelete = await FileService.deleteFile(id);
+            if (fileToDelete) {
+                util.setSuccess(200, 'File deleted');
+            } else {
+                util.setError(404, `File with the id ${id} cannot be found`);
+            }
+            return util.send(res);
+        } catch (error) {
+            util.setError(400, error);
             return util.send(res);
         }
     }

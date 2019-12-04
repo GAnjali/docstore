@@ -29,6 +29,35 @@ class FileService {
             throw error;
         }
     }
+
+    static async update(id, updateFile) {
+        try {
+            const {rows} = await db.query(queries.GET_A_FILE, [id]);
+            if (rows[0]) {
+                const updatingFile = [updateFile.name || rows[0].name,
+                    updateFile.content || rows[0].content, id];
+                await db.query(queries.UPDATE_A_FILE, updatingFile);
+                return updatingFile;
+            }
+            return null;
+        } catch (err) {
+            return err;
+        }
+    }
+
+    static async deleteFile(id) {
+        try {
+            const fileToDelete = await db.query(queries.GET_A_FILE, [id]);
+
+            if (fileToDelete) {
+                const deletedFile = await db.query(queries.DELETE_A_FILE, [id]);
+                return deletedFile;
+            }
+            return null;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default FileService;
