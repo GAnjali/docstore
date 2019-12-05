@@ -1,21 +1,17 @@
-import db from '../../db';
-
-const queries = require('../../db/queries');
+import database from "../../db/models/index"
 
 class FileService {
     static async getAllFiles() {
         try {
-            const {rows} = await db.query(queries.GET_ALL_FILES);
-            return rows;
+            return await database.File.findAll();
         } catch (error) {
             throw error;
         }
     }
 
-    static async addFile(file) {
+    static async addFile(newFile) {
         try {
-            const {rows} = await db.query(queries.INSERT_A_FILE, file);
-            return rows;
+            return await database.File.create(newFile);
         } catch (error) {
             throw error;
         }
@@ -23,8 +19,11 @@ class FileService {
 
     static async getAFile(id) {
         try {
-            const {rows} = await db.query(queries.GET_A_FILE, [id]);
-            return rows[0];
+            const theFile = await database.File.findOne({
+                where: { id: Number(id) }
+            });
+
+            return theFile;
         } catch (error) {
             throw error;
         }
@@ -32,25 +31,29 @@ class FileService {
 
     static async update(id, updateFile) {
         try {
-            const {rows} = await db.query(queries.GET_A_FILE, [id]);
-            if (rows[0]) {
-                const updatingFile = [updateFile.name || rows[0].name,
-                    updateFile.content || rows[0].content, id];
-                await db.query(queries.UPDATE_A_FILE, updatingFile);
-                return updatingFile;
+            const fileToUpdate = await database.File.findOne({
+                where: { id: Number(id) }
+            });
+
+            if (fileToUpdate) {
+                await database.File.update(updateFile, { where: { id: Number(id) } });
+
+                return updateFile;
             }
             return null;
-        } catch (err) {
-            return err;
+        } catch (error) {
+            throw error;
         }
     }
 
     static async deleteFile(id) {
         try {
-            const fileToDelete = await db.query(queries.GET_A_FILE, [id]);
+            const fileToDelete = await database.File.findOne({ where: { id: Number(id) } });
 
             if (fileToDelete) {
-                const deletedFile = await db.query(queries.DELETE_A_FILE, [id]);
+                const deletedFile = await database.File.destroy({
+                    where: { id: Number(id) }
+                });
                 return deletedFile;
             }
             return null;

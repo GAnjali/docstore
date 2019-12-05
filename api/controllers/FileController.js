@@ -1,6 +1,5 @@
 import FileService from "../services/FileService";
 import Util from "../utils/Util";
-import uuidv4 from 'uuid/v4';
 
 const util = new Util();
 
@@ -26,10 +25,10 @@ class FileController {
             util.setError(400, 'Cannot create a File without Name, Please provide file name');
             return util.send(res);
         }
-        const newFile = [uuidv4(), req.body.name, req.body.content];
+        const newFile = req.body;
         try {
             const createdFile = await FileService.addFile(newFile);
-            util.setSuccess(201, 'File Added!', newFile);
+            util.setSuccess(201, 'File Added!', createdFile);
             return util.send(res);
         } catch (error) {
             if ((error.message).includes("duplicate key value violates unique constraint"))
@@ -41,6 +40,10 @@ class FileController {
 
     static async getAFile(req, res) {
         const {id} = req.params;
+        if (!Number(id)) {
+            util.setError(400, 'Please input a valid numeric value');
+            return util.send(res);
+        }
         try {
             const theFile = await FileService.getAFile(id);
 
@@ -59,6 +62,11 @@ class FileController {
     static async updateFile(req, res) {
         const updateData = req.body;
         const {id} = req.params;
+
+        if (!Number(id)) {
+            util.setError(400, 'Please input a valid numeric value');
+            return util.send(res);
+        }
         try {
             const updateFile = await FileService.update(id, updateData);
             if (!updateFile) {
@@ -75,6 +83,10 @@ class FileController {
 
     static async deleteFile(req, res) {
         const {id} = req.params;
+        if (!Number(id)) {
+            util.setError(400, 'Please input a valid numeric value');
+            return util.send(res);
+        }
         try {
             const fileToDelete = await FileService.deleteFile(id);
             if (fileToDelete) {
