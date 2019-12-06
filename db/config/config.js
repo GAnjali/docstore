@@ -11,7 +11,7 @@ module.exports = {
   },
 
   test: {
-    database: 'docstore',
+    database: 'docstore_test',
     username: 'postgres',
     password: 'docstore',
     host: '192.168.99.100',

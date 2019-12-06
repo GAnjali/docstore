@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "sequelize db:migrate:undo:all  && sequelize db:migrate && mocha ./api/test/file.test.js --require babel-register --exit",
+    "test": "sequelize db:migrate:undo:all  && sequelize db:migrate && mocha ./api/test/user.test.js --require babel-register --exit",
     "dev": "nodemon --exec babel-node --presets babel-preset-env ./server.js"
   },
   "keywords": [],
@@ -22,8 +22,10 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "bcrypt": "^3.0.7",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "path": "^0.12.7",
     "pg": "^7.14.0",
     "pg-hstore": "^2.3.3",
