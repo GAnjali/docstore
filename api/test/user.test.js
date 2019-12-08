@@ -3,6 +3,8 @@ import chatHttp from 'chai-http';
 import 'chai/register-should';
 import app from '../../server';
 
+const describe = require("mocha");
+
 chai.use(chatHttp);
 const {expect} = chai;
 
@@ -76,31 +78,33 @@ describe('Test User endpoints', () => {
         });
     });
 
-    describe('login User', () => {
-        it('Should login an user with proper credentials', (done) => {
+    describe('login user', () => {
+
+        before((done) => {
             const newuser = {
                 email: 'test3@gmail.com',
                 password: 'test1'
             };
             chai.request(app).post('/users').set('Accept', 'application/json').send(newuser).end(done());
+        });
 
+        it('Should login an user with proper credentials', (done) => {
+            const loginuser = {
+                email: 'test3@gmail.com',
+                password: 'test1'
+            };
             chai.request(app)
                 .post('/users/login')
                 .set('Accept', 'application/json')
-                .send(newuser)
+                .send(loginuser)
                 .end((err, res) => {
-                    expect(res.status).to.equal(201);
+                    expect(res.status).to.equal(200);
                     expect(res.body.message).to.equals("Token generated");
                     done();
                 });
         });
 
         it('Should not login an user with incorrect credentials', (done) => {
-            const newuser = {
-                email: 'test3@gmail.com',
-                password: 'test1'
-            };
-            chai.request(app).post('/users').set('Accept', 'application/json').send(newuser).end(done());
             const loginuser = {
                 email: 'test3@gmail.com',
                 password: 'test2'
@@ -116,5 +120,21 @@ describe('Test User endpoints', () => {
                     done();
                 });
         });
+
+        it('Should not login an user with incorrect email', (done) => {
+            const loginuser = {
+                email: 'test3@gcom',
+                password: 'test2'
+            };
+            chai.request(app)
+                .post('/users/login')
+                .set('Accept', 'application/json')
+                .send(loginuser)
+                .end((err, res) => {
+                    expect(res.status).to.equal(400);
+                    expect(res.body.message).to.equals("Please enter a valid email address");
+                    done();
+                });
+        })
     });
 });
