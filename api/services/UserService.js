@@ -15,7 +15,9 @@ class UserService {
             const theUser = await database.user.findOne({
                 where: { email: email }
             });
-            return theUser.dataValues;
+            if(theUser)
+                return theUser.dataValues;
+            else return null;
         } catch (error) {
             throw error;
         }

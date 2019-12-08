@@ -30,6 +30,10 @@ class UserController {
         }
         try {
             const user = await UserService.getAUser(req.body.email);
+            if(!user){
+                util.setError(400, "User not registered, please sign up your account");
+                return util.send(res);
+            }
             if(user && !Helper.comparePassword(user.password, req.body.password)) {
                 util.setError(400, 'The credentials you provided is incorrect');
                 return util.send(res);
