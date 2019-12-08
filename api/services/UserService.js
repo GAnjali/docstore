@@ -9,6 +9,17 @@ class UserService {
             throw error;
         }
     }
+
+    static async getAUser(email) {
+        try {
+            const theUser = await database.user.findOne({
+                where: { email: email }
+            });
+            return theUser.dataValues;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default UserService;

@@ -18,6 +18,30 @@ class UserController {
             return util.send(res);
         }
     }
+
+    static async login(req, res) {
+        if (!req.body.email || !req.body.password) {
+            util.setError(400, 'Some values are missing');
+            return util.send(res);
+        }
+        if (!Helper.isValidEmail(req.body.email)) {
+            util.setError(400, 'Please enter a valid email address');
+            return util.send(res);
+        }
+        try {
+            const user = await UserService.getAUser(req.body.email);
+            if(user && !Helper.comparePassword(user.password, req.body.password)) {
+                util.setError(400, 'The credentials you provided is incorrect');
+                return util.send(res);
+            }
+            const token = Helper.generateToken(user.id);
+            util.setSuccess(200, "Token generated", token);
+            return util.send(res);
+        } catch(error) {
+            util.setError(400, error);
+            return util.send(res);
+        }
+    };
 }
 
 export default UserController;
