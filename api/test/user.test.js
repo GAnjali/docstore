@@ -3,8 +3,6 @@ import chatHttp from 'chai-http';
 import 'chai/register-should';
 import app from '../../server';
 
-const describe = require("mocha");
-
 chai.use(chatHttp);
 const {expect} = chai;
 
@@ -135,6 +133,59 @@ describe('Test User endpoints', () => {
                     expect(res.body.message).to.equals("Please enter a valid email address");
                     done();
                 });
-        })
+        });
+    });
+
+    describe('update user', () => {
+
+        const updateuser = {
+            email: 'test3@gmail.com',
+            password: 'test1'
+        };
+        before((done) => {
+            chai.request(app).post('/users').set('Accept', 'application/json').send(updateuser).end(done());
+        });
+
+        it('Should update an user', (done) => {
+            updateuser.password = "test2";
+
+            chai.request(app)
+                .put('/users/update')
+                .set('Accept', 'application/json')
+                .send(updateuser)
+                .end((err, res) => {
+                    expect(res.status).to.equal(200);
+                    expect(res.body.message).to.equals("User updated");
+                    done();
+                });
+        });
+
+        it('Should fail updating user with a non registered user', (done) => {
+            updateuser.email = "test5@gmail.com";
+
+            chai.request(app)
+                .put('/users/update')
+                .set('Accept', 'application/json')
+                .send(updateuser)
+                .end((err, res) => {
+                    expect(res.status).to.equal(404);
+                    expect(res.body.message).to.contains("Cannot find user with the email");
+                    done();
+                });
+        });
+
+        it('Should fail updating user with an invalid user', (done) => {
+            updateuser.email = "test5sdgk";
+
+            chai.request(app)
+                .put('/users/update')
+                .set('Accept', 'application/json')
+                .send(updateuser)
+                .end((err, res) => {
+                    expect(res.status).to.equal(400);
+                    expect(res.body.message).to.contains("Please enter a valid email address");
+                    done();
+                });
+        });
     });
 });

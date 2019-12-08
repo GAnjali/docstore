@@ -42,6 +42,27 @@ class UserController {
             return util.send(res);
         }
     };
+
+    static async update(req, res){
+        req.body.password = Helper.hashPassword(req.body.password);
+        const updateUser = req.body;
+        if (!Helper.isValidEmail(req.body.email)) {
+            util.setError(400, 'Please enter a valid email address');
+            return util.send(res);
+        }
+        try{
+            const updatedUser = await UserService.update(updateUser);
+            if (!updatedUser) {
+                util.setError(404, `Cannot find user with the email: ${req.body.email}`);
+            } else {
+                util.setSuccess(200, 'User updated', updateUser);
+            }
+            return util.send(res);
+        }catch (error) {
+            util.setError(404, error);
+            return util.send(res);
+        }
+    }
 }
 
 export default UserController;
