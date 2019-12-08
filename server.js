@@ -3,13 +3,17 @@ import express from 'express';
 const dotenv = require('dotenv');
 import 'babel-polyfill';
 import fileRoutes from "./api/routes/FileRoutes"
+import userRoutes from "./api/routes/UserRoutes";
+import folderRoutes from "./api/routes/FolderRoutes";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-app.use('/files', fileRoutes);
+// app.use('/files', fileRoutes);
+app.use('/users', userRoutes);
+app.use('/folders', folderRoutes);
 
 app.get('/', (req, res) => {
     return res.status(200).send({'message': 'YAY! Congratulations! Your first endpoint is working'});
