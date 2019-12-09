@@ -11,14 +11,16 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique:true
       },
       parentfolderid: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
           model: 'folders',
-          key: 'id'
-        }
+          key: 'id',
+        },
+        onDelete: 'CASCADE'
       },
       userid: {
         type: Sequelize.INTEGER,

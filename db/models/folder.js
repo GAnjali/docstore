@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: {
+        args:true,
+        msg:'Folder name already in use!'
+      }
     },
     parentfolderid: {
       type: DataTypes.INTEGER,
@@ -22,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     folder.hasOne(models.folder, {
       foreignKey: 'id',
+      targetKey: 'parentfolderid',
       as: 'parentfolder',
       onDelete: 'CASCADE'
     })
