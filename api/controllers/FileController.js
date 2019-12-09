@@ -1,5 +1,6 @@
 import FileService from "../services/FileService";
 import Util from "../utils/Util";
+import FolderService from "../services/FolderService";
 
 const util = new Util();
 
@@ -7,7 +8,7 @@ class FileController {
 
     static async getAllFiles(req, res) {
         try {
-            const allFiles = await FileService.getAllFiles();
+            const allFiles = await FileService.getAllFiles(req.user.id);
             if (allFiles.length > 0) {
                 util.setSuccess(200, 'Files retrieved', allFiles);
             } else {
@@ -21,12 +22,18 @@ class FileController {
     }
 
     static async addFile(req, res) {
-        if (!req.body.name) {
-            util.setError(400, 'Cannot create a File without Name, Please provide file name');
-            return util.send(res);
-        }
-        const newFile = req.body;
+        const newFile = {
+            name: req.body.name,
+            content: req.body.content,
+            parentfolderid: null,
+            userid: req.user.id
+        };
         try {
+            if (req.body.parentfoldername !== undefined) {
+                const parentfolder = await FolderService.getAFolderByName(req.body.parentfoldername);
+                if (parentfolder)
+                    newFile.parentfolderid = parentfolder.id;
+            }
             const createdFile = await FileService.addFile(newFile);
             util.setSuccess(201, 'File Added!', createdFile);
             return util.send(res);

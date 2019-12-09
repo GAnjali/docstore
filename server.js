@@ -11,9 +11,9 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// app.use('/files', fileRoutes);
 app.use('/users', userRoutes);
 app.use('/folders', folderRoutes);
+app.use('/files', fileRoutes);
 
 app.get('/', (req, res) => {
     return res.status(200).send({'message': 'YAY! Congratulations! Your first endpoint is working'});
