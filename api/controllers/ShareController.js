@@ -1,7 +1,7 @@
-import Util from "../utils/Util";
+import ResponseUtil from "../utils/ResponseUtil";
 import ShareService from "../services/ShareService";
 
-const util = new Util();
+const util = new ResponseUtil();
 
 class ShareController {
 
@@ -18,7 +18,6 @@ class ShareController {
                 return util.send(res);
             }
         } catch (error) {
-            console.log(error);
             util.setError(400, error.message);
             return util.send(res);
         }

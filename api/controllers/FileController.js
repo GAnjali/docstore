@@ -1,8 +1,8 @@
 import FileService from "../services/FileService";
-import Util from "../utils/Util";
+import ResponseUtil from "../utils/ResponseUtil";
 import FolderService from "../services/FolderService";
 
-const util = new Util();
+const util = new ResponseUtil();
 
 class FileController {
 

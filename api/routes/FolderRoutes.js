@@ -1,11 +1,11 @@
 import {Router} from 'express';
 import FolderController from "../controllers/FolderController";
-import Auth from "../utils/Auth";
+import AuthUtil from "../utils/AuthUtil";
 
 const folderRoutes = Router();
 
-folderRoutes.post('/', Auth.verifyToken, FolderController.create);
-folderRoutes.get('/', Auth.verifyToken, FolderController.getAll);
-folderRoutes.delete('/:id', Auth.verifyToken, FolderController.delete);
+folderRoutes.post('/', AuthUtil.verifyToken, FolderController.create);
+folderRoutes.get('/', AuthUtil.verifyToken, FolderController.getAll);
+folderRoutes.delete('/:id', AuthUtil.verifyToken, FolderController.delete);
 
 export default folderRoutes;

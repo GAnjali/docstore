@@ -6,7 +6,6 @@ class ShareService {
         try {
             return await database.share.create(sharingitem);
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }
@@ -17,7 +16,6 @@ class ShareService {
                 where: {fileid: fileid}
             });
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }
@@ -28,7 +26,6 @@ class ShareService {
                 where: {fileid: file, userid: user}
             });
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }

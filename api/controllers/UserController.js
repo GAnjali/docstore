@@ -1,13 +1,13 @@
 import UserService from "../services/UserService";
-import Util from "../utils/Util";
-import Helper from "../utils/Helper";
+import ResponseUtil from "../utils/ResponseUtil";
+import AuthUtil from "../utils/AuthUtil";
 
-const util = new Util();
+const util = new ResponseUtil();
 
 class UserController {
 
     static async create(req, res) {
-        req.body.password = Helper.hashPassword(req.body.password);
+        req.body.password = AuthUtil.hashPassword(req.body.password);
         const newUser = req.body;
         try {
             const createdUser = await UserService.add(newUser);
@@ -24,7 +24,7 @@ class UserController {
             util.setError(400, 'Some values are missing');
             return util.send(res);
         }
-        if (!Helper.isValidEmail(req.body.email)) {
+        if (!AuthUtil.isValidEmail(req.body.email)) {
             util.setError(400, 'Please enter a valid email address');
             return util.send(res);
         }
@@ -34,11 +34,11 @@ class UserController {
                 util.setError(400, "User not registered, please sign up your account");
                 return util.send(res);
             }
-            if(user && !Helper.comparePassword(user.password, req.body.password)) {
+            if(user && !AuthUtil.comparePassword(user.password, req.body.password)) {
                 util.setError(400, 'The credentials you provided is incorrect');
                 return util.send(res);
             }
-            const token = Helper.generateToken(user.id);
+            const token = AuthUtil.generateToken(user.id);
             util.setSuccess(200, "Token generated", token);
             return util.send(res);
         } catch(error) {
@@ -48,9 +48,9 @@ class UserController {
     };
 
     static async update(req, res){
-        req.body.password = Helper.hashPassword(req.body.password);
+        req.body.password = AuthUtil.hashPassword(req.body.password);
         const updateUser = req.body;
-        if (!Helper.isValidEmail(req.body.email)) {
+        if (!AuthUtil.isValidEmail(req.body.email)) {
             util.setError(400, 'Please enter a valid email address');
             return util.send(res);
         }
