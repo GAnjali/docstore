@@ -5,6 +5,7 @@ import 'babel-polyfill';
 import fileRoutes from "./api/routes/FileRoutes"
 import userRoutes from "./api/routes/UserRoutes";
 import folderRoutes from "./api/routes/FolderRoutes";
+import shareRoutes from "./api/routes/ShareRoutes";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/folders', folderRoutes);
 app.use('/files', fileRoutes);
+app.use('/shares', shareRoutes);
 
 app.get('/', (req, res) => {
     return res.status(200).send({'message': 'YAY! Congratulations! Your first endpoint is working'});

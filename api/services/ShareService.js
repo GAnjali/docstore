@@ -1,0 +1,51 @@
+import database from "../../db/models/index"
+
+class ShareService {
+
+    static async add(sharingitem) {
+        try {
+            return await database.share.create(sharingitem);
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+    static async getAll(fileid) {
+        try {
+            return await database.share.findAll({
+                where: {fileid: fileid}
+            });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+    static async getShares(file, user) {
+        try {
+            return await database.share.findAll({
+                where: {fileid: file, userid: user}
+            });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+    static async update(sharing) {
+        try {
+            await database.share.update({sharetype: sharing.sharetype}, {
+                where: {
+                    fileid: sharing.fileid,
+                    userid: sharing.userid
+                }
+            });
+            return sharing;
+        } catch (error) {
+            throw error;
+        }
+    }
+}
+
+export default ShareService;
