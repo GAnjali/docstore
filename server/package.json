@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "sequelize db:migrate:undo:all  && sequelize db:migrate && mocha ./api/test/user.test.js --require babel-register --exit",
-    "dev": "nodemon --exec babel-node --presets babel-preset-env ./server.js"
+    "test": "sequelize db:migrate:undo:all  && sequelize db:migrate && ../node_modules/.bin/mocha server/api/test/folder.test.js --require babel-register --exit",
+    "dev": "./node_modules/.bin/nodemon --exec babel-node --presets babel-preset-env server.js"
   },
   "keywords": [],
   "author": "",
