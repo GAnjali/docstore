@@ -3,6 +3,7 @@ import {getToken} from "../../Util/localStorageUtil";
 import decode from "jwt-decode";
 import Header from "./Header";
 import './Home.css';
+import Sidebar from "./Sidebar";
 
 class Home extends Component {
 
@@ -33,7 +34,10 @@ class Home extends Component {
     render() {
         if (this.state.folders) {
             return (
-                <Header />
+                <>
+                    <Header />
+                    <Sidebar/>
+                </>
             )
         }
     }
