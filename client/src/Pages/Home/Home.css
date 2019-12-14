@@ -1,0 +1,13 @@
+.navbar{
+    background: #3a6bd6;
+    height: 7vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2{
+    color: #ebebf0;
+    text-align: center;
+    font-size: 4vh;
+}
