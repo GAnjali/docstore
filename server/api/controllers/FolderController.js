@@ -28,7 +28,24 @@ class FolderController {
 
     static async getAll(req, res) {
         try {
+            console.log(req.user.id)
             const allFolders = await FolderService.getAllFolders(req.user.id);
+            if (allFolders.length > 0) {
+                util.setSuccess(200, 'Folders retrieved', allFolders);
+            } else {
+                util.setSuccess(200, 'No folder found');
+            }
+            return util.send(res);
+        } catch (error) {
+            util.setError(400, error);
+            return util.send(res);
+        }
+    }
+
+    static async getAllByParentFolder(req, res) {
+        try {
+            const {parentfolderid} = req.params;
+            const allFolders = await FolderService.getAllByParent(req.user.id, parentfolderid);
             if (allFolders.length > 0) {
                 util.setSuccess(200, 'Folders retrieved', allFolders);
             } else {

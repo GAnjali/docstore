@@ -22,6 +22,16 @@ class FolderService {
         }
     }
 
+    static async getAllByParent(userid, parentfolderid) {
+        try {
+            return await database.folder.findAll({
+                where: {userid: userid, parentfolderid: parentfolderid}
+            });
+        } catch (error) {
+            throw error;
+        }
+    }
+
     static async getAllFolders(userid) {
         try {
             return await database.folder.findAll({
