@@ -1,6 +1,7 @@
 import express from 'express';
 
-const dotenv = require('dotenv');
+import cors from 'cors';
+import dotenv from 'dotenv';
 import 'babel-polyfill';
 import fileRoutes from "./api/routes/FileRoutes"
 import userRoutes from "./api/routes/UserRoutes";
@@ -11,6 +12,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use('/users', userRoutes);
 app.use('/folders', folderRoutes);
