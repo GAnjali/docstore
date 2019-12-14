@@ -1,6 +1,5 @@
 import ResponseUtil from "../utils/ResponseUtil";
 import FolderService from "../services/FolderService";
-
 const util = new ResponseUtil();
 
 class FolderController {
@@ -44,7 +43,7 @@ class FolderController {
 
     static async getAllByParentFolder(req, res) {
         try {
-            const {parentfolderid} = req.params;
+            let {parentfolderid} = req.params;
             const allFolders = await FolderService.getAllByParent(req.user.id, parentfolderid);
             if (allFolders.length > 0) {
                 util.setSuccess(200, 'Folders retrieved', allFolders);

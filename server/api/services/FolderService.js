@@ -1,4 +1,5 @@
 import database from "../../db/models/index"
+import * as Op from "sequelize";
 
 class FolderService {
 
@@ -15,7 +16,6 @@ class FolderService {
             const theFolder = await database.folder.findOne({
                 where: {name: foldername}
             });
-
             return theFolder;
         } catch (error) {
             throw error;
@@ -25,7 +25,7 @@ class FolderService {
     static async getAllByParent(userid, parentfolderid) {
         try {
             return await database.folder.findAll({
-                where: {userid: userid, parentfolderid: parentfolderid}
+                where: {userid: userid, parentfolderid: parentfolderid != 0 ? parentfolderid : null}
             });
         } catch (error) {
             throw error;
