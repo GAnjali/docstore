@@ -7,8 +7,8 @@ const Folders = (props) => {
             <span className={"heading"}> Folders </span>
             <hr/>
             <div className={"folders-list"}>
-                {props.folders.map(folder => (
-                    <div className={"folder"}>
+                {props.folders.map((folder, i) => (
+                    <div className={"folder"} key={i}>
                         <img src={folderIcon} className={"folder-icon"}/>
                         <p>{folder.name}</p>
                     </div>
