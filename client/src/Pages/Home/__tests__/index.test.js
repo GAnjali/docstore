@@ -1,9 +1,23 @@
 import React from "react";
-import { shallow } from "enzyme";
+import {shallow} from "enzyme";
 import Home from "../index";
 
 describe("Home", () => {
+
+    let historyMock, props;
+    beforeEach(() => {
+        historyMock = {replace: jest.fn()};
+        props = {
+            history: historyMock
+        };
+    });
+
     it("Should render without crashing", () => {
-        shallow(<Home />);
+        shallow(<Home {...props}/>);
+    });
+
+    it('should match the Home snapshot', function () {
+        const homeComponent = shallow(<Home {...props}/>);
+        expect(homeComponent).toMatchSnapshot();
     });
 });

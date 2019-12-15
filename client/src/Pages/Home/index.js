@@ -7,6 +7,10 @@ import Sidebar from "./Sidebar";
 
 class Home extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     state = {
         folders: []
     };
@@ -35,7 +39,7 @@ class Home extends Component {
         if (this.state.folders) {
             return (
                 <>
-                    <Header />
+                    <Header/>
                     <Sidebar/>
                 </>
             )
