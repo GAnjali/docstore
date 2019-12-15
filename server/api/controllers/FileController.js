@@ -21,6 +21,22 @@ class FileController {
         }
     }
 
+    static async getAllByParentFolder(req, res) {
+        try {
+            let {parentfolderid} = req.params;
+            const allFiles = await FileService.getAllByParent(req.user.id, parentfolderid);
+            if (allFiles.length > 0) {
+                util.setSuccess(200, 'Files retrieved', allFiles);
+            } else {
+                util.setSuccess(200, 'No files found');
+            }
+            return util.send(res);
+        } catch (error) {
+            util.setError(400, error);
+            return util.send(res);
+        }
+    }
+
     static async addFile(req, res) {
         const newFile = {
             name: req.body.name,

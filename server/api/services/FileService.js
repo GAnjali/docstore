@@ -11,6 +11,16 @@ class FileService {
         }
     }
 
+    static async getAllByParent(userid, parentfolderid) {
+        try {
+            return await database.folder.findAll({
+                where: {userid: userid, parentfolderid: parentfolderid !== 0 ? parentfolderid : null}
+            });
+        } catch (error) {
+            throw error;
+        }
+    }
+
     static async addFile(newFile) {
         try {
             return await database.file.create(newFile);
