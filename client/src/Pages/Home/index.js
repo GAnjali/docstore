@@ -5,6 +5,7 @@ import Header from "./Header";
 import './Home.css';
 import Sidebar from "./Sidebar";
 import {getFolders} from "./HomeService";
+import MainSection from "./MainSection";
 
 class Home extends Component {
 
@@ -56,6 +57,7 @@ class Home extends Component {
                 <>
                     <Header/>
                     <Sidebar/>
+                    <MainSection folders={this.state.folders}/>
                 </>
             )
         }
