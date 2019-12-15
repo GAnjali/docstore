@@ -68,7 +68,7 @@ class Home extends Component {
             <>
                 <Header/>
                 <Sidebar/>
-                <MainSection folders={this.state.folders}/>
+                <MainSection folders={this.state.folders} files={this.state.files}/>
             </>
         )
     }
