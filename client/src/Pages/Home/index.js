@@ -4,6 +4,7 @@ import decode from "jwt-decode";
 import Header from "./Header";
 import './Home.css';
 import Sidebar from "./Sidebar";
+import {getFolders} from "./HomeService";
 
 class Home extends Component {
 
@@ -12,14 +13,28 @@ class Home extends Component {
     }
 
     state = {
-        folders: []
+        folders: [],
+        error: ''
     };
 
     componentDidMount() {
         if (!this.isLoggedIn()) {
             this.props.history.replace('/login')
-        }
+        } else this.fetchDocs();
     }
+
+    fetchDocs = async () => {
+        const foldersResponse = await getFolders(0);
+        if (foldersResponse.status === 200) {
+            this.setState({
+                folders: foldersResponse.data.data
+            })
+        } else {
+            this.setState({
+                error: foldersResponse.message
+            })
+        }
+    };
 
     isLoggedIn = () => {
         const token = getToken();
