@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 import {getFileByid, getFiles, getFolders} from "./HomeService";
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
+import FileModel from "./FileModel";
 
 class Home extends Component {
 
@@ -66,7 +67,7 @@ class Home extends Component {
         this.setState((prevState) => {
             const fileOnEdit = prevState.editingFile;
             fileOnEdit.content = newContent;
-            return {editingFile: fileOnEdit};
+            return { editingFile: fileOnEdit };
         });
     };
 
@@ -75,8 +76,8 @@ class Home extends Component {
             <>
                 <Header/>
                 <Sidebar/>
-                <MainSection folders={this.state.folders} files={this.state.files}
-                             handleFileClick={this.handleFileClick}/>
+                <MainSection folders={this.state.folders} files={this.state.files} handleFileClick={this.handleFileClick}/>
+                <FileModel editingFile={this.state.editingFile} show={this.state.showFileModel} handleContentChange={this.handleContentChange}/>
             </>
         )
     }
