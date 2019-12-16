@@ -25,3 +25,15 @@ export const getFiles = async (parentfolderid) => {
         return e;
     }
 };
+
+export const getFileByid = async (id) => {
+    try {
+        let response;
+        console.log("in homeservice:",id);
+        response = await axios.get(process.env.REACT_APP_SERVER_URL + '/files/' + id, config);
+        console.log(response);
+        return response;
+    } catch (e) {
+        return e;
+    }
+};
