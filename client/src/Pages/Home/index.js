@@ -1,11 +1,10 @@
 import React, {Component} from "react";
-import {getToken} from "../../Util/localStorageUtil";
-import decode from "jwt-decode";
 import Header from "./Header";
 import './Home.css';
 import Sidebar from "./Sidebar";
 import {getFiles, getFolders} from "./HomeService";
 import MainSection from "./MainSection";
+import {isLoggedIn} from "../../Util/AuthService";
 
 class Home extends Component {
 
@@ -20,7 +19,7 @@ class Home extends Component {
     };
 
     componentDidMount() {
-        if (!this.isLoggedIn()) {
+        if (!isLoggedIn()) {
             this.props.history.replace('/login')
         } else {
             this.fetchDocs('Folders', 0);
@@ -46,20 +45,6 @@ class Home extends Component {
             this.setState({
                 error: docsResponse.message
             })
-        }
-    };
-
-    isLoggedIn = () => {
-        const token = getToken();
-        return !!token && !this.isTokenExpired(token)
-    };
-
-    isTokenExpired = (token) => {
-        try {
-            const decoded = decode(token);
-            return decoded.exp < Date.now() / 1000;
-        } catch (err) {
-            return false;
         }
     };
 
