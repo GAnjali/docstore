@@ -11,7 +11,7 @@ const FileModel = (props) => {
         <div id="myModal" className="modal" style={style}>
             <div className="modal-content">
                 <div className="modal-header">
-                    <span className="close">&times;</span>
+                    <span className="close" onClick={props.handleClose}>&times;</span>
                     <h2 className={"model-title"}>{title}</h2>
                 </div>
                 <div className="modal-body">

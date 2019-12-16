@@ -84,6 +84,12 @@ class Home extends Component {
 
     };
 
+    handleClose = () => {
+        this.setState({
+            showFileModel: false,
+        });
+    };
+
     render() {
         return (
             <>
@@ -92,7 +98,8 @@ class Home extends Component {
                 <MainSection folders={this.state.folders} files={this.state.files}
                              handleFileClick={this.handleFileClick}/>
                 <FileModel editingFile={this.state.editingFile} show={this.state.showFileModel}
-                           handleContentChange={this.handleContentChange} handleSave={this.handleSave}/>
+                           handleContentChange={this.handleContentChange} handleSave={this.handleSave}
+                           handleClose={this.handleClose}/>
             </>
         )
     }
