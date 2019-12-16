@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Header from "./Header";
 import './Home.css';
 import Sidebar from "./Sidebar";
-import {getFiles, getFolders} from "./HomeService";
+import {getFileByid, getFiles, getFolders} from "./HomeService";
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
 
@@ -15,7 +15,9 @@ class Home extends Component {
     state = {
         folders: [],
         files: [],
-        error: ''
+        error: '',
+        editingFile: null,
+        showFileModel: false
     };
 
     componentDidMount() {
@@ -48,12 +50,33 @@ class Home extends Component {
         }
     };
 
+    handleFileClick = async (event) => {
+        const response = await getFileByid(this.state.files[event.target.id].id);
+        if (response.status === 200 && response.data.data !== undefined) {
+
+            this.setState({
+                editingFile: response.data.data,
+                showFileModel: true
+            })
+        }
+    };
+
+    handleContentChange = (e) => {
+        const newContent = e.target.value;
+        this.setState((prevState) => {
+            const fileOnEdit = prevState.editingFile;
+            fileOnEdit.content = newContent;
+            return {editingFile: fileOnEdit};
+        });
+    };
+
     render() {
         return (
             <>
                 <Header/>
                 <Sidebar/>
-                <MainSection folders={this.state.folders} files={this.state.files}/>
+                <MainSection folders={this.state.folders} files={this.state.files}
+                             handleFileClick={this.handleFileClick}/>
             </>
         )
     }

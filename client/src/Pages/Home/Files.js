@@ -1,5 +1,4 @@
 import React from "react";
-import fileIcon from "../../Util/fileicon.jpg"
 
 const Files = (props) => {
     return (
@@ -7,10 +6,10 @@ const Files = (props) => {
             <span className={"heading"}> Files </span>
             <hr/>
             {props.files.map((file, i) => (
-                <div className={"file"} key={i}>
-                    <p className={"file-content"}>{file.content}</p>
+                <div className={"file"} key={i} id={i} onClick={props.handleFileClick}>
+                    <p className={"file-content"} id={i}>{file.content}</p>
                     <hr/>
-                    <p className={"file-title"}>{file.name}</p>
+                    <p className={"file-title"} id={i}>{file.name}</p>
                 </div>
             ))}
         </div>

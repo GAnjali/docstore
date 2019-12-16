@@ -6,7 +6,7 @@ const MainSection = (props) => {
     return (
         <div className={"main-section"}>
             {props.folders !== undefined && (props.folders).length > 0 && <Folders folders={props.folders}/>}
-            {props.files !== undefined && (props.files).length > 0 && <Files files={props.files}/>}
+            {props.files !== undefined && (props.files).length > 0 && <Files files={props.files} handleFileClick={props.handleFileClick}/>}
         </div>
     )
 };
