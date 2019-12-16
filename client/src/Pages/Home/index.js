@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Header from "./Header";
 import './Home.css';
 import Sidebar from "./Sidebar";
-import {getFileByid, getFiles, getFolders} from "./HomeService";
+import {getFileByid, getFiles, getFolders, updateFile} from "./HomeService";
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
 import FileModel from "./FileModel";
@@ -67,8 +67,21 @@ class Home extends Component {
         this.setState((prevState) => {
             const fileOnEdit = prevState.editingFile;
             fileOnEdit.content = newContent;
-            return { editingFile: fileOnEdit };
+            return {editingFile: fileOnEdit};
         });
+    };
+
+    handleSave = async () => {
+        if (this.state.showFileModel) {
+            await updateFile(this.state.editingFile).then(() => {
+                console.log("updated file");
+                this.setState({
+                    showFileModel: false,
+                });
+            });
+        }
+        // else saveFile(this.state.editingNote);
+
     };
 
     render() {
@@ -76,8 +89,10 @@ class Home extends Component {
             <>
                 <Header/>
                 <Sidebar/>
-                <MainSection folders={this.state.folders} files={this.state.files} handleFileClick={this.handleFileClick}/>
-                <FileModel editingFile={this.state.editingFile} show={this.state.showFileModel} handleContentChange={this.handleContentChange}/>
+                <MainSection folders={this.state.folders} files={this.state.files}
+                             handleFileClick={this.handleFileClick}/>
+                <FileModel editingFile={this.state.editingFile} show={this.state.showFileModel}
+                           handleContentChange={this.handleContentChange} handleSave={this.handleSave}/>
             </>
         )
     }

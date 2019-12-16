@@ -18,7 +18,7 @@ const FileModel = (props) => {
                     <textarea className={"model-filecontent"} value={content} onChange={props.handleContentChange}/>
                 </div>
                 <div className="modal-footer">
-                    <button>Save</button>
+                    <button onClick={props.handleSave}>Save</button>
                 </div>
             </div>
         </div>
