@@ -8,7 +8,7 @@ const Files = (props) => {
             <hr/>
             {props.files.map((file, i) => (
                 <div className={"file"} key={i}>
-                    <img src={fileIcon} className={"file-icon"}/>
+                    <p className={"file-content"}>{file.content}</p>
                     <hr/>
                     <p className={"file-title"}>{file.name}</p>
                 </div>
