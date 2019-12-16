@@ -1,3 +1,7 @@
+.parentDiv {
+    height: 100%;
+}
+
 .navbar {
     background: #3a6bd6;
     height: 7vh;
@@ -44,7 +48,7 @@ h2 {
 .main-section {
     height: 87vh;
     margin-left: 45vh;
-    margin-right:auto;
+    margin-right: auto;
 }
 
 .folders-block {
@@ -93,10 +97,10 @@ hr {
 .folder p {
     margin-left: 7vh;
     font-size: 2.5vh;
-    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
     padding-left: 1.5vh;
     margin-top: 3.5vh;
-    color: rgba(0,0,0,.72)
+    color: rgba(0, 0, 0, .72)
 }
 
 .files-block {
@@ -120,29 +124,125 @@ hr {
     margin-bottom: 2vh;
 }
 
-.file-icon{
+.file-icon {
     margin-top: 8vh;
     margin-left: 12vh;
     height: 8vh;
 }
 
-.file-content{
-   font-size: 2vh;
+.file-content {
+    font-size: 2vh;
     height: 50%;
     padding-left: 2vh;
     word-wrap: break-word;
     padding-right: 2vh;
 }
 
-.file hr{
+.file hr {
     margin-top: 5vh;
-    width:100%;
+    width: 100%;
     display: block;
 }
 
-.file-title{
+.file-title {
     font-size: 2.5vh;
     text-align: center;
-    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
-    color: rgba(0,0,0,.72)
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+    color: rgba(0, 0, 0, .72)
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 70%;
+    height: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+/* Modal Header */
+.modal-header {
+    background-color: #afafaf;
+    color: white;
+}
+
+.model-title {
+    margin: 0;
+    padding-top: 3vh;
+    padding-bottom: 2.5vh;
+}
+
+.close {
+    color: black;
+    float: right;
+    margin-right: 2vh;
+    margin-top: 1vh;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Modal Body */
+.modal-body {
+    width: 100%;
+    text-align: left;
+    border: 0;
+    margin: 0;
+    height: 65%
+}
+
+.model-filecontent {
+    width: 98.7%;
+    padding: 0;
+    padding-top: 2vh;
+    padding-left: 2vh;
+    border: 0;
+    word-wrap: break-word;
+    height: 100%;
+}
+
+/* Modal Footer */
+.modal-footer {
+    margin-top: 4.5vh;
+    float: right;
+    clear: right;
+    margin-right: 6vh;
+}
+
+
+/* Add Animation */
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
 }
