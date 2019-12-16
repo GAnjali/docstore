@@ -117,11 +117,13 @@ hr {
     box-shadow: 0px 0px 10px 0px #afafaf;
     margin-top: 3vh;
     margin-left: 3vh;
+    margin-bottom: 2vh;
 }
 
 .file-icon{
     margin-top: 8vh;
-    margin-left: 12vh
+    margin-left: 12vh;
+    height: 8vh;
 }
 
 .file hr{
