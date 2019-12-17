@@ -11,7 +11,9 @@ const Files = (props) => {
                     <p className={"file-content"} id={i}>
                         <div className={"fileoptions"}>
                             <img src={optionsIcon} className={"fileoptions-icon"}/>
-                            <div className="fileoptions-content"  id={i}>Delete
+                            <div className="fileoptions-content"  id={i}>
+                                <button className={"file-share"}>Share</button>
+                                <button className={"file-delete"} >Delete</button>
                             </div>
                         </div>
                         {file.content}</p>
