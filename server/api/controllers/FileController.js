@@ -6,9 +6,9 @@ const util = new ResponseUtil();
 
 class FileController {
 
-    static async getAllFiles(req, res) {
+    static async getAll(req, res) {
         try {
-            const allFiles = await FileService.getAllFiles(req.user.id);
+            const allFiles = await FileService.getAll(req.user.id);
             if (allFiles.length > 0) {
                 util.setSuccess(200, 'Files retrieved', allFiles);
             } else {
@@ -21,7 +21,7 @@ class FileController {
         }
     }
 
-    static async getAllByParentFolder(req, res) {
+    static async getAllByParent(req, res) {
         try {
             let {parentfolderid} = req.params;
             const allFiles = await FileService.getAllByParent(req.user.id, parentfolderid);
@@ -37,7 +37,7 @@ class FileController {
         }
     }
 
-    static async addFile(req, res) {
+    static async add(req, res) {
         const newFile = {
             name: req.body.name,
             content: req.body.content,
@@ -46,11 +46,11 @@ class FileController {
         };
         try {
             if (req.body.parentfoldername !== undefined) {
-                const parentfolder = await FolderService.getAFolderByName(req.body.parentfoldername);
+                const parentfolder = await FolderService.getOneByName(req.body.parentfoldername);
                 if (parentfolder)
                     newFile.parentfolderid = parentfolder.id;
             }
-            const createdFile = await FileService.addFile(newFile);
+            const createdFile = await FileService.add(newFile);
             util.setSuccess(201, 'File Added!', createdFile);
             return util.send(res);
         } catch (error) {
@@ -61,14 +61,14 @@ class FileController {
         }
     }
 
-    static async getAFile(req, res) {
+    static async getOne(req, res) {
         const {id} = req.params;
         if (!Number(id)) {
             util.setError(400, 'Please input a valid numeric value');
             return util.send(res);
         }
         try {
-            const theFile = await FileService.getAFile(id);
+            const theFile = await FileService.getOne(id);
 
             if (!theFile) {
                 util.setError(404, `Cannot find file with the id ${id}`);
@@ -82,7 +82,7 @@ class FileController {
         }
     }
 
-    static async updateFile(req, res) {
+    static async update(req, res) {
         const updateData = req.body;
         const {id} = req.params;
 
@@ -104,14 +104,14 @@ class FileController {
         }
     }
 
-    static async deleteFile(req, res) {
+    static async delete(req, res) {
         const {id} = req.params;
         if (!Number(id)) {
             util.setError(400, 'Please input a valid numeric value');
             return util.send(res);
         }
         try {
-            const fileToDelete = await FileService.deleteFile(id);
+            const fileToDelete = await FileService.delete(id);
             if (fileToDelete) {
                 util.setSuccess(200, 'File deleted');
             } else {

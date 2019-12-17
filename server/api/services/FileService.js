@@ -1,7 +1,7 @@
 import database from "../../db/models/index"
 
 class FileService {
-    static async getAllFiles(userid) {
+    static async getAll(userid) {
         try {
             return await database.file.findAll({
                 where: {userid: userid}
@@ -14,14 +14,14 @@ class FileService {
     static async getAllByParent(userid, parentfolderid) {
         try {
             return await database.file.findAll({
-                where: {userid: userid, parentfolderid: parentfolderid !=0 ? parentfolderid : null}
+                where: {userid: userid, parentfolderid: parentfolderid !== 0 ? parentfolderid : null}
             });
         } catch (error) {
             throw error;
         }
     }
 
-    static async addFile(newFile) {
+    static async add(newFile) {
         try {
             return await database.file.create(newFile);
         } catch (error) {
@@ -29,12 +29,11 @@ class FileService {
         }
     }
 
-    static async getAFile(id) {
+    static async getOne(id) {
         try {
             const theFile = await database.file.findOne({
                 where: {id: Number(id)}
             });
-
             return theFile;
         } catch (error) {
             throw error;
@@ -63,10 +62,9 @@ class FileService {
         }
     }
 
-    static async deleteFile(id) {
+    static async delete(id) {
         try {
             const fileToDelete = await database.file.findOne({where: {id: Number(id)}});
-
             if (fileToDelete) {
                 const deletedFile = await database.file.destroy({
                     where: {id: Number(id)}
