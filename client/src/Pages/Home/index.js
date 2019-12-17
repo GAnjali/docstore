@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Header from "./Header";
 import './Home.css';
 import Sidebar from "./Sidebar";
-import {getFileByid, getFiles, getFolders, updateFile} from "./HomeService";
+import {deleteFile, getFileByid, getFiles, getFolders, updateFile} from "./HomeService";
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
 import FileModel from "./FileModel";
@@ -52,14 +52,24 @@ class Home extends Component {
     };
 
     handleFileClick = async (event) => {
-        const response = await getFileByid(this.state.files[event.target.id].id);
-        if (response.status === 200 && response.data.data !== undefined) {
-
-            this.setState({
-                editingFile: response.data.data,
-                showFileModel: true
-            })
+        if(event.target.id){
+            if(event.target.className!=="fileoptions-content"){
+                const response = await getFileByid(this.state.files[event.target.id].id);
+                if (response.status === 200 && response.data.data !== undefined) {
+                    this.setState({
+                        editingFile: response.data.data,
+                        showFileModel: true
+                    })
+                }
+            }
+            else {
+                const deleteResponse = await deleteFile(this.state.files[event.target.id].id);
+                if (deleteResponse.status === 200){
+                    alert(deleteResponse.data.message);
+                }
+            }
         }
+
     };
 
     handleContentChange = (e) => {
@@ -74,7 +84,6 @@ class Home extends Component {
     handleSave = async () => {
         if (this.state.showFileModel) {
             await updateFile(this.state.editingFile).then(() => {
-                console.log("updated file");
                 this.setState({
                     showFileModel: false,
                 });
