@@ -1,52 +1,54 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
-.center{
+.center {
     font-family: 'Raleway', sans-serif;
-    background-color: #1abc9c;
     position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 98%;
+    width: 98%;
 }
 
-.card{
+.card {
     background-color: #fff;
+    box-shadow: 0px 0px 10px 0px #afafaf;
     border-radius: 15px;
     padding: 0.8rem;
+    width: 60vh;
+    margin-left: 36%;
+    margin-top: 6%;
 }
 
-.card > form{
+.card > form {
     display: flex;
     flex-direction: column;
 }
 
-.card h1{
+.card h1 {
     text-align: center;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 3vh;
 }
 
-.form-item{
+.form-item {
     font-family: 'Raleway', sans-serif;
-    padding: 5px;
+    padding: 0.5vh;
     margin-bottom: 2rem;
-    height: 30px;
+    height: 6vh;
     width: 16rem;
-    border: 1px solid grey;
+    margin-left: 3vh;
 }
 
-.form-submit{
+.form-submit {
     font-family: 'Raleway', sans-serif;
-    height: 35px;
-    color: #fff;
-    background-color: #1abc9c;
+    height: 8vh;
+    color: black;
     border: none;
     letter-spacing: 0.2rem;
     transition: 0.3s opacity ease;
     cursor: pointer;
+    width: 25vh;
+    margin-left: 7vw;
 }
-.form-submit:hover{
+
+.form-submit:hover {
     opacity: 0.6;
 }

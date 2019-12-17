@@ -1,8 +1,10 @@
 import React from "react";
+import Header from "../Home/Header";
 
 const LoginView = (props) => {
     return (
         <div className="center">
+            <Header/>
             <div className="card">
                 <h1>Login</h1>
                 <form>
