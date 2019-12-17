@@ -16,6 +16,7 @@ h2 {
     font-size: 4vh;
 }
 
+
 .sidebar-block {
     position: absolute;
     margin: auto;
@@ -33,6 +34,7 @@ h2 {
     border-radius: 15vh;
     height: 6vh;
     position: relative;
+    margin-top: 50px;
 }
 
 .sidebar-tabs p {
@@ -43,6 +45,7 @@ h2 {
     padding-left: 5vh;
     font-size: 3vh;
     color: white;
+    float: left;
 }
 
 .main-section {
@@ -96,11 +99,13 @@ hr {
 
 .folder p {
     margin-left: 7vh;
+    margin-right: 5vh;
     font-size: 2.5vh;
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
     padding-left: 1.5vh;
     margin-top: 3.5vh;
-    color: rgba(0, 0, 0, .72)
+    color: rgba(0, 0, 0, .72);
+    position: absolute;
 }
 
 .files-block {
@@ -253,6 +258,13 @@ label:focus,
     display: inline-block;
 }
 
+.new-dropdown{
+    position: relative;
+    display: inline-block;
+    float: left;
+    clear: left;
+}
+
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
@@ -394,7 +406,24 @@ label:focus,
     }
 }
 
+.folderoptions{
+    position: absolute;
+height: 2vh;
+    padding-top: 0.5vh;
+    padding-left: 3vh;
+    /* align-content: end; */
+    float: right;
+    margin-left: 29vh;
+    margin-bottom: 2vh;
+}
 .fileoptions {
+    position: absolute;
+    top: 3vh;
+    right: 1.5vh;
+    display: inline-block;
+}
+
+.new-options {
     position: absolute;
     top: 3vh;
     right: 1.5vh;
@@ -405,7 +434,12 @@ label:focus,
     height: 3vh;
 }
 
-.fileoptions-content {
+.folderoptions-icon{
+    height: 2vh;
+}
+
+.fileoptions-content,
+.folderoptions-content{
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -418,6 +452,8 @@ label:focus,
     color: #888888;
 }
 
+
+
 .fileoptions-content button{
     height: 22px;
     width: 80px;
@@ -427,6 +463,19 @@ label:focus,
     border-color: white;
 }
 
+.newoptions-content button{
+    height: 22px;
+    width: 80px;
+    font-size: 10px;
+    float: left;
+    clear: left;
+    border-color: white;
+}
+
 .fileoptions:hover .fileoptions-content {
+    display: block;
+}
+
+.newoptions:hover .newoptions-content {
     display: block;
 }

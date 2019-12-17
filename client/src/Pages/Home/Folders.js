@@ -1,5 +1,6 @@
 import React from 'react';
 import folderIcon from "../../Util/foldericon.png"
+import optionsIcon from "../../Util/optionsIcon.jpg";
 
 const Folders = (props) => {
     return (
@@ -11,6 +12,9 @@ const Folders = (props) => {
                     <div className={"folder"} key={i}>
                         <img src={folderIcon} className={"folder-icon"}/>
                         <p>{folder.name}</p>
+                        <div className={"folderoptions"}>
+                            <img src={optionsIcon} className={"folderoptions-icon"}/>
+                        </div>
                     </div>
                 ))}
             </div>
