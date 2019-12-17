@@ -4,7 +4,7 @@ import AuthUtil from "../utils/AuthUtil";
 
 const shareRoutes = Router();
 
-shareRoutes.post('/', AuthUtil.verifyToken, ShareController.addShare);
-shareRoutes.get('/:id', AuthUtil.verifyToken, ShareController.getAllSharings);
+shareRoutes.post('/', AuthUtil.verifyToken, ShareController.add);
+shareRoutes.get('/:id', AuthUtil.verifyToken, ShareController.getAll);
 
 export default shareRoutes;

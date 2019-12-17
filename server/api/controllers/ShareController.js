@@ -5,9 +5,9 @@ const util = new ResponseUtil();
 
 class ShareController {
 
-    static async addShare(req, res) {
+    static async add(req, res) {
         try {
-            const share = await ShareService.getShares(req.body.fileid, req.body.userid);
+            const share = await ShareService.getAllByFileUser(req.body.fileid, req.body.userid);
             if (share === null || share === undefined) {
                 const newShare = await ShareService.add(req.body);
                 util.setSuccess(201, 'Share Added!', newShare);
@@ -23,7 +23,7 @@ class ShareController {
         }
     }
 
-    static async getAllSharings(req, res) {
+    static async getAll(req, res) {
         try {
             const allSharings = await ShareService.getAll(req.params.id);
             if (allSharings.length > 0) {

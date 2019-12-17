@@ -30,7 +30,7 @@ class UserController {
             return util.send(res);
         }
         try {
-            const user = await UserService.getAUser(req.body.email);
+            const user = await UserService.getOneByEmail(req.body.email);
             if (!user) {
                 util.setError(400, "User not registered, please sign up your account");
                 return util.send(res);
@@ -76,7 +76,7 @@ class UserController {
             return util.send(res);
         }
         try {
-            const user = await UserService.getAUser(email);
+            const user = await UserService.getOneByEmail(email);
 
             if (!user) {
                 util.setError(404, `Cannot find user with the email ${email}`);

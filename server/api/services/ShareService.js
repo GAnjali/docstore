@@ -10,7 +10,7 @@ class ShareService {
         }
     }
 
-    static async getAll(fileid) {
+    static async getAllByFile(fileid) {
         try {
             return await database.share.findAll({
                 where: {fileid: fileid}
@@ -20,7 +20,7 @@ class ShareService {
         }
     }
 
-    static async getShares(file, user) {
+    static async getAllByFileUser(file, user) {
         try {
             return await database.share.findAll({
                 where: {fileid: file, userid: user}

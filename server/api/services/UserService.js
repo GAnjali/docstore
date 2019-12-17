@@ -10,7 +10,7 @@ class UserService {
         }
     }
 
-    static async getAUser(email) {
+    static async getOneByEmail(email) {
         try {
             const theUser = await database.user.findOne({
                 where: {email: email}
