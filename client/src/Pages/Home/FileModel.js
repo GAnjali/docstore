@@ -19,7 +19,7 @@ const FileModel = (props) => {
                               placeholder={"File content..."}/>
                 </div>
                 <div className="modal-footer">
-                    <button onClick={props.handleSave}>Save</button>
+                    <button onClick={props.handleSaveFile}>Save</button>
                 </div>
             </div>
         </div>
