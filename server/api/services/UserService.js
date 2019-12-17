@@ -13,9 +13,9 @@ class UserService {
     static async getAUser(email) {
         try {
             const theUser = await database.user.findOne({
-                where: { email: email }
+                where: {email: email}
             });
-            if(theUser)
+            if (theUser)
                 return theUser.dataValues;
             else return null;
         } catch (error) {
@@ -26,10 +26,10 @@ class UserService {
     static async update(updateUser) {
         try {
             const userToUpdate = await database.user.findOne({
-                where: { email: updateUser.email }
+                where: {email: updateUser.email}
             });
             if (userToUpdate) {
-                await database.user.update(updateUser, { where: { email: updateUser.email } });
+                await database.user.update(updateUser, {where: {email: updateUser.email}});
                 return updateUser;
             }
             return null;
