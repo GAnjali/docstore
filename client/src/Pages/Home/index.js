@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Header from "./Header";
 import './Home.css';
 import Sidebar from "./Sidebar";
-import {deleteFile, getFileByid, getFiles, getFolders, updateFile, getUserByEmail, addShare} from "./HomeService";
+import {deleteFile, getFileByid, getFiles, getFolders, updateFile, getUserByEmail, addShare, addFile} from "./HomeService";
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
 import FileModel from "./FileModel";
@@ -139,11 +139,22 @@ class Home extends Component {
         }
     };
 
+    handleAddFile =() =>{
+        const newFile = {
+            name: '',
+            content: ''
+        }
+        this.setState({
+            showFileModel: true,
+            editingFile: newFile
+        })
+    };
+
     render() {
         return (
             <>
                 <Header/>
-                <Sidebar/>
+                <Sidebar handleAddFile={this.handleAddFile}/>
                 <MainSection folders={this.state.folders} files={this.state.files}
                              handleFileClick={this.handleFileClick}/>
                 <FileModel editingFile={this.state.editingFile} show={this.state.showFileModel}

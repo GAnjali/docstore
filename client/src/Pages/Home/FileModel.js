@@ -4,8 +4,8 @@ const FileModel = (props) => {
     let style = {}, title = '', content = '';
     if (props.show === true) {
         style = {display: "block"};
-        title = props.editingFile.name;
-        content = props.editingFile.content
+        title = props.editingFile.name!=null?props.editingFile.name:'';
+        content = props.editingFile.content!=null?props.editingFile.content:''
     }
     return (
         <div id="myModal" className="modal" style={style}>
