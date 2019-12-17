@@ -1,5 +1,6 @@
 import ResponseUtil from "../utils/ResponseUtil";
 import FolderService from "../services/FolderService";
+
 const util = new ResponseUtil();
 
 class FolderController {
@@ -12,7 +13,7 @@ class FolderController {
         };
         try {
             if (req.body.parentfoldername !== undefined) {
-                const parentfolder = await FolderService.getAFolderByName(req.body.parentfoldername);
+                const parentfolder = await FolderService.getOneByName(req.body.parentfoldername);
                 if (parentfolder)
                     newFolder.parentfolderid = parentfolder.id;
             }
@@ -28,7 +29,7 @@ class FolderController {
     static async getAll(req, res) {
         try {
             console.log(req.user.id)
-            const allFolders = await FolderService.getAllFolders(req.user.id);
+            const allFolders = await FolderService.getAll(req.user.id);
             if (allFolders.length > 0) {
                 util.setSuccess(200, 'Folders retrieved', allFolders);
             } else {
@@ -41,7 +42,7 @@ class FolderController {
         }
     }
 
-    static async getAllByParentFolder(req, res) {
+    static async getAllByParent(req, res) {
         try {
             let {parentfolderid} = req.params;
             const allFolders = await FolderService.getAllByParent(req.user.id, parentfolderid);
@@ -64,7 +65,7 @@ class FolderController {
             return util.send(res);
         }
         try {
-            const folderToDelete = await FolderService.deleteFolder(id);
+            const folderToDelete = await FolderService.delete(id);
             if (folderToDelete) {
                 util.setSuccess(200, 'Folder deleted');
             } else {

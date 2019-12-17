@@ -11,7 +11,7 @@ class FolderService {
         }
     }
 
-    static async getAFolderByName(foldername) {
+    static async getOneByName(foldername) {
         try {
             const theFolder = await database.folder.findOne({
                 where: {name: foldername}
@@ -25,14 +25,14 @@ class FolderService {
     static async getAllByParent(userid, parentfolderid) {
         try {
             return await database.folder.findAll({
-                where: {userid: userid, parentfolderid: parentfolderid != 0 ? parentfolderid : null}
+                where: {userid: userid, parentfolderid: parentfolderid !== 0 ? parentfolderid : null}
             });
         } catch (error) {
             throw error;
         }
     }
 
-    static async getAllFolders(userid) {
+    static async getAll(userid) {
         try {
             return await database.folder.findAll({
                 where: {userid: userid}
@@ -42,7 +42,7 @@ class FolderService {
         }
     }
 
-    static async deleteFolder(id) {
+    static async delete(id) {
         try {
             const fileToDelete = await database.folder.findOne({where: {id: Number(id)}});
 
