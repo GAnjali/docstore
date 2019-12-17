@@ -1,4 +1,5 @@
 import React from "react";
+import optionsIcon from "../../Util/optionsIcon.jpg";
 
 const Files = (props) => {
     return (
@@ -7,7 +8,13 @@ const Files = (props) => {
             <hr/>
             {props.files.map((file, i) => (
                 <div className={"file"} key={i} id={i} onClick={props.handleFileClick}>
-                    <p className={"file-content"} id={i}>{file.content}</p>
+                    <p className={"file-content"} id={i}>
+                        <div className={"fileoptions"}>
+                            <img src={optionsIcon} className={"fileoptions-icon"}/>
+                            <div className="fileoptions-content" id={i}>Delete
+                            </div>
+                        </div>
+                        {file.content}</p>
                     <hr/>
                     <p className={"file-title"} id={i}>{file.name}</p>
                 </div>
