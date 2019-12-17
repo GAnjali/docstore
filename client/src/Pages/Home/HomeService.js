@@ -75,3 +75,21 @@ export const addShare = async (fileid, sharetype, userid) => {
         return e;
     }
 };
+
+export const addFile = async (file) =>{
+    try {
+        const response = await axios.post(process.env.REACT_APP_SERVER_URL + '/files/', file, config);
+        return response;
+    } catch (e) {
+        return e;
+    }
+};
+
+export const addFolder = async (folder) =>{
+    try {
+        const response = await axios.post(process.env.REACT_APP_SERVER_URL + '/folders/', folder, config);
+        return response;
+    } catch (e) {
+        return e;
+    }
+};
