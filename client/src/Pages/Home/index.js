@@ -2,7 +2,16 @@ import React, {Component} from "react";
 import Header from "./Header";
 import './Home.css';
 import Sidebar from "./Sidebar";
-import {deleteFile, getFileByid, getFiles, getFolders, updateFile, getUserByEmail, addShare, addFile} from "./HomeService";
+import {
+    deleteFile,
+    getFileByid,
+    getFiles,
+    getFolders,
+    updateFile,
+    getUserByEmail,
+    addShare,
+    addFile
+} from "./HomeService";
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
 import FileModel from "./FileModel";
@@ -23,7 +32,8 @@ class Home extends Component {
         showSharingModel: false,
         sharingFile: null,
         sharingWith: null,
-        shareType: 'View'
+        shareType: 'View',
+        newFile: false
     };
 
     componentDidMount() {
@@ -91,16 +101,32 @@ class Home extends Component {
         });
     };
 
+    handleTitleChange = (e) => {
+        const newTitle = e.target.value;
+        this.setState((prevState) => {
+            const fileOnEdit = prevState.editingFile;
+            fileOnEdit.name = newTitle;
+            return {editingFile: fileOnEdit};
+        });
+    };
+
     handleSave = async () => {
+        console.log("clicked on save");
         if (this.state.showFileModel) {
-            await updateFile(this.state.editingFile).then(() => {
+            if (!this.state.newFile) {
+                await updateFile(this.state.editingFile).then(() => {
+                    this.setState({
+                        showFileModel: false,
+                    });
+                });
+            }
+            await addFile(this.state.editingFile).then(() => {
                 this.setState({
                     showFileModel: false,
+                    newFile: false
                 });
             });
         }
-        // else saveFile(this.state.editingNote);
-
     };
 
     handleClose = () => {
@@ -139,14 +165,15 @@ class Home extends Component {
         }
     };
 
-    handleAddFile =() =>{
+    handleAddFile = () => {
         const newFile = {
             name: '',
             content: ''
         }
         this.setState({
             showFileModel: true,
-            editingFile: newFile
+            editingFile: newFile,
+            newFile: true
         })
     };
 
@@ -158,6 +185,7 @@ class Home extends Component {
                 <MainSection folders={this.state.folders} files={this.state.files}
                              handleFileClick={this.handleFileClick}/>
                 <FileModel editingFile={this.state.editingFile} show={this.state.showFileModel}
+                           handleTitleChange={this.handleTitleChange}
                            handleContentChange={this.handleContentChange} handleSave={this.handleSave}
                            handleClose={this.handleClose}/>
                 <ShareModel show={this.state.showSharingModel} sharingFile={this.state.sharingFile}
