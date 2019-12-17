@@ -7,14 +7,13 @@ const Sidebar = (props) => {
             <div className={"sidebar-tabs"}>
                 <p>My Store</p>
             </div>
-            <div className="new-options">
+            <div className="newoptions">
                 <button className="new-button">+ New</button>
                 <div className="newoptions-content">
-                    <button className={"newfile"} onClick={props.handleAddFile}>New File</button>
-                    <button className={"newfolder"} onClick={props.handleAddFolder}>New Folder</button>
+                    <a className={"newfile"} onClick={props.handleAddFile}>New File</a>
+                    <a className={"newfolder"} onClick={props.handleAddFolder}>New Folder</a>
                 </div>
             </div>
-
         </div>
     )
 };
