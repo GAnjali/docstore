@@ -409,7 +409,7 @@ label:focus,
 .folderoptions{
     position: absolute;
 height: 2vh;
-    padding-top: 0.5vh;
+    padding-top: 02vh;
     padding-left: 3vh;
     /* align-content: end; */
     float: right;
@@ -435,10 +435,22 @@ height: 2vh;
 }
 
 .folderoptions-icon{
-    height: 2vh;
+    height: 3vh;
 }
 
-.fileoptions-content,
+.fileoptions-content{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    height: 40px;
+    width: 80px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    text-align: center;
+    font-size: 3vh;
+    color: #888888;
+}
+
 .folderoptions-content{
     display: none;
     position: absolute;
@@ -463,6 +475,15 @@ height: 2vh;
     border-color: white;
 }
 
+.folderoptions-content button{
+    height: 22px;
+    width: 80px;
+    font-size: 10px;
+    float: left;
+    clear: left;
+    border-color: white;
+}
+
 .newoptions-content button{
     height: 22px;
     width: 80px;
@@ -473,6 +494,10 @@ height: 2vh;
 }
 
 .fileoptions:hover .fileoptions-content {
+    display: block;
+}
+
+.folderoptions:hover .fileoptions-content {
     display: block;
 }
 
