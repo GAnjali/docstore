@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Header from "./Header";
 import './Home.css';
 import Sidebar from "./Sidebar";
-import {deleteFile, getFileByid, getFiles, getFolders, updateFile} from "./HomeService";
+import {deleteFile, getFileByid, getFiles, getFolders, updateFile, getUserByEmail, addShare} from "./HomeService";
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
 import FileModel from "./FileModel";
@@ -21,7 +21,9 @@ class Home extends Component {
         editingFile: null,
         showFileModel: false,
         showSharingModel: false,
-        sharingFile: null
+        sharingFile: null,
+        sharingWith: null,
+        shareType: 'View'
     };
 
     componentDidMount() {
@@ -55,8 +57,8 @@ class Home extends Component {
     };
 
     handleFileClick = async (event) => {
-        if(event.target.id){
-            if(event.target.className==="file-content"){
+        if (event.target.id) {
+            if (event.target.className === "file-content") {
                 const response = await getFileByid(this.state.files[event.target.id].id);
                 if (response.status === 200 && response.data.data !== undefined) {
                     this.setState({
@@ -64,17 +66,16 @@ class Home extends Component {
                         showFileModel: true
                     })
                 }
-            }
-            else if(event.target.className==="file-delete"){
+            } else if (event.target.className === "file-delete") {
                 const deleteResponse = await deleteFile(this.state.files[event.target.id].id);
-                if (deleteResponse.status === 200){
+                if (deleteResponse.status === 200) {
                     alert(deleteResponse.data.message);
                 }
-            }
-            else if(event.target.className==="file-share"){
+            } else if (event.target.className === "file-share") {
                 console.log(event.target.id);
                 this.setState({
                     showSharingModel: true,
+                    sharingFile: this.state.files[event.target.id]
                 })
             }
         }
@@ -108,6 +109,36 @@ class Home extends Component {
         });
     };
 
+    handleInput = (event) => {
+        this.setState({
+            sharingWith: event.target.value
+        })
+    };
+
+    handleShareType = (event) => {
+        this.setState({
+            shareType: event.target.id
+        })
+    };
+
+    handleShare = async () => {
+        const getUserResponse = await getUserByEmail(this.state.sharingWith);
+        if (getUserResponse.status === 200) {
+            const shareResponse = await addShare(this.state.sharingFile.id, this.state.shareType, getUserResponse.data.data.id);
+            if (shareResponse.status === 200) {
+                alert(shareResponse.data.message);
+            } else {
+                this.setState({
+                    error: getUserResponse.message
+                })
+            }
+        } else {
+            this.setState({
+                error: getUserResponse.message
+            })
+        }
+    };
+
     render() {
         return (
             <>
@@ -118,7 +149,9 @@ class Home extends Component {
                 <FileModel editingFile={this.state.editingFile} show={this.state.showFileModel}
                            handleContentChange={this.handleContentChange} handleSave={this.handleSave}
                            handleClose={this.handleClose}/>
-                <ShareModel show={this.state.showSharingModel} sharingFile={this.state.sharingFile}/>
+                <ShareModel show={this.state.showSharingModel} sharingFile={this.state.sharingFile}
+                            handleInput={this.handleInput} handleShareType={this.handleShareType}
+                            handleShare={this.handleShare}/>
             </>
         )
     }

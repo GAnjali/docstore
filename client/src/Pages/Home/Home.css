@@ -168,7 +168,133 @@ hr {
     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
+.sharingmodal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    margin-left: auto;
+    margin-right: auto;
+}
 
+.sharingmodel-heading{
+    font-size: 4vh;
+    color: black;
+    float: left;
+    position: absolute;
+    margin-left: 4vh;
+    margin-top: 2vh;
+}
+
+.people-span {
+    float: left;
+    margin-top: 11vh;
+    position: absolute;
+    clear: left;
+    margin-left: 4vh;
+    font-size: 3vh;
+}
+.sharingmodel-body {
+    float: left;
+    position: absolute;
+    margin-top: 17vh;
+    clear: left;
+    margin-left: 4vh;
+    width: 100%;
+}
+.sharewith-textarea {
+
+    width: 35%;
+    height: 4%;
+    font-size: 3vh;
+    box-shadow: 0px 0px 5px 0px #afafaf;
+    border: 0;
+}
+
+.share-button {
+    position: absolute;
+    margin-top: 30vh;
+    margin-left: 30vh;
+    clear: left;
+}
+
+
+textarea:focus,
+input:focus,
+button:focus,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
+/* Style The Dropdown Button */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.sharetype-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.sharetype-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+
+.sharingmodal-content hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    position: absolute;
+}
 /* Modal Content */
 .modal-content {
     background-color: #fefefe;
@@ -182,6 +308,19 @@ hr {
     animation-duration: 0.4s;
 }
 
+.sharingmodal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding-left: 0;
+    padding-top: 15px;
+    border: 1px solid #888;
+    width: 45%;
+    height: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    color: black;
+}
 /* Modal Header */
 .modal-header {
     background-color: #afafaf;
@@ -222,8 +361,6 @@ hr {
 .model-filecontent {
     width: 98.7%;
     padding: 0;
-    padding-top: 2vh;
-    padding-left: 2vh;
     border: 0;
     word-wrap: break-word;
     height: 100%;
@@ -232,6 +369,13 @@ hr {
 /* Modal Footer */
 .modal-footer {
     margin-top: 4.5vh;
+    float: right;
+    clear: right;
+    margin-right: 6vh;
+}
+
+.sharingmodal-footer {
+    margin-top: 1vh;
     float: right;
     clear: right;
     margin-right: 6vh;
