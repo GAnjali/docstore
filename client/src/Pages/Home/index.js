@@ -10,7 +10,8 @@ import {
     updateFile,
     getUserByEmail,
     addShare,
-    addFile, addFolder
+    addFile, addFolder,
+    deleteFolder
 } from "./HomeService";
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
@@ -70,7 +71,7 @@ class Home extends Component {
     };
 
     handleFileClick = async (event) => {
-        if (event.target.id) {
+        if (event.target.id != undefined) {
             if (event.target.className === "file-content") {
                 const response = await getFileByid(this.state.files[event.target.id].id);
                 if (response.status === 200 && response.data.data !== undefined) {
@@ -89,6 +90,22 @@ class Home extends Component {
                 this.setState({
                     showSharingModel: true,
                     sharingFile: this.state.files[event.target.id]
+                })
+            }
+        }
+    };
+
+    handleFolderClick = async (event) => {
+        console.log(event.target.className);
+        console.log(event.target.id);
+        if (event.target.className === 'folder-delete') {
+            const deleteFolderResponse = await deleteFolder(this.state.folders[event.target.id].id);
+            console.log(deleteFolderResponse);
+            if (deleteFolderResponse.status === 200) {
+                alert(deleteFolderResponse.data.message)
+            } else {
+                this.setState({
+                    error: deleteFolderResponse.message
                 })
             }
         }
@@ -210,7 +227,7 @@ class Home extends Component {
                 <Header/>
                 <Sidebar handleAddFile={this.handleAddFile} handleAddFolder={this.handleAddFolder}/>
                 <MainSection folders={this.state.folders} files={this.state.files}
-                             handleFileClick={this.handleFileClick}/>
+                             handleFileClick={this.handleFileClick} handleFolderClick={this.handleFolderClick}/>
                 <FolderModel show={this.state.showFolderModel} newFolder={this.state.newFolder}
                              handleFolderNameChange={this.handleFolderNameChange}
                              handleSaveFolder={this.handleSaveFolder}/>

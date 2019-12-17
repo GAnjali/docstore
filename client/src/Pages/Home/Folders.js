@@ -9,14 +9,14 @@ const Folders = (props) => {
             <hr/>
             <div className={"folders-list"}>
                 {props.folders.map((folder, i) => (
-                    <div className={"folder"} key={i}>
-                        <img src={folderIcon} className={"folder-icon"}/>
-                        <p>{folder.name}</p>
-                        <div className={"folderoptions"}>
-                            <img src={optionsIcon} className={"folderoptions-icon"}/>
-                            <div className="fileoptions-content">
-                                <button className={"file-share"} id={i}>Share</button>
-                                <button className={"file-delete"} id={i}>Delete</button>
+                    <div className={"folder"} id={i} onClick={props.handleFolderClick}>
+                        <img src={folderIcon} className={"folder-icon"} id={i}/>
+                        <p id={i}>{folder.name}</p>
+                        <div className={"folderoptions"} id={i}>
+                            <img src={optionsIcon} className={"folderoptions-icon"} id={i}/>
+                            <div className="fileoptions-content" id={i}>
+                                <button className={"folder-share"} id={i}>Share</button>
+                                <button className={"folder-delete"} id={i}>Delete</button>
                             </div>
                         </div>
                     </div>

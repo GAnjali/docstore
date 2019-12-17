@@ -76,7 +76,7 @@ export const addShare = async (fileid, sharetype, userid) => {
     }
 };
 
-export const addFile = async (file) =>{
+export const addFile = async (file) => {
     try {
         const response = await axios.post(process.env.REACT_APP_SERVER_URL + '/files/', file, config);
         return response;
@@ -85,9 +85,18 @@ export const addFile = async (file) =>{
     }
 };
 
-export const addFolder = async (folder) =>{
+export const addFolder = async (folder) => {
     try {
         const response = await axios.post(process.env.REACT_APP_SERVER_URL + '/folders/', folder, config);
+        return response;
+    } catch (e) {
+        return e;
+    }
+};
+
+export const deleteFolder = async (id) => {
+    try {
+        const response = await axios.delete(process.env.REACT_APP_SERVER_URL + '/folders/' + id, config);
         return response;
     } catch (e) {
         return e;
