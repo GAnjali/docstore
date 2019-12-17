@@ -10,12 +10,13 @@ import {
     updateFile,
     getUserByEmail,
     addShare,
-    addFile
+    addFile, addFolder
 } from "./HomeService";
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
 import FileModel from "./FileModel";
 import ShareModel from "./ShareModel";
+import FolderModel from "./FolderModel";
 
 class Home extends Component {
 
@@ -30,10 +31,12 @@ class Home extends Component {
         editingFile: null,
         showFileModel: false,
         showSharingModel: false,
+        showFolderModel: false,
         sharingFile: null,
         sharingWith: null,
         shareType: 'View',
-        newFile: false
+        newFile: false,
+        newFolder: ''
     };
 
     componentDidMount() {
@@ -89,7 +92,6 @@ class Home extends Component {
                 })
             }
         }
-
     };
 
     handleContentChange = (e) => {
@@ -110,7 +112,7 @@ class Home extends Component {
         });
     };
 
-    handleSave = async () => {
+    handleSaveFile = async () => {
         console.log("clicked on save");
         if (this.state.showFileModel) {
             if (!this.state.newFile) {
@@ -127,6 +129,24 @@ class Home extends Component {
                 });
             });
         }
+    };
+
+    handleSaveFolder = async () => {
+        const newFolder = {name: this.state.newFolder};
+        const addFolderResponse = await addFolder(newFolder);
+        if (addFolderResponse.status === 200) {
+            alert(addFolderResponse.data.message);
+        } else {
+            this.setState({
+                error: addFolderResponse.message
+            })
+        }
+    };
+
+    handleFolderNameChange = (event) => {
+        this.setState({
+            newFolder: event.target.value
+        })
     };
 
     handleClose = () => {
@@ -169,7 +189,7 @@ class Home extends Component {
         const newFile = {
             name: '',
             content: ''
-        }
+        };
         this.setState({
             showFileModel: true,
             editingFile: newFile,
@@ -177,16 +197,26 @@ class Home extends Component {
         })
     };
 
+
+    handleAddFolder = () => {
+        this.setState({
+            showFolderModel: true
+        })
+    };
+
     render() {
         return (
             <>
                 <Header/>
-                <Sidebar handleAddFile={this.handleAddFile}/>
+                <Sidebar handleAddFile={this.handleAddFile} handleAddFolder={this.handleAddFolder}/>
                 <MainSection folders={this.state.folders} files={this.state.files}
                              handleFileClick={this.handleFileClick}/>
+                <FolderModel show={this.state.showFolderModel} newFolder={this.state.newFolder}
+                             handleFolderNameChange={this.handleFolderNameChange}
+                             handleSaveFolder={this.handleSaveFolder}/>
                 <FileModel editingFile={this.state.editingFile} show={this.state.showFileModel}
                            handleTitleChange={this.handleTitleChange}
-                           handleContentChange={this.handleContentChange} handleSave={this.handleSave}
+                           handleContentChange={this.handleContentChange} handleSaveFile={this.handleSaveFile}
                            handleClose={this.handleClose}/>
                 <ShareModel show={this.state.showSharingModel} sharingFile={this.state.sharingFile}
                             handleInput={this.handleInput} handleShareType={this.handleShareType}
