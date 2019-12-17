@@ -6,6 +6,7 @@ import {deleteFile, getFileByid, getFiles, getFolders, updateFile} from "./HomeS
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
 import FileModel from "./FileModel";
+import ShareModel from "./ShareModel";
 
 class Home extends Component {
 
@@ -18,7 +19,9 @@ class Home extends Component {
         files: [],
         error: '',
         editingFile: null,
-        showFileModel: false
+        showFileModel: false,
+        showSharingModel: false,
+        sharingFile: null
     };
 
     componentDidMount() {
@@ -53,7 +56,7 @@ class Home extends Component {
 
     handleFileClick = async (event) => {
         if(event.target.id){
-            if(event.target.className!=="fileoptions-content"){
+            if(event.target.className==="file-content"){
                 const response = await getFileByid(this.state.files[event.target.id].id);
                 if (response.status === 200 && response.data.data !== undefined) {
                     this.setState({
@@ -62,11 +65,17 @@ class Home extends Component {
                     })
                 }
             }
-            else {
+            else if(event.target.className==="file-delete"){
                 const deleteResponse = await deleteFile(this.state.files[event.target.id].id);
                 if (deleteResponse.status === 200){
                     alert(deleteResponse.data.message);
                 }
+            }
+            else if(event.target.className==="file-share"){
+                console.log(event.target.id);
+                this.setState({
+                    showSharingModel: true,
+                })
             }
         }
 
@@ -109,6 +118,7 @@ class Home extends Component {
                 <FileModel editingFile={this.state.editingFile} show={this.state.showFileModel}
                            handleContentChange={this.handleContentChange} handleSave={this.handleSave}
                            handleClose={this.handleClose}/>
+                <ShareModel show={this.state.showSharingModel} sharingFile={this.state.sharingFile}/>
             </>
         )
     }

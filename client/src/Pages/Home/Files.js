@@ -8,15 +8,15 @@ const Files = (props) => {
             <hr/>
             {props.files.map((file, i) => (
                 <div className={"file"} key={i} id={i} onClick={props.handleFileClick}>
-                    <p className={"file-content"} id={i}>
+                    <div className={"file-content"} id={i}>
                         <div className={"fileoptions"}>
                             <img src={optionsIcon} className={"fileoptions-icon"}/>
-                            <div className="fileoptions-content"  id={i}>
-                                <button className={"file-share"}>Share</button>
-                                <button className={"file-delete"} >Delete</button>
+                            <div className="fileoptions-content">
+                                <button className={"file-share"} id={i}>Share</button>
+                                <button className={"file-delete"} id={i}>Delete</button>
                             </div>
                         </div>
-                        {file.content}</p>
+                        {file.content}</div>
                     <hr/>
                     <p className={"file-title"} id={i}>{file.name}</p>
                 </div>
