@@ -1,8 +1,10 @@
 import React from "react";
+import Header from "../Home/Header";
 
 const SignupView = (props) => {
     return (
         <div className="center">
+            <Header/>
             <div className="card">
                 <h1>Signup</h1>
                 <form>
@@ -20,13 +22,7 @@ const SignupView = (props) => {
                         type="password"
                         onChange={props.handleChange}
                     />
-                    <input
-                        className="form-item"
-                        placeholder="Enter password again..."
-                        name="password"
-                        type="password"
-                        onChange={props.handleChange}
-                    />
+                    {props.hasError && <h4>{props.error}</h4>}
                     <input
                         className="form-submit"
                         value="Register"
