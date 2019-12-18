@@ -12,7 +12,7 @@ describe("FolderModel component tests", () => {
         shallow(<FolderModel props/>);
     });
 
-    it('should match the FileModel snapshot', function () {
+    it('should match the FolderModel snapshot', function () {
         const folderModelComponent = shallow(<FolderModel props/>);
         expect(folderModelComponent).toMatchSnapshot();
     });

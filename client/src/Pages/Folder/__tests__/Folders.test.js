@@ -9,7 +9,7 @@ describe("Folders component tests", () => {
         shallow(<Folders folders={folders}/>);
     });
 
-    it('should match the Sidebar snapshot', function () {
+    it('should match the Folders snapshot', function () {
         const folderComponent = shallow(<Folders folders={folders}/>);
         expect(folderComponent).toMatchSnapshot();
     });
