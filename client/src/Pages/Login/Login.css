@@ -14,7 +14,7 @@
     padding: 0.8rem;
     width: 60vh;
     margin-left: 36%;
-    margin-top: 6%;
+    margin-top: 8%;
 }
 
 .card > form {
@@ -30,11 +30,15 @@
 
 .form-item {
     font-family: 'Raleway', sans-serif;
-    padding: 0.5vh;
-    margin-bottom: 2rem;
-    height: 6vh;
-    width: 16rem;
-    margin-left: 3vh;
+    padding-left: 2vw;
+    box-shadow: 0px 0px 10px 0px #afafaf;
+    margin-bottom: 3.5vh;
+    border: 0;
+    height: 7vh;
+    width: 93%;
+    background: #e1e6e5;
+    margin-left: 0.7vh;
+    opacity: 0.7;
 }
 
 .form-submit {
@@ -44,9 +48,10 @@
     border: none;
     letter-spacing: 0.2rem;
     transition: 0.3s opacity ease;
+    box-shadow: 0px 0px 10px 0px #afafaf;
     cursor: pointer;
-    width: 25vh;
-    margin-left: 7vw;
+    width: 40%;
+    margin-left: 30%;
 }
 
 .form-submit:hover {
