@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './Login.css';
-import login from "./APIservice";
+import {login} from "./LoginService";
 import LoginView from "./LoginView";
+import {setToken, setUser} from "../../Util/localStorageUtil";
 
 class Login extends Component {
 
@@ -12,11 +13,10 @@ class Login extends Component {
         hasError: '',
     };
 
-    handleChange = (e) => {
-        console.log(e.target.value);
+    handleChange = (event) => {
         this.setState(
             {
-                [e.target.name]: e.target.value
+                [event.target.name]: event.target.value
             }
         )
     };
@@ -24,13 +24,15 @@ class Login extends Component {
     handleFormSubmit = async (e) => {
         e.preventDefault();
         const response = await login(this.state.username, this.state.password);
-        this.handleResponse(response);
+        this.handleResponse(response, this.props.history);
     };
 
-    handleResponse = (response) => {
+
+    handleResponse = (response, history) => {
         if (response.status === 200 && response.data.message === "Token generated") {
-            this.props.history.replace('/');
-            localStorage.setItem("token", response.data.data);
+            setUser(this.state.email);
+            setToken(response.data.data);
+            history.replace('/');
         } else {
             this.setState({
                 hasError: true,
