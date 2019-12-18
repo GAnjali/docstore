@@ -40,22 +40,35 @@ class Home extends Component {
         if (!isLoggedIn()) {
             this.props.history.replace('/login')
         } else {
+            localStorage.setItem("parentfolderid", 0);
             this.updateComponent(0);
         }
     }
 
     fetchDocs = async (docType, parentFolderId) => {
-        const docsResponse = (docType === 'Folders') ? await getFolders(parentFolderId) : await getFiles(parentFolderId);
-        if (docsResponse.status === 200) {
-            if (docType === 'Folders' && docsResponse.data.data !== undefined) {
-                this.setState({
-                    folders: docsResponse.data.data
-                });
-            } else {
+        const docsResponse = (docType == 'Folders') ? await getFolders(parentFolderId) : await getFiles(parentFolderId);
+        if (docsResponse.status == 200) {
+            if (docType == 'Folders' && docsResponse.data.status == 'success') {
                 if (docsResponse.data.data !== undefined) {
                     this.setState({
-                        files: docsResponse.data.data
+                        folders: docsResponse.data.data
                     });
+                } else {
+                    this.setState({
+                        folders: []
+                    });
+                }
+            } else {
+                if (docsResponse.data.status == 'success') {
+                    if (docsResponse.data.data != undefined) {
+                        this.setState({
+                            files: docsResponse.data.data
+                        });
+                    } else {
+                        this.setState({
+                            files: []
+                        });
+                    }
                 }
             }
         } else {
@@ -82,7 +95,7 @@ class Home extends Component {
             } else if (event.target.className === "file-delete") {
                 const deleteResponse = await deleteFile(this.state.files[event.target.id].id);
                 if (deleteResponse.status === 200) {
-                    this.updateComponent(0);
+                    this.updateComponent(localStorage.getItem("parentfolderid"));
                 }
             } else if (event.target.className === "file-share") {
                 console.log(event.target.id);
@@ -97,16 +110,21 @@ class Home extends Component {
     handleFolderClick = async (event) => {
         console.log(event.target.className);
         console.log(event.target.id);
-        if (event.target.className === 'folder-delete') {
+        if (event.target.className == 'folder-delete') {
             const deleteFolderResponse = await deleteFolder(this.state.folders[event.target.id].id);
             console.log(deleteFolderResponse);
-            if (deleteFolderResponse.status === 200) {
-                this.updateComponent(0);
+            if (deleteFolderResponse.status == 200) {
+                this.updateComponent(localStorage.getItem("parentfolderid"));
             } else {
                 this.setState({
                     error: deleteFolderResponse.message
                 })
             }
+        } else if (event.target.className !== 'folder-share') {
+            console.log("in handle folder click");
+            //set parentfolder
+            localStorage.setItem("parentfolderid", this.state.folders[event.target.id].id);
+            this.updateComponent(this.state.folders[event.target.id].id);
         }
     };
 
@@ -136,7 +154,7 @@ class Home extends Component {
                     this.setState({
                         showFileModel: false,
                     });
-                    this.updateComponent(0);
+                    this.updateComponent(localStorage.getItem("parentfolderid"));
                 });
             }
             await addFile(this.state.editingFile).then(() => {
@@ -144,7 +162,7 @@ class Home extends Component {
                     showFileModel: false,
                     newFile: false
                 }, () => {
-                    this.updateComponent(0);
+                    this.updateComponent(localStorage.getItem("parentfolderid"));
                 });
             });
         }
@@ -158,8 +176,8 @@ class Home extends Component {
     handleSaveFolder = async () => {
         const newFolder = {name: this.state.newFolder};
         const addFolderResponse = await addFolder(newFolder);
-        if (addFolderResponse.status === 200) {
-            this.updateComponent(0);
+        if (addFolderResponse.status == 200) {
+            this.updateComponent(localStorage.getItem("parentfolderid"));
         } else {
             this.setState({
                 error: addFolderResponse.message
@@ -193,9 +211,9 @@ class Home extends Component {
 
     handleShare = async () => {
         const getUserResponse = await getUserByEmail(this.state.sharingWith);
-        if (getUserResponse.status === 200) {
+        if (getUserResponse.status == 200) {
             const shareResponse = await addShare(this.state.sharingFile.id, this.state.shareType, getUserResponse.data.data.id);
-            if (shareResponse.status === 200) {
+            if (shareResponse.status == 200) {
                 alert(shareResponse.data.message);
             } else {
                 this.setState({
