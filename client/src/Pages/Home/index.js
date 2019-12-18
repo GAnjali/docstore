@@ -45,10 +45,25 @@ class Home extends Component {
         }
     }
 
-    fetchDocs = async (docType, parentFolderId) => {
-        const docsResponse = (docType == 'Folders') ? await getFolders(parentFolderId) : await getFiles(parentFolderId);
+    getAllFiles = async (parentfolderid) => {
+        const getFilesResponse = await getFiles(parentfolderid);
+        if (getFilesResponse.data.status == 'success') {
+            if (getFilesResponse.data.data != undefined) {
+                this.setState({
+                    files: getFilesResponse.data.data
+                });
+            } else {
+                this.setState({
+                    files: []
+                });
+            }
+        }
+        //get shared files
+    };
+    fetchFolders = async (parentFolderId) => {
+        const docsResponse = await getFolders(parentFolderId);
         if (docsResponse.status == 200) {
-            if (docType == 'Folders' && docsResponse.data.status == 'success') {
+            if (docsResponse.data.status == 'success') {
                 if (docsResponse.data.data !== undefined) {
                     this.setState({
                         folders: docsResponse.data.data
@@ -57,18 +72,6 @@ class Home extends Component {
                     this.setState({
                         folders: []
                     });
-                }
-            } else {
-                if (docsResponse.data.status == 'success') {
-                    if (docsResponse.data.data != undefined) {
-                        this.setState({
-                            files: docsResponse.data.data
-                        });
-                    } else {
-                        this.setState({
-                            files: []
-                        });
-                    }
                 }
             }
         } else {
@@ -124,6 +127,7 @@ class Home extends Component {
             console.log("in handle folder click");
             //set parentfolder
             localStorage.setItem("parentfolderid", this.state.folders[event.target.id].id);
+            localStorage.setItem("parentfoldername", this.state.folders[event.target.id].name);
             this.updateComponent(this.state.folders[event.target.id].id);
         }
     };
@@ -147,7 +151,6 @@ class Home extends Component {
     };
 
     handleSaveFile = async () => {
-        console.log("clicked on save");
         if (this.state.showFileModel) {
             if (!this.state.newFile) {
                 await updateFile(this.state.editingFile).then(() => {
@@ -169,8 +172,8 @@ class Home extends Component {
     };
 
     updateComponent = (parentfolderid) => {
-        this.fetchDocs('Folders', parentfolderid);
-        this.fetchDocs('Files', parentfolderid);
+        this.fetchFolders(parentfolderid);
+        this.getAllFiles(parentfolderid);
     };
 
     handleSaveFolder = async () => {
@@ -230,7 +233,8 @@ class Home extends Component {
     handleAddFile = () => {
         const newFile = {
             name: '',
-            content: ''
+            content: '',
+            parentfoldername: localStorage.getItem("parentfoldername")
         };
         this.setState({
             showFileModel: true,
