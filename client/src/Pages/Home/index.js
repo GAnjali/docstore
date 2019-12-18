@@ -178,14 +178,12 @@ class Home extends Component {
 
     handleSaveFolder = async () => {
         const newFolder = {name: this.state.newFolder};
-        const addFolderResponse = await addFolder(newFolder);
-        if (addFolderResponse.status == 200) {
-            this.updateComponent(localStorage.getItem("parentfolderid"));
-        } else {
+        await addFolder(newFolder).then(() => {
             this.setState({
-                error: addFolderResponse.message
-            })
-        }
+                showFolderModel: false
+            });
+            this.updateComponent(localStorage.getItem("parentfolderid"));
+        })
     };
 
     handleFolderNameChange = (event) => {
@@ -197,6 +195,7 @@ class Home extends Component {
     handleClose = () => {
         this.setState({
             showFileModel: false,
+            showFolderModel: false
         });
     };
 
@@ -259,7 +258,7 @@ class Home extends Component {
                              handleFileClick={this.handleFileClick} handleFolderClick={this.handleFolderClick}/>
                 <FolderModel show={this.state.showFolderModel} newFolder={this.state.newFolder}
                              handleFolderNameChange={this.handleFolderNameChange}
-                             handleSaveFolder={this.handleSaveFolder}/>
+                             handleSaveFolder={this.handleSaveFolder} handleClose={this.handleClose}/>
                 <FileModel editingFile={this.state.editingFile} show={this.state.showFileModel}
                            handleTitleChange={this.handleTitleChange}
                            handleContentChange={this.handleContentChange} handleSaveFile={this.handleSaveFile}
