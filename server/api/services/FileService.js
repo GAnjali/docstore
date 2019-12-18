@@ -14,7 +14,7 @@ class FileService {
     static async getAllByParent(userid, parentfolderid) {
         try {
             return await database.file.findAll({
-                where: {userid: userid, parentfolderid: parentfolderid !== 0 ? parentfolderid : null}
+                where: {userid: userid, parentfolderid: parentfolderid != 0 ? parentfolderid : null}
             });
         } catch (error) {
             throw error;
