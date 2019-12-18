@@ -1,7 +1,7 @@
 import React from "react";
 
 const FolderModel = (props) => {
-    let style = {}, title = '', content = '';
+    let style = {};
     if (props.show === true) {
         style = {display: "block"};
     }
