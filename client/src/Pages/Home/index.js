@@ -40,8 +40,7 @@ class Home extends Component {
         if (!isLoggedIn()) {
             this.props.history.replace('/login')
         } else {
-            this.fetchDocs('Folders', 0);
-            this.fetchDocs('Files', 0);
+            this.updateComponent(0);
         }
     }
 
@@ -83,7 +82,7 @@ class Home extends Component {
             } else if (event.target.className === "file-delete") {
                 const deleteResponse = await deleteFile(this.state.files[event.target.id].id);
                 if (deleteResponse.status === 200) {
-                    alert(deleteResponse.data.message);
+                    this.updateComponent(0);
                 }
             } else if (event.target.className === "file-share") {
                 console.log(event.target.id);
@@ -102,7 +101,7 @@ class Home extends Component {
             const deleteFolderResponse = await deleteFolder(this.state.folders[event.target.id].id);
             console.log(deleteFolderResponse);
             if (deleteFolderResponse.status === 200) {
-                alert(deleteFolderResponse.data.message)
+                this.updateComponent(0);
             } else {
                 this.setState({
                     error: deleteFolderResponse.message
@@ -137,22 +136,30 @@ class Home extends Component {
                     this.setState({
                         showFileModel: false,
                     });
+                    this.updateComponent(0);
                 });
             }
             await addFile(this.state.editingFile).then(() => {
                 this.setState({
                     showFileModel: false,
                     newFile: false
+                }, () => {
+                    this.updateComponent(0);
                 });
             });
         }
+    };
+
+    updateComponent = (parentfolderid) => {
+        this.fetchDocs('Folders', parentfolderid);
+        this.fetchDocs('Files', parentfolderid);
     };
 
     handleSaveFolder = async () => {
         const newFolder = {name: this.state.newFolder};
         const addFolderResponse = await addFolder(newFolder);
         if (addFolderResponse.status === 200) {
-            alert(addFolderResponse.data.message);
+            this.updateComponent(0);
         } else {
             this.setState({
                 error: addFolderResponse.message
