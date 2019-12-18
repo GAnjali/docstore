@@ -3,10 +3,7 @@ import {shallow} from "enzyme";
 import Folders from "../Folders";
 
 describe("Folders component tests", () => {
-    let folders;
-    beforeEach(() => {
-        folders = [];
-    });
+    const folders=[];
 
     it("Should render without crashing", () => {
         shallow(<Folders folders={folders}/>);
