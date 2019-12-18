@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../Login/Login.css';
 import register from "./APIService";
 import SignupView from "./SignupView";
+import {getToken} from "../../Util/localStorageUtil";
 
 class Index extends Component {
 
@@ -11,6 +12,12 @@ class Index extends Component {
         error: '',
         hasError: '',
     };
+
+    componentDidMount() {
+        if (getToken().length != 0) {
+            this.props.history.replace('/')
+        }
+    }
 
     handleChange = (e) => {
         this.setState(
