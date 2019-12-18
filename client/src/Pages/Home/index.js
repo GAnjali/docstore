@@ -15,15 +15,11 @@ import {
 } from "./HomeService";
 import MainSection from "./MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
-import FileModel from "./FileModel";
+import FileModel from "../File/FileModel";
 import ShareModel from "./ShareModel";
-import FolderModel from "./FolderModel";
+import FolderModel from "../Folder/FolderModel";
 
 class Home extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     state = {
         folders: [],
@@ -64,10 +60,14 @@ class Home extends Component {
                 }
             }
         } else {
-            this.setState({
-                error: docsResponse.message
-            })
+            this.setError(docsResponse.message);
         }
+    };
+
+    setError = (errorMessage) => {
+        this.setState({
+            error: errorMessage
+        })
     };
 
     handleFileClick = async (event) => {

@@ -1,6 +1,6 @@
 import React from "react";
-import Folders from "./Folders";
-import Files from "./Files";
+import Folders from "../Folder/Folders";
+import Files from "../File/Files";
 
 const MainSection = (props) => {
     return (
