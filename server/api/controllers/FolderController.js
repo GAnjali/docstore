@@ -28,7 +28,6 @@ class FolderController {
 
     static async getAll(req, res) {
         try {
-            console.log(req.user.id)
             const allFolders = await FolderService.getAll(req.user.id);
             if (allFolders.length > 0) {
                 util.setSuccess(200, 'Folders retrieved', allFolders);
