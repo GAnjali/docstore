@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './Login.css';
 import {login} from "./LoginService";
 import LoginView from "./LoginView";
-import {setToken, setUser} from "../../Util/localStorageUtil";
+import {getToken, setToken, setUser} from "../../Util/localStorageUtil";
 
 class Login extends Component {
 
@@ -12,6 +12,12 @@ class Login extends Component {
         error: '',
         hasError: '',
     };
+
+    componentDidMount() {
+        if(getToken().length!=0){
+            this.props.history.replace('/')
+        }
+    }
 
     handleChange = (event) => {
         this.setState(
