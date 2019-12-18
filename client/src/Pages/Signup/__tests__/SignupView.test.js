@@ -1,8 +1,8 @@
 import React from "react";
 import {shallow} from "enzyme";
-import Signup from "../index";
+import Signup from "../SignupView";
 
-describe("Signup", () => {
+describe("SignupView tests", () => {
     const props = {
         handleChange: jest.fn(),
         handleFormSubmit: jest.fn()
@@ -10,7 +10,7 @@ describe("Signup", () => {
     it("Should render without crashing", () => {
         shallow(<Signup props/>);
     });
-    it('should match the signup snapshot', function () {
+    it('should match the signupView snapshot', function () {
         const signupComponent = shallow(<Signup props/>);
         expect(signupComponent).toMatchSnapshot();
     });
