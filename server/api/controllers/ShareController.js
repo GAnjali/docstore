@@ -7,8 +7,8 @@ class ShareController {
 
     static async add(req, res) {
         try {
-            const share = await ShareService.getAllByFileUser(req.body.fileid, req.body.userid);
-            if (share === null || share === undefined) {
+            const existedShare = await ShareService.getAllByFileUser(req.body.fileid, req.body.userid);
+            if (existedShare.length === 0) {
                 const newShare = await ShareService.add(req.body);
                 util.setSuccess(201, 'Share Added!', newShare);
                 return util.send(res);
@@ -23,9 +23,9 @@ class ShareController {
         }
     }
 
-    static async getAll(req, res) {
+    static async getAllByUser(req, res) {
         try {
-            const allSharings = await ShareService.getAll(req.params.id);
+            const allSharings = await ShareService.getAllByUser(req.params.userid);
             if (allSharings.length > 0) {
                 util.setSuccess(200, 'Sharings retrieved', allSharings);
             } else {
