@@ -15,7 +15,7 @@ class Login extends Component {
 
     componentDidMount() {
         if(getToken().length!=0){
-            this.props.history.replace('/')
+            this.props.history.replace('/dashboard')
         }
     }
 
@@ -38,7 +38,7 @@ class Login extends Component {
         if (response.status === 200 && response.data.message === "Token generated") {
             setUser(this.state.email);
             setToken(response.data.data);
-            history.replace('/');
+            history.replace('/dashboard');
         } else {
             this.setState({
                 hasError: true,

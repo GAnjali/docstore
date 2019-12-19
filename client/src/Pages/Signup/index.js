@@ -15,7 +15,7 @@ class Index extends Component {
 
     componentDidMount() {
         if (getToken().length != 0) {
-            this.props.history.replace('/')
+            this.props.history.replace('/dashboard')
         }
     }
 
