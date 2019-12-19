@@ -104,6 +104,7 @@ class Home extends Component {
         })
         //share service request
     };
+
     handleFileActions = async (event) => {
         if (event.target.id !== undefined) {
             if (event.target.className === "file-content")
@@ -116,16 +117,20 @@ class Home extends Component {
         }
     };
 
-    handleFolderClick = async (event) => {
-        if (event.target.className == 'folder-delete') {
-            const deleteFolderResponse = await deleteFolder(this.state.folders[event.target.id].id);
-            if (deleteFolderResponse.status == 200) {
-                this.updateComponent(localStorage.getItem("parentfolderid"));
-            } else {
-                this.setState({
-                    error: deleteFolderResponse.message
-                })
-            }
+    handleDeleteFolder = async (folderid) => {
+        const deleteFolderResponse = await deleteFolder(folderid);
+        if (deleteFolderResponse.status === 200) {
+            this.updateComponent(localStorage.getItem("parentfolderid"));
+        } else {
+            this.setState({
+                error: deleteFolderResponse.message
+            })
+        }
+    };
+
+    handleFolderActions = async (event) => {
+        if (event.target.className === 'folder-delete') {
+            this.handleDeleteFolder(this.state.folders[event.target.id].id);
         } else if (event.target.className !== 'folder-share') {
             localStorage.setItem("parentfolderid", this.state.folders[event.target.id].id);
             localStorage.setItem("parentfoldername", this.state.folders[event.target.id].name);
@@ -251,7 +256,7 @@ class Home extends Component {
                 <Header/>
                 <Sidebar handleAddFile={this.handleAddFile} handleAddFolder={this.handleAddFolder}/>
                 <MainSection folders={this.state.folders} files={this.state.files}
-                             handleFileClick={this.handleFileActions} handleFolderClick={this.handleFolderClick}/>
+                             handleFileClick={this.handleFileActions} handleFolderClick={this.handleFolderActions}/>
                 <FolderModel show={this.state.showFolderModel} newFolder={this.state.newFolder}
                              handleFolderNameChange={this.handleFolderNameChange}
                              handleSaveFolder={this.handleSaveFolder} handleClose={this.handleClose}/>
