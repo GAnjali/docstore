@@ -47,7 +47,7 @@ class Home extends Component {
 
     getAllFiles = async (parentfolderid) => {
         const getFilesResponse = await getFiles(parentfolderid);
-        if (getFilesResponse.data.status == 'success') {
+        if (getFilesResponse.status == 200 && getFilesResponse.data.status == 'success') {
             if (getFilesResponse.data.data != undefined) {
                 this.setState({
                     files: getFilesResponse.data.data
