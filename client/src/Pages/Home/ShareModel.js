@@ -11,7 +11,7 @@ const ShareModel = (props) => {
                 <span className={"sharingmodel-heading"}> Share with others </span>
                 <span className={"people-span"}> People </span>
                 <div className={"sharingmodel-body"}>
-                    <textarea className={"sharewith-textarea"} placeholder={"Enter email addresses..."} onChange={props.handleInput}/>
+                    <textarea className={"sharewith-textarea"} name={"sharingWithUser"} placeholder={"Enter email addresses..."} onChange={props.handleInput}/>
                     <div className="sharetype-dropdown">
                         <button className="dropbtn">share type</button>
                         <div className="dropdown-content">

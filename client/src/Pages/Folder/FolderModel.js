@@ -10,7 +10,7 @@ const FolderModel = (props) => {
             <div className="sharingmodal-content">
                 <span className="close" onClick={props.handleClose}>&times;</span>
                 <div className={"sharingmodel-body"}>
-                    <textarea className={"sharewith-textarea"} placeholder={"Enter folder name here..."} onChange={props.handleFolderNameChange}/>
+                    <textarea className={"sharewith-textarea"} name={"newFolderName"} placeholder={"Enter folder name here..."} onChange={props.handleFolderNameChange}/>
                 </div>
                 <button className={"share-button"} onClick={props.handleSaveFolder}>Save</button>
             </div>
