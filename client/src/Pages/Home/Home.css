@@ -34,13 +34,13 @@ h2 {
     border-width: 1px 1px 1px 0;
     border-radius: 0 66px 66px 0;;
     height: 8vh;
-    margin-top: 4vh;
+    margin-top: 2vh;
     align-items: center;
 }
 
 .sidebar-tabs p {
-    position: absolute;
-    top: 18%;
+position: absolute;
+    top: 63%;
     transform: translate(0, -50%);
     padding-top: 2vh;
     color: black;
@@ -317,8 +317,8 @@ label:focus,
     margin: auto;
     padding: 0;
     border: 1px solid #888;
-    width: 70%;
-    height: 60%;
+    width: 40vw;
+    height: 50vh;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     animation-name: animatetop;
     animation-duration: 0.4s;
@@ -339,21 +339,21 @@ label:focus,
 }
 /* Modal Header */
 .modal-header {
-    background-color: #afafaf;
     color: white;
+    position: relative;
 }
 
 .model-title {
-    margin: 0;
     padding-top: 3vh;
-    padding-bottom: 2.5vh;
+    padding-left: 2vh;
+    width: 97%;
 }
 
 .close {
     color: black;
-    float: right;
-    margin-right: 2vh;
-    margin-top: 1vh;
+    position: absolute;
+    margin-left: 95%;
+    margin-top: 0vh;
     font-size: 32px;
     font-weight: bold;
 }
@@ -371,12 +371,12 @@ label:focus,
     text-align: left;
     border: 0;
     margin: 0;
-    height: 65%
+    height: 50%
 }
 
 .model-filecontent {
-    width: 98.7%;
-    padding: 0;
+    width: 96%;
+    padding-left: 2vh;
     border: 0;
     word-wrap: break-word;
     height: 100%;
@@ -384,7 +384,8 @@ label:focus,
 
 /* Modal Footer */
 .modal-footer {
-    margin-top: 4.5vh;
+    box-shadow: 0px 0px 10px 0px #afafaf;
+    margin-top: 6vh;
     float: right;
     clear: right;
     margin-right: 6vh;
@@ -442,10 +443,10 @@ height: 2vh;
     padding-left: 2vh;
     padding-right: 2vh;
     margin-bottom: 2vh;
-    margin-top: 4vh;
-    height: 8vh;
-    width: 20vh;
-    border-radius: 1vh;
+    margin-top: 2vh;
+    height: 7vh;
+    width: 14vh;
+    border-radius: 6vh;
     box-shadow: 0px 0px 10px 0px #afafaf;
 }
 
@@ -548,7 +549,7 @@ height: 2vh;
 .emptysection {
     top: 50%;
     margin-left: 25%;
-    font-size: 5vh;
+    font-size: 3vh;
     position: absolute;
     color: #afafaf;
     font-family: 'Product Sans',Arial,sans-serif;;
