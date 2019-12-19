@@ -31,7 +31,6 @@ class Home extends Component {
         newFolder: ''
     };
 
-
     componentDidMount() {
         localStorage.setItem("parentfolderid", 0);
         if (!isLoggedIn()) {
@@ -42,8 +41,8 @@ class Home extends Component {
     }
 
     updateComponent = (parentfolderid) => {
-        this.getFolders(parentfolderid);
         this.getFiles(parentfolderid);
+        this.getFolders(parentfolderid);
     };
 
     getFiles = async (parentfolderid) => {
@@ -73,36 +72,46 @@ class Home extends Component {
         }
     };
 
-    handleFileClick = async (event) => {
+    handleEditFile = async (fileid) => {
+        const getFileByIdResponse = responseUtil.getResponse(await getFileByid(fileid));
+        if (getFileByIdResponse.status === 'success') {
+            this.setState({
+                editingFile: getFileByIdResponse.data,
+                showFileModel: true
+            })
+        } else {
+            this.setState({
+                error: getFileByIdResponse.message
+            })
+        }
+    };
+
+    handleDeleteFile = async (fileid) => {
+        const deleteResponse = await deleteFile(fileid);
+        if (deleteResponse.status === 200) {
+            this.updateComponent(localStorage.getItem("parentfolderid"));
+        } else {
+            this.setState({
+                error: deleteResponse.message
+            })
+        }
+    };
+
+    handleShareFile = (fileindex) => {
+        this.setState({
+            showSharingModel: true,
+            sharingFile: this.state.files[fileindex]
+        })
+        //share service request
+    };
+    handleFileActions = async (event) => {
         if (event.target.id !== undefined) {
-            if (event.target.className === "file-content") {
-                const getFileByIdResponse = responseUtil.getResponse(await getFileByid(this.state.files[event.target.id].id));
-                if (getFileByIdResponse.status === 'success') {
-                    this.setState({
-                        editingFile: getFileByIdResponse.data,
-                        showFileModel: true
-                    })
-                } else {
-                    this.setState({
-                        error: getFileByIdResponse.message
-                    })
-                }
-            } else if (event.target.className === "file-delete") {
-                const deleteResponse = await deleteFile(this.state.files[event.target.id].id);
-                if (deleteResponse.status === 200) {
-                    this.updateComponent(localStorage.getItem("parentfolderid"));
-                } else {
-                    this.setState({
-                        error: deleteResponse.message
-                    })
-                }
+            if (event.target.className === "file-content")
+                this.handleEditFile(this.state.files[event.target.id].id);
+            else if (event.target.className === "file-delete") {
+                this.handleDeleteFile(this.state.files[event.target.id].id);
             } else if (event.target.className === "file-share") {
-                console.log(event.target.id);
-                this.setState({
-                    showSharingModel: true,
-                    sharingFile: this.state.files[event.target.id]
-                })
-                //share service request
+                this.handleShareFile(event.target.id);
             }
         }
     };
@@ -242,7 +251,7 @@ class Home extends Component {
                 <Header/>
                 <Sidebar handleAddFile={this.handleAddFile} handleAddFolder={this.handleAddFolder}/>
                 <MainSection folders={this.state.folders} files={this.state.files}
-                             handleFileClick={this.handleFileClick} handleFolderClick={this.handleFolderClick}/>
+                             handleFileClick={this.handleFileActions} handleFolderClick={this.handleFolderClick}/>
                 <FolderModel show={this.state.showFolderModel} newFolder={this.state.newFolder}
                              handleFolderNameChange={this.handleFolderNameChange}
                              handleSaveFolder={this.handleSaveFolder} handleClose={this.handleClose}/>
