@@ -13,39 +13,37 @@
 
 h2 {
     color: black;
+    font-family: 'Product Sans',Arial,sans-serif;;
     text-align: center;
     font-size: 5vh;
 }
 
 
 .sidebar-block {
-    position: absolute;
+    position: fixed;
     margin: auto;
-    width: 15vw;
-    padding-top: 5vh;
     text-align: center;
     float: left;
+    width: 17%;
 }
 
 .sidebar-tabs {
-    opacity: 0.7;
-    background-color: #e8f0fe;
+    opacity: 0.4;
+    background-color: #e1e6e5;
     border: solid transparent;
     border-width: 1px 1px 1px 0;
     border-radius: 0 66px 66px 0;;
     height: 8vh;
-    margin-top: 50px;
+    margin-top: 4vh;
     align-items: center;
 }
 
 .sidebar-tabs p {
     position: absolute;
-    top: 50%;
+    top: 18%;
     transform: translate(0, -50%);
-    margin: 0px;
-    padding-left: 0vh;
     padding-top: 2vh;
-    color: #1967d2;
+    color: black;
     font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
     font-weight: 600;
     font-size: 15px;
@@ -298,7 +296,7 @@ label:focus,
 }
 
 .newoptions:hover .new-button {
-    background-color: #3e8e41;
+    background-color: #e1e6e5;
 }
 
 
@@ -434,7 +432,7 @@ height: 2vh;
 }
 
 .new-button{
-    color: white;
+    color: black;
     padding-top: 2vh;
     font-size: 16px;
     border: none;
@@ -445,7 +443,7 @@ height: 2vh;
     margin-bottom: 2vh;
     margin-top: 4vh;
     height: 8vh;
-    width: 25vh;
+    width: 20vh;
     border-radius: 1vh;
     box-shadow: 0px 0px 10px 0px #afafaf;
 }
@@ -454,16 +452,19 @@ height: 2vh;
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 10vw;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
 .newoptions-content a{
+    height: 2vh;
     color: black;
-    padding: 12px 16px;
+    padding: 10px 16px;
+    font-size: 2.2vh;
     text-decoration: none;
     display: block;
+    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
 }
 
 .newoptions-content a:hover {background-color: #f1f1f1}

@@ -10,8 +10,8 @@ const Sidebar = (props) => {
             <div className="newoptions">
                 <button className="new-button">+ New</button>
                 <div className="newoptions-content">
-                    <a className={"newfile"} onClick={props.handleAddFile}>New File</a>
-                    <a className={"newfolder"} onClick={props.handleAddFolder}>New Folder</a>
+                    <a className={"newfile"} onClick={props.handleAddFile}>File</a>
+                    <a className={"newfolder"} onClick={props.handleAddFolder}>Folder</a>
                 </div>
             </div>
         </div>
