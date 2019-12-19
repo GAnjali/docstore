@@ -13,7 +13,7 @@
 
 h2 {
     color: black;
-    font-family: 'Product Sans',Arial,sans-serif;;
+    font-family: 'Product Sans',Arial,sans-serif;
     text-align: center;
     font-size: 5vh;
 }
@@ -145,10 +145,10 @@ hr {
     font-size: 2vh;
     height: 70%;
     margin: 0;
-    padding-left: 2vh;
-    padding-top: 2vh;
+    padding-left: 3vh;
+    padding-top: 3vh;
     word-wrap: break-word;
-    padding-right: 2vh;
+    padding-right: 3.5vh;
     position: relative;
 }
 
@@ -162,7 +162,8 @@ hr {
     font-size: 2.5vh;
     text-align: center;
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
-    color: rgba(0, 0, 0, .72)
+    color: rgba(0, 0, 0, .72);
+    margin-top: 1.5vh;
 }
 
 .modal {
@@ -421,8 +422,8 @@ height: 2vh;
 }
 .fileoptions {
     position: absolute;
-    top: 3vh;
-    right: 1.5vh;
+    top: 2vh;
+    right: 0.6vh;
     display: inline-block;
 }
 
@@ -474,14 +475,14 @@ height: 2vh;
 }
 
 .folderoptions-icon{
-    height: 3vh;
+    height: 2.8vh;
 }
 
 .fileoptions-content{
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    height: 40px;
+    height: 20px;
     width: 80px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -542,4 +543,13 @@ height: 2vh;
 
 .newoptions:hover .newoptions-content {
     display: block;
+}
+
+.emptysection {
+    top: 50%;
+    margin-left: 25%;
+    font-size: 5vh;
+    position: absolute;
+    color: #afafaf;
+    font-family: 'Product Sans',Arial,sans-serif;;
 }
