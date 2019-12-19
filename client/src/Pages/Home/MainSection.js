@@ -3,7 +3,7 @@ import Folders from "../Folder/Folders";
 import Files from "../File/Files";
 
 const MainSection = (props) => {
-    if (props.folders.length !== 0 || props.files.length != 0) {
+    if (props.folders.length !== 0 || props.files.length !== 0) {
         return (
             <div className={"main-section"}>
                 {props.folders !== undefined && (props.folders).length > 0 &&
