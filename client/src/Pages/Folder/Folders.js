@@ -15,7 +15,6 @@ const Folders = (props) => {
                         <div className={"folderoptions"} id={i}>
                             <img src={optionsIcon} className={"folderoptions-icon"} id={i}/>
                             <div className="fileoptions-content" id={i}>
-                                <button className={"folder-share"} id={i}>Share</button>
                                 <button className={"folder-delete"} id={i}>Delete</button>
                             </div>
                         </div>
