@@ -14,7 +14,8 @@ class Login extends Component {
     };
 
     componentDidMount() {
-        if(getToken().length !== 0){
+        const token = getToken();
+        if (token!==null  && token.length !== 0 && token!==undefined) {
             this.props.history.replace('/dashboard')
         }
     }
