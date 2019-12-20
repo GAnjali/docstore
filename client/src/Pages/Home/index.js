@@ -1,17 +1,16 @@
 import React, {Component} from "react";
-import Header from "./Header";
-import './Home.css';
-import Sidebar from "./Sidebar";
-import {deleteFile, getFileByid, getFiles, updateFile, addFile} from "../File/FileService";
-import {addFolder, deleteFolder, getFolders} from "../Folder/FolderService";
-import {getUserByEmail, addShare} from "./HomeService";
-import MainSection from "./MainSection";
+import Header from "./components/Header";
+import './styles/Home.css';
+import Sidebar from "./components/Sidebar";
+import {deleteFile, getFileByid, getFiles, updateFile, addFile} from "./services/FileService";
+import {addFolder, deleteFolder, getFolders} from "./services/FolderService";
+import {getUserByEmail, addShare} from "./services/HomeService";
+import MainSection from "./components/MainSection";
 import {isLoggedIn} from "../../Util/AuthService";
-import FileModel from "../File/FileModel";
-import ShareModel from "./ShareModel";
-import FolderModel from "../Folder/FolderModel";
+import FileModel from "./components/FileModel";
+import ShareModel from "./components/ShareModel";
+import FolderModel from "./components/FolderModel";
 import ResponseUtil from "../../Util/ResponseUtil";
-import ConfirmationModel from "../../Util/ConfirmationModel";
 
 const responseUtil = new ResponseUtil();
 
@@ -275,7 +274,6 @@ class Home extends Component {
                 <ShareModel show={this.state.showSharingModel} sharingFile={this.state.sharingFile}
                             handleInput={this.handleChange} handleShareType={this.handleShareType}
                             handleShare={this.handleShare} handleClose={this.handleClose}/>
-                            <ConfirmationModel error={this.state.error}/>
             </>
         )
     }

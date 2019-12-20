@@ -1,5 +1,5 @@
 import React from "react";
-import optionsIcon from "../../Util/optionsIcon.jpg";
+import optionsIcon from "../../../Util/optionsIcon.jpg";
 
 const Files = (props) => {
     return (
