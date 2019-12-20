@@ -6,7 +6,7 @@ module.exports = {
     database: 'docstore',
     username: 'postgres',
     password: 'docstore',
-    host: '192.168.99.100',
+    host: 'postgres',
     dialect: 'postgres'
   },
 
@@ -14,7 +14,7 @@ module.exports = {
     database: 'docstore_test',
     username: 'postgres',
     password: 'docstore',
-    host: '192.168.99.100',
+    host: 'postgres',
     dialect: 'postgres'
   },
 
