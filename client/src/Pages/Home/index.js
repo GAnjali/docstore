@@ -11,6 +11,7 @@ import FileModel from "../File/FileModel";
 import ShareModel from "./ShareModel";
 import FolderModel from "../Folder/FolderModel";
 import ResponseUtil from "../../Util/ResponseUtil";
+import ConfirmationModel from "../../Util/ConfirmationModel";
 
 const responseUtil = new ResponseUtil();
 
@@ -179,6 +180,10 @@ class Home extends Component {
                 showFolderModel: false
             });
             this.updateComponent(localStorage.getItem("parentfolderid"));
+        }).catch((err)=>{
+            this.setState({
+                error: err.message
+            })
         })
     };
 
@@ -270,6 +275,7 @@ class Home extends Component {
                 <ShareModel show={this.state.showSharingModel} sharingFile={this.state.sharingFile}
                             handleInput={this.handleChange} handleShareType={this.handleShareType}
                             handleShare={this.handleShare} handleClose={this.handleClose}/>
+                            <ConfirmationModel error={this.state.error}/>
             </>
         )
     }
