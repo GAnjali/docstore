@@ -245,10 +245,18 @@ class Home extends Component {
         })
     };
 
+    logOut = (props) => {
+        console.log(props);
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        this.props.history.replace('/login');
+    };
+
     render() {
         return (
             <>
                 <Header/>
+                <button className={"logout"} onClick={this.logOut}>Logout</button>
                 <Sidebar handleAddFile={this.handleAddNewFile} handleAddFolder={this.handleAddNewFolder}/>
                 <MainSection folders={this.state.folders} files={this.state.files}
                              handleFileClick={this.handleFileActions} handleFolderClick={this.handleFolderActions}/>

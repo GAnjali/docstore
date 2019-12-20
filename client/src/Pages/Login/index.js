@@ -15,7 +15,7 @@ class Login extends Component {
 
     componentDidMount() {
         const token = getToken();
-        if (token!==null  && token.length !== 0 && token!==undefined) {
+        if (token !== null && token.length !== 0 && token !== undefined) {
             this.props.history.replace('/dashboard')
         }
     }
@@ -50,12 +50,14 @@ class Login extends Component {
 
     render() {
         return (
-            <LoginView email={this.state.email}
-                       password={this.state.password}
-                       hasError={this.state.hasError}
-                       error={this.state.error}
-                       handleChange={this.handleChange}
-                       handleFormSubmit={this.handleFormSubmit}
+            <LoginView
+                history={this.props.history}
+                email={this.state.email}
+                password={this.state.password}
+                hasError={this.state.hasError}
+                error={this.state.error}
+                handleChange={this.handleChange}
+                handleFormSubmit={this.handleFormSubmit}
             />
         );
     }

@@ -1,12 +1,10 @@
 import React from "react";
-import Header from "../Home/Header";
 
 const SignupView = (props) => {
     return (
         <div className="center">
-            <Header/>
             <div className="card">
-                <h1>Signup</h1>
+                <h1>Docstore</h1>
                 <form>
                     <input
                         className="form-item"
@@ -25,7 +23,7 @@ const SignupView = (props) => {
                     {props.hasError && <h4>{props.error}</h4>}
                     <input
                         className="form-submit"
-                        value="Register"
+                        value="SIGNUP"
                         type="submit"
                         onClick={props.handleFormSubmit}
                     />

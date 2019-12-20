@@ -341,11 +341,21 @@ margin-bottom: 1vh;
     animation-duration: 0.4s;
 }
 
+.logout {
+    position: absolute;
+    width: 15vh;
+    margin-left: 90%;
+    margin-top: 5vh;
+    font-size: 2vh;
+    height: 5vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 6vh;
+}
 .foldermodal-content {
     background-color: #fefefe;
     border: 1px solid #888;
     width: 35vw;
-    height: 20vh;
+    height: 18vh;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     animation-name: animatetop;
     animation-duration: 0.4s;
@@ -369,9 +379,11 @@ margin-bottom: 1vh;
 }
 
 .sharingwith-text-area{
-    width:96%;
+    width: 60%;
     padding-left: 2vh;
-    padding-top: 2vh;
+    float: left;
+    padding-top: 6vh;
+    border: 0;
 }
 /* Modal Header */
 .modal-header {
@@ -383,7 +395,7 @@ margin-bottom: 1vh;
 .model-title {
     padding-top: 3vh;
     padding-left: 2vh;
-    width: 97.2%;
+    width: 98%;
 }
 
 .close {
@@ -420,16 +432,18 @@ margin-bottom: 1vh;
     height: 100%;
 }
 
-/* Modal Footer */
-.modal-footer {
+/* Modal  */
+.modal- {
     box-shadow: 0px 0px 10px 0px #afafaf;
     margin-top: 6vh;
     float: right;
+    border: 0;
+    /* padding: 1px; */
     clear: right;
-    margin-right: 6vh;
+    margin-right: 3vh;
 }
 
-.sharingmodal-footer {
+.sharingmodal- {
     margin-top: 1vh;
     float: right;
     clear: right;
@@ -592,3 +606,4 @@ height: 2vh;
     color: #afafaf;
     font-family: 'Product Sans',Arial,sans-serif;;
 }
+

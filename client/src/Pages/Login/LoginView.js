@@ -1,12 +1,11 @@
 import React from "react";
-import Header from "../Home/Header";
+import {Link} from "react-router-dom";
 
 const LoginView = (props) => {
     return (
         <div className="center">
-            <Header/>
             <div className="card">
-                <h1>Login</h1>
+                <h1>Docstore</h1>
                 <form>
                     <input
                         className="form-item"
@@ -25,11 +24,12 @@ const LoginView = (props) => {
                     {props.hasError && <h4>{props.error}</h4>}
                     <input
                         className="form-submit"
-                        value="SUBMIT"
+                        value="LOGIN"
                         type="submit"
                         onClick={props.handleFormSubmit}
                     />
                 </form>
+                <div className={"signupLink"}>Need an account? <Link onClick={()=>{props.history.push('/signup')}}>Signup</Link></div>
             </div>
         </div>
     )
