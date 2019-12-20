@@ -7,12 +7,15 @@ const FolderModel = (props) => {
     }
     return (
         <div id="myModal" className="sharingmodal" style={style}>
-            <div className="sharingmodal-content">
-                <span className="close" onClick={props.handleClose}>&times;</span>
-                <div className={"sharingmodel-body"}>
-                    <textarea className={"sharewith-textarea"} name={"newFolderName"} placeholder={"Enter folder name here..."} onChange={props.handleFolderNameChange}/>
+            <div className="foldermodal-content">
+                <div className="modal-header">
+                    <span className="close" onClick={props.handleClose}>&times;</span>
+                    <textarea className={"sharingwith-text-area"} name={"newFolderName"}
+                              placeholder={"Enter folder name here..."} onChange={props.handleFolderNameChange}/>
+                    <div className="modal-footer">
+                        <button onClick={props.handleSaveFolder}>Save</button>
+                    </div>
                 </div>
-                <button className={"share-button"} onClick={props.handleSaveFolder}>Save</button>
             </div>
         </div>
     )

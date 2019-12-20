@@ -209,7 +209,8 @@ class Home extends Component {
     handleClose = () => {
         this.setState({
             showFileModel: false,
-            showFolderModel: false
+            showFolderModel: false,
+            showSharingModel: false
         });
     };
 
@@ -260,7 +261,7 @@ class Home extends Component {
                            handleClose={this.handleClose}/>
                 <ShareModel show={this.state.showSharingModel} sharingFile={this.state.sharingFile}
                             handleInput={this.handleChange} handleShareType={this.handleShareType}
-                            handleShare={this.handleShare}/>
+                            handleShare={this.handleShare} handleClose={this.handleClose}/>
             </>
         )
     }

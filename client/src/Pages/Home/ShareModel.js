@@ -8,6 +8,7 @@ const ShareModel = (props) => {
     return (
         <div id="myModal" className="sharingmodal" style={style}>
             <div className="sharingmodal-content">
+                <span className="close" onClick={props.handleClose}>&times;</span>
                 <span className={"sharingmodel-heading"}> Share with others </span>
                 <span className={"people-span"}> People </span>
                 <div className={"sharingmodel-body"}>
@@ -15,8 +16,8 @@ const ShareModel = (props) => {
                     <div className="sharetype-dropdown">
                         <button className="dropbtn">share type</button>
                         <div className="dropdown-content">
-                            <a onClick={props.handleShareType} id={"View"}>can view</a>
-                            <a onClick={props.handleShareType} id={"Edit"}>can edit</a>
+                            <a onClick={props.handleShareType} id={"View"}>View</a>
+                            <a onClick={props.handleShareType} id={"Edit"}>Edit</a>
                         </div>
                     </div>
                 </div>
