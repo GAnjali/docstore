@@ -40,7 +40,7 @@ class Index extends Component {
         } else {
             this.setState({
                 hasError: true,
-                error: response.toString()
+                error: response.response.data.message
             })
         }
     };

@@ -20,7 +20,7 @@ const SignupView = (props) => {
                         type="password"
                         onChange={props.handleChange}
                     />
-                    {props.hasError && <h4>{props.error}</h4>}
+                    {props.hasError && <h6 className={"error"}>{props.error}</h6>}
                     <input
                         className="form-submit"
                         value="SIGNUP"
