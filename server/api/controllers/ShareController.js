@@ -1,7 +1,7 @@
 import ResponseUtil from "../utils/ResponseUtil";
 import ShareService from "../services/ShareService";
 
-const util = new ResponseUtil();
+const responseUtil = new ResponseUtil();
 
 class ShareController {
 
@@ -10,16 +10,16 @@ class ShareController {
             const existedShare = await ShareService.getAllByFileUser(req.body.fileid, req.body.userid);
             if (existedShare.length === 0) {
                 const newShare = await ShareService.add(req.body);
-                util.setSuccess(201, 'Share Added!', newShare);
-                return util.send(res);
+                responseUtil.setSuccess(201, 'Share Added!', newShare);
+                return responseUtil.send(res);
             } else {
                 const updateShare = await ShareService.update(req.body);
-                util.setSuccess(200, 'Share Updated!', updateShare);
-                return util.send(res);
+                responseUtil.setSuccess(200, 'Share Updated!', updateShare);
+                return responseUtil.send(res);
             }
         } catch (error) {
-            util.setError(400, error.message);
-            return util.send(res);
+            responseUtil.setError(400, error.message);
+            return responseUtil.send(res);
         }
     }
 
@@ -27,14 +27,14 @@ class ShareController {
         try {
             const allSharings = await ShareService.getAllByUser(req.params.userid);
             if (allSharings.length > 0) {
-                util.setSuccess(200, 'Sharings retrieved', allSharings);
+                responseUtil.setSuccess(200, 'Sharings retrieved', allSharings);
             } else {
-                util.setSuccess(200, 'No Shares found');
+                responseUtil.setSuccess(200, 'No Shares found');
             }
-            return util.send(res);
+            return responseUtil.send(res);
         } catch (error) {
-            util.setError(400, error);
-            return util.send(res);
+            responseUtil.setError(400, error);
+            return responseUtil.send(res);
         }
     }
 }

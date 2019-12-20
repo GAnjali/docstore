@@ -1,8 +1,6 @@
-import database from "../../db/models/index"
-import * as Op from "sequelize";
+import database from "../../db/models/index";
 
 class FolderService {
-
     static async add(newFolder) {
         try {
             return await database.folder.create(newFolder);
@@ -11,48 +9,43 @@ class FolderService {
         }
     }
 
-    static async getOneByName(foldername) {
+    static async getByName(folderName) {
         try {
-            const theFolder = await database.folder.findOne({
-                where: {name: foldername}
+            return await database.folder.findOne({
+                where: {name: folderName}
             });
-            return theFolder;
         } catch (error) {
             throw error;
         }
     }
 
-    static async getAllByParent(userid, parentfolderid) {
+    static async getAllByParent(userId, parentFolderId) {
         try {
             return await database.folder.findAll({
-                where: {userid: userid, parentfolderid: parentfolderid != 0 ? parentfolderid : null}
+                where: {userid: userId, parentfolderid: parentFolderId !== 0 ? parentFolderId : null}
             });
         } catch (error) {
             throw error;
         }
     }
 
-    static async getAll(userid) {
+    static async getAll(userId) {
         try {
             return await database.folder.findAll({
-                where: {userid: userid}
+                where: {userid: userId}
             });
         } catch (error) {
             throw error;
         }
     }
 
-    static async delete(id) {
+    static async delete(folderId) {
         try {
-            const fileToDelete = await database.folder.findOne({where: {id: Number(id)}});
-
-            if (fileToDelete) {
-                const deletedFile = await database.folder.destroy({
-                    where: {id: Number(id)}
-                });
-                return deletedFile;
-            }
-            return null;
+            const fileToDelete = await database.folder.findOne({where: {id: Number(folderId)}});
+            if (!fileToDelete) return null;
+            return await database.folder.destroy({
+                where: {id: Number(folderId)}
+            });
         } catch (error) {
             throw error;
         }

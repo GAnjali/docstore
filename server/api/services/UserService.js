@@ -2,9 +2,9 @@ import database from "../../db/models/index"
 
 class UserService {
 
-    static async add(newUser) {
+    static async add(user) {
         try {
-            return await database.user.create(newUser);
+            return await database.user.create(user);
         } catch (error) {
             throw error;
         }
@@ -12,27 +12,12 @@ class UserService {
 
     static async getOneByEmail(email) {
         try {
-            const theUser = await database.user.findOne({
+            const user = await database.user.findOne({
                 where: {email: email}
             });
-            if (theUser)
-                return theUser.dataValues;
+            if (user)
+                return user.dataValues;
             else return null;
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    static async update(updateUser) {
-        try {
-            const userToUpdate = await database.user.findOne({
-                where: {email: updateUser.email}
-            });
-            if (userToUpdate) {
-                await database.user.update(updateUser, {where: {email: updateUser.email}});
-                return updateUser;
-            }
-            return null;
         } catch (error) {
             throw error;
         }

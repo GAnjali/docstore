@@ -2,43 +2,33 @@ import database from "../../db/models/index"
 
 class ShareService {
 
-    static async add(sharingitem) {
+    static async add(sharingItem) {
         try {
-            return await database.share.create(sharingitem);
+            return await database.share.create(sharingItem);
         } catch (error) {
             throw error;
         }
     }
 
-    static async getAllByUser(userid) {
+    static async getAllByUser(userId) {
         try {
             return await database.share.findAll({
-                where: {userid: userid}
+                where: {userid: userId}
             });
         } catch (error) {
             throw error;
         }
     }
 
-    static async getAllByFileUser(file, user) {
+    static async update(sharingItem) {
         try {
-            return await database.share.findAll({
-                where: {fileid: file, userid: user}
-            });
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    static async update(sharing) {
-        try {
-            await database.share.update({sharetype: sharing.sharetype}, {
+            await database.share.update({sharetype: sharingItem.sharetype}, {
                 where: {
-                    fileid: sharing.fileid,
-                    userid: sharing.userid
+                    fileid: sharingItem.fileid,
+                    userid: sharingItem.userid
                 }
             });
-            return sharing;
+            return sharingItem;
         } catch (error) {
             throw error;
         }

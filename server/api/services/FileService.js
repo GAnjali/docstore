@@ -1,29 +1,29 @@
 import database from "../../db/models/index"
 
 class FileService {
-    static async getAll(userid) {
+    static async getAll(userId) {
         try {
             return await database.file.findAll({
-                where: {userid: userid}
+                where: {userid: userId}
             });
         } catch (error) {
             throw error;
         }
     }
 
-    static async getAllByParent(userid, parentfolderid) {
+    static async getAllByParent(userId, parentFolderId) {
         try {
             return await database.file.findAll({
-                where: {userid: userid, parentfolderid: parentfolderid != 0 ? parentfolderid : null}
+                where: {userid: userId, parentfolderid: parentFolderId !== 0 ? parentFolderId : null}
             });
         } catch (error) {
             throw error;
         }
     }
 
-    static async add(newFile) {
+    static async add(file) {
         try {
-            return await database.file.create(newFile);
+            return await database.file.create(file);
         } catch (error) {
             throw error;
         }
@@ -31,10 +31,9 @@ class FileService {
 
     static async getOne(id) {
         try {
-            const theFile = await database.file.findOne({
+            return await database.file.findOne({
                 where: {id: Number(id)}
             });
-            return theFile;
         } catch (error) {
             throw error;
         }
@@ -45,18 +44,15 @@ class FileService {
             const fileToUpdate = await database.file.findOne({
                 where: {id: Number(id)}
             });
-
-            if (fileToUpdate) {
-                if (fileToUpdate.name === updateFile.name) //to avoid Unique constraint violation for file name
-                    await database.file.update({content: updateFile.content}, {where: {id: Number(id)}});
-                else
-                    await database.file.update({
-                        name: updateFile.name,
-                        content: updateFile.content
-                    }, {where: {id: Number(id)}});
-                return updateFile;
-            }
-            return null;
+            if (!fileToUpdate) return null;
+            if (fileToUpdate.name === updateFile.name)
+                await database.file.update({content: updateFile.content}, {where: {id: Number(id)}});
+            else
+                await database.file.update({
+                    name: updateFile.name,
+                    content: updateFile.content
+                }, {where: {id: Number(id)}});
+            return updateFile;
         } catch (error) {
             throw error;
         }
@@ -65,13 +61,10 @@ class FileService {
     static async delete(id) {
         try {
             const fileToDelete = await database.file.findOne({where: {id: Number(id)}});
-            if (fileToDelete) {
-                const deletedFile = await database.file.destroy({
-                    where: {id: Number(id)}
-                });
-                return deletedFile;
-            }
-            return null;
+            if (!fileToDelete) return null;
+            return await database.file.destroy({
+                where: {id: Number(id)}
+            });
         } catch (error) {
             throw error;
         }
