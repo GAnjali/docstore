@@ -216,9 +216,9 @@ class Home extends Component {
 
     handleShare = async () => {
         const getUserResponse = await getUserByEmail(this.state.sharingWithUser);
-        if (getUserResponse.status == 200) {
+        if (getUserResponse.status === 200) {
             const shareResponse = await addShare(this.state.sharingFile.id, this.state.shareType, getUserResponse.data.data.id);
-            if (shareResponse.status == 200) {
+            if (shareResponse.status === 200) {
                 alert(shareResponse.data.message);
             } else {
                 this.setState({

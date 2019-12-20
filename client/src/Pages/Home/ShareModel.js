@@ -1,7 +1,7 @@
 import React from "react";
 
 const ShareModel = (props) => {
-    let style = {}, title = '', content = '';
+    let style = {};
     if (props.show === true) {
         style = {display: "block"};
     }
@@ -16,8 +16,8 @@ const ShareModel = (props) => {
                     <div className="sharetype-dropdown">
                         <button className="dropbtn">share type</button>
                         <div className="dropdown-content">
-                            <a onClick={props.handleShareType} id={"View"}>View</a>
-                            <a onClick={props.handleShareType} id={"Edit"}>Edit</a>
+                            <p onClick={props.handleShareType} id={"View"}>View</p>
+                            <p onClick={props.handleShareType} id={"Edit"}>Edit</p>
                         </div>
                     </div>
                 </div>
