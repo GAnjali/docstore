@@ -8,3 +8,6 @@ export const TOKEN_GENERATED = "Token generated";
 export const EMAIL_PLACEHOLDER = "Username";
 export const PASSWORD_PLACEHOLDER = "Password";
 export const STATUS_CODE_201 = 201;
+export const STATUS_CODE_200 = 200;
+export const SIGNUP="SIGNUP";
+export const LOGIN="LOGIN";

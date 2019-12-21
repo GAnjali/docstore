@@ -1,66 +1,71 @@
-import React, {Component} from 'react';
-import './Login.css';
-import {login} from "./LoginService";
+import React, { Component } from "react";
+import "./Login.css";
+import { login } from "./LoginService";
 import LoginView from "./LoginView";
-import {getToken, setToken, setUser} from "../../Util/localStorageUtil";
+import { getToken, setToken, setUser } from "../../Util/localStorageUtil";
+import { HOME_URL, STATUS_CODE_200, TOKEN_GENERATED } from "../../AppConstants";
+
+const intialState = {
+  email: "",
+  password: "",
+  error: "",
+  hasError: ""
+};
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = intialState;
+  }
 
-    state = {
-        email: '',
-        password: '',
-        error: '',
-        hasError: '',
-    };
-
-    componentDidMount() {
-        const token = getToken();
-        if (token !== null && token.length !== 0 && token !== undefined) {
-            this.props.history.replace('/')
-        }
+  componentDidMount() {
+    const token = getToken();
+    if (token !== null && token !== undefined && token.length !== 0) {
+      this.props.history.replace(HOME_URL);
     }
+  }
 
-    handleChange = (event) => {
-        this.setState(
-            {
-                [event.target.name]: event.target.value
-            }
-        )
-    };
+  handleInputChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
 
-    handleFormSubmit = async (e) => {
-        e.preventDefault();
-        const response = await login(this.state.username, this.state.password);
-        this.handleResponse(response, this.props.history);
-    };
+  handleLogin = async e => {
+    e.preventDefault();
+    const response = await login(this.state.username, this.state.password);
+    this.handleResponse(response, this.props.history);
+  };
 
-
-    handleResponse = (response, history) => {
-        if (response.status === 200 && response.data.message === "Token generated") {
-            setUser(this.state.username);
-            setToken(response.data.data);
-            history.replace('/');
-        } else {
-            this.setState({
-                hasError: true,
-                error: response.response.data.message
-            })
-        }
-    };
-
-    render() {
-        return (
-            <LoginView
-                history={this.props.history}
-                email={this.state.email}
-                password={this.state.password}
-                hasError={this.state.hasError}
-                error={this.state.error}
-                handleChange={this.handleChange}
-                handleFormSubmit={this.handleFormSubmit}
-            />
-        );
+  handleResponse = (response, history) => {
+    if (
+      response.status === STATUS_CODE_200 &&
+      response.data.message === TOKEN_GENERATED
+    ) {
+      setUser(this.state.email);
+      setToken(response.data.data);
+      history.replace(HOME_URL);
+    } else {
+      this.setState({
+        hasError: true,
+        error: response.response.data.message
+      });
     }
+  };
+
+  render() {
+    return (
+      <LoginView
+        history={this.props.history}
+        email={this.state.email}
+        password={this.state.password}
+        hasError={this.state.hasError}
+        error={this.state.error}
+        handleInputChange={this.handleInputChange}
+        handleLogin={this.handleLogin}
+      />
+    );
+  }
 }
 
 export default Login;
