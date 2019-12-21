@@ -1,61 +1,72 @@
-import React, {Component} from 'react';
-import '../Login/Login.css';
+import React, { Component } from "react";
+import "../Login/Login.css";
 import register from "./SignupService";
 import SignupView from "./SignupView";
-import {getToken} from "../../Util/localStorageUtil";
+import { getToken } from "../../Util/localStorageUtil";
+import {
+    HOME_URL,
+    LOGIN_URL,
+    ADD_USER_SUCCESS_MESSAGE, STATUS_CODE_201
+} from "../../AppConstants";
+
+const intialState = {
+  email: "",
+  password: "",
+  error: "",
+  hasError: ""
+};
 
 class Index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = intialState;
+  }
 
-    state = {
-        email: '',
-        password: '',
-        error: '',
-        hasError: '',
-    };
-
-    componentDidMount() {
-        const token = getToken();
-        if (token!==null && token.length !== 0 && token!==undefined) {
-            this.props.history.replace('/')
-        }
+  componentDidMount() {
+    const token = getToken();
+    if (token !== null && token !== undefined && token.length !== 0) {
+      this.props.history.replace(HOME_URL);
     }
+  }
 
-    handleChange = (e) => {
-        this.setState(
-            {
-                [e.target.name]: e.target.value
-            }
-        )
-    };
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
-    handleFormSubmit = async (e) => {
-        e.preventDefault();
-        const response = await register(this.state.username, this.state.password);
-        this.handleResponse(response);
-    };
+  handleFormSignup = async e => {
+    e.preventDefault();
+    const response = await register(this.state.email, this.state.password);
+    this.handleResponse(response);
+  };
 
-    handleResponse = (response) => {
-        if (response.status === 201 && response.data.message === "User Added!") {
-            this.props.history.replace('/login');
-        } else {
-            this.setState({
-                hasError: true,
-                error: response.response.data.message
-            })
-        }
-    };
-
-    render() {
-        return (
-            <SignupView email={this.state.email}
-                        password={this.state.password}
-                        hasError={this.state.hasError}
-                        error={this.state.error}
-                        handleChange={this.handleChange}
-                        handleFormSubmit={this.handleFormSubmit}
-            />
-        );
+  handleResponse = response => {
+    if (
+      response.status === STATUS_CODE_201 &&
+      response.data.message === ADD_USER_SUCCESS_MESSAGE
+    ) {
+      this.props.history.replace(LOGIN_URL);
+    } else {
+      this.setState({
+        hasError: true,
+        error: response.response.data.message
+      });
     }
+  };
+
+  render() {
+    return (
+      <SignupView
+        email={this.state.email}
+        password={this.state.password}
+        hasError={this.state.hasError}
+        error={this.state.error}
+        handleChange={this.handleChange}
+        handleFormSignup={this.handleFormSignup}
+      />
+    );
+  }
 }
 
 export default Index;
