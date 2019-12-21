@@ -50,3 +50,4 @@ export const MY_STORE = "My Store";
 export const NEW = "+ New";
 export const FILE = "File";
 export const FOLDER = "Folder";
+export const SUCCESS = "success";
