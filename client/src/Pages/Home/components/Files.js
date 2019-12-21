@@ -3,12 +3,13 @@ import optionsIcon from "../styles/icons/optionsIcon.jpg";
 import { DELETE, FILES_HEADER, SHARE } from "../../../AppConstants";
 
 const Files = props => {
+  const { files, handleFileClick } = props;
   return (
     <div className={"files-block"}>
       <span className={"heading"}> {FILES_HEADER} </span>
       <hr />
-      {props.files.map((file, id) => (
-        <div className={"file"} key={id} id={id} onClick={props.handleFileClick}>
+      {files.map((file, id) => (
+        <div className={"file"} key={id} id={id} onClick={handleFileClick}>
           <div className={"file-content"} id={id}>
             <div className={"fileoptions"}>
               <img src={optionsIcon} className={"fileoptions-icon"} />

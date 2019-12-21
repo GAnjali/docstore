@@ -10,6 +10,7 @@ import {
 } from "../../../AppConstants";
 
 const ShareModel = props => {
+  const { handleClose, handleInput, handleShareType, handleShare } = props;
   let style = {};
   if (props.show === true) {
     style = { display: "block" };
@@ -17,7 +18,7 @@ const ShareModel = props => {
   return (
     <div id="myModal" className="sharingmodal" style={style}>
       <div className="sharingmodal-content">
-        <span className="close" onClick={props.handleClose}>
+        <span className="close" onClick={handleClose}>
           &times;
         </span>
         <span className={"sharingmodel-heading"}> {SHARE_WITH_OTHERS} </span>
@@ -27,21 +28,21 @@ const ShareModel = props => {
             className={"sharewith-textarea"}
             name={"sharingWithUser"}
             placeholder={EMAIL_PLACEHOLDER}
-            onChange={props.handleInput}
+            onChange={handleInput}
           />
           <div className="sharetype-dropdown">
             <button className="dropbtn">{SHARE_TYPE}</button>
             <div className="dropdown-content">
-              <p onClick={props.handleShareType} id={"View"}>
+              <p onClick={handleShareType} id={"View"}>
                 {VIEW}
               </p>
-              <p onClick={props.handleShareType} id={"Edit"}>
+              <p onClick={handleShareType} id={"Edit"}>
                 {EDIT}
               </p>
             </div>
           </div>
         </div>
-        <button className={"share-button"} onClick={props.handleShare}>
+        <button className={"share-button"} onClick={handleShare}>
           {SHARE}
         </button>
       </div>

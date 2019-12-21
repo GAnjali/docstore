@@ -6,8 +6,9 @@ import {
 } from "../../../AppConstants";
 
 const FolderModel = props => {
+  const { show, handleClose, handleSaveFolder, handleFolderNameChange } = props;
   let style = {};
-  if (props.show) {
+  if (show) {
     style = { display: "block" };
   }
   return (
@@ -15,17 +16,17 @@ const FolderModel = props => {
       <div className="foldermodal-content">
         <div className="modal-header">
           <span className={"newFolder"}>{NEW_FOLDER}</span>
-          <span className="close" onClick={props.handleClose}>
+          <span className="close" onClick={handleClose}>
             &times;
           </span>
           <textarea
             className={"sharingwith-text-area"}
             name={"newFolderName"}
             placeholder={FOLDER_NAME_PLACEHOLDER}
-            onChange={props.handleFolderNameChange}
+            onChange={handleFolderNameChange}
           />
           <div className="modal-save">
-            <button onClick={props.handleSaveFolder}>{SAVE}</button>
+            <button onClick={handleSaveFolder}>{SAVE}</button>
           </div>
         </div>
       </div>
