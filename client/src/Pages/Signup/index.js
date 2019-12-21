@@ -4,9 +4,10 @@ import register from "./SignupService";
 import SignupView from "./SignupView";
 import { getToken } from "../../Util/localStorageUtil";
 import {
-    HOME_URL,
-    LOGIN_URL,
-    USER_ADDED, STATUS_CODE_201
+  HOME_URL,
+  LOGIN_URL,
+  USER_ADDED,
+  STATUS_CODE_201
 } from "../../AppConstants";
 
 const intialState = {
