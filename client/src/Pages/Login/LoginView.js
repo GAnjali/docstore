@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  APP_NAME,
+  DOCSTORE,
   EMAIL_PLACEHOLDER,
   LOGIN,
+  NEED_AN_ACCOUNT,
   PASSWORD_PLACEHOLDER,
   SIGNUP_URL
 } from "../../AppConstants";
@@ -12,7 +13,7 @@ const LoginView = props => {
   return (
     <div className="center">
       <div className="card">
-        <h1>{APP_NAME}</h1>
+        <h1>{DOCSTORE}</h1>
         <form>
           <input
             className="form-item"
@@ -37,7 +38,7 @@ const LoginView = props => {
           />
         </form>
         <div className={"signupLink"}>
-          Need an account?
+          {NEED_AN_ACCOUNT}
           <Link
             onClick={() => {
               props.history.push(SIGNUP_URL);

@@ -1,15 +1,20 @@
 import React from "react";
-import {APP_NAME, EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, SIGNUP} from "../../AppConstants";
+import {
+  DOCSTORE,
+  EMAIL_PLACEHOLDER,
+  PASSWORD_PLACEHOLDER,
+  SIGNUP
+} from "../../AppConstants";
 
 const SignupView = props => {
   return (
     <div className="center">
       <div className="card">
-        <h1>{APP_NAME}</h1>
+        <h1>{DOCSTORE}</h1>
         <form>
           <input
             className="form-item"
-            placeholder={ EMAIL_PLACEHOLDER }
+            placeholder={EMAIL_PLACEHOLDER}
             name="email"
             type="text"
             onChange={props.handleChange}
