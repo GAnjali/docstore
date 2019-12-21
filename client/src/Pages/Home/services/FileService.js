@@ -15,6 +15,15 @@ export const getFiles = async (parentfolderid) => {
     }
 };
 
+export const getSharedFiles = async (userId) => {
+    try {
+        const response = await axios.get(process.env.REACT_APP_SERVER_URL + '/sharedfiles/userid=' + userId, config);
+        return response;
+    } catch (e) {
+        return e;
+    }
+};
+
 export const getFileByid = async (id) => {
     try {
         const response = await axios.get(process.env.REACT_APP_SERVER_URL + '/files/' + id, config);

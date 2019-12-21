@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Header from "./components/Header";
 import './styles/Home.css';
 import Sidebar from "./components/Sidebar";
-import {deleteFile, getFileByid, getFiles, updateFile, addFile} from "./services/FileService";
+import {deleteFile, getFileByid, getFiles, updateFile, addFile, getSharedFiles} from "./services/FileService";
 import {addFolder, deleteFolder, getFolders} from "./services/FolderService";
 import {getUserByEmail, addShare} from "./services/HomeService";
 import MainSection from "./components/MainSection";
@@ -11,6 +11,7 @@ import FileModel from "./components/FileModel";
 import ShareModel from "./components/ShareModel";
 import FolderModel from "./components/FolderModel";
 import ResponseUtil from "../../Util/ResponseUtil";
+import {getUser} from "../../Util/localStorageUtil";
 
 const responseUtil = new ResponseUtil();
 
@@ -56,7 +57,20 @@ class Home extends Component {
                 error: getFilesResponse.message
             })
         }
-        //get shared files
+        const getSHaredFilesResponse = responseUtil.getResponse(await getSharedFiles(this.getUserId()));
+        if (getSHaredFilesResponse.status === 'success') {
+            const allFiles = this.state.files;
+            getSHaredFilesResponse.data.map((file) => {
+                allFiles.push(file);
+            });
+            this.setState({
+                files: allFiles
+            })
+        } else {
+            this.setState({
+                error: getSHaredFilesResponse
+            })
+        }
     };
 
     getFolders = async (parentFolderId) => {
@@ -68,6 +82,17 @@ class Home extends Component {
         } else {
             this.setState({
                 error: getFoldersResponse.message
+            })
+        }
+    };
+
+    getUserId = async () => {
+        const getUserResponse = responseUtil.getResponse(await getUserByEmail(getUser()));
+        if (getUserResponse.status === 'success') {
+            return getUserResponse.data.id
+        } else {
+            this.setState({
+                error: getUserResponse.message
             })
         }
     };
@@ -179,7 +204,7 @@ class Home extends Component {
                 showFolderModel: false
             });
             this.updateComponent(localStorage.getItem("parentfolderid"));
-        }).catch((err)=>{
+        }).catch((err) => {
             this.setState({
                 error: err.message
             })
@@ -241,7 +266,7 @@ class Home extends Component {
             shareType: event.target.id
         })
     };
-    
+
     handleChange = (event) => {
         const {name, value} = event.target;
         this.setState({

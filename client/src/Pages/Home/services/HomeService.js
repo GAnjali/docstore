@@ -8,7 +8,6 @@ const config = {
 
 export const getUserByEmail = async (email) => {
     try {
-        console.log(email);
         const response = await axios.get(process.env.REACT_APP_SERVER_URL + '/users/' + email, config);
         return response;
     } catch (e) {
