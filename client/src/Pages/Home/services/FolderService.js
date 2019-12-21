@@ -1,3 +1,5 @@
+import {FOLDERS_BY_ID_API_ENDPOINT, GET_FILES_API_ENDPOINT} from "../../../AppConstants";
+
 const axios = require('axios');
 
 const config = {
@@ -9,7 +11,7 @@ const config = {
 export const getFolders = async (parentfolderid) => {
     try {
         let response;
-        response = await axios.get(process.env.REACT_APP_SERVER_URL + '/folders/parentfolder=' + parentfolderid, config);
+        response = await axios.get(process.env.REACT_APP_SERVER_URL + GET_FILES_API_ENDPOINT + parentfolderid, config);
         return response;
     } catch (e) {
         return e;
@@ -18,7 +20,7 @@ export const getFolders = async (parentfolderid) => {
 
 export const addFolder = async (folder) => {
     try {
-        const response = await axios.post(process.env.REACT_APP_SERVER_URL + '/folders/', folder, config);
+        const response = await axios.post(process.env.REACT_APP_SERVER_URL + FOLDERS_BY_ID_API_ENDPOINT, folder, config);
         return response;
     } catch (e) {
         return e;
@@ -27,7 +29,7 @@ export const addFolder = async (folder) => {
 
 export const deleteFolder = async (id) => {
     try {
-        const response = await axios.delete(process.env.REACT_APP_SERVER_URL + '/folders/' + id, config);
+        const response = await axios.delete(process.env.REACT_APP_SERVER_URL + FOLDERS_BY_ID_API_ENDPOINT + id, config);
         return response;
     } catch (e) {
         return e;

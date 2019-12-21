@@ -6,6 +6,13 @@ export const SIGNUP_URL = "/signup";
 //api endpoints
 export const LOGIN_API_ENDPOINT = "/users/login";
 export const SIGNUP_API_ENDPOINT = "/users";
+export const GET_FILES_API_ENDPOINT = "/files/parentfolder=";
+export const GET_SHARED_FILES_API_ENDPOINT = "/sharedfiles/userid=";
+export const FILE_BY_ID_API_ENDPOINT = "/files/";
+export const GET_FOLDERS_API_ENDPOINT = "/folders/parentfolder=";
+export const FOLDERS_BY_ID_API_ENDPOINT = "/folders/";
+export const USERS_API_ENDPOINT = "/users/";
+export const SHARES_API_ENDPOINT = "/shares/";
 
 //messages
 export const USER_ADDED = "User Added!";
@@ -30,6 +37,7 @@ export const SAVE = "SAVE";
 export const SHARE = "Share";
 export const DELETE = "Delete";
 export const FILES_HEADER = "Files";
+export const FOLDERS_HEADER = "Folders";
 export const NEW_FOLDER = "New Folder";
 export const NEED_AN_ACCOUNT = "Need an account?";
 export const NO_CONTENTS_FOUND = "No contents found";
