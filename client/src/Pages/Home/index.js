@@ -20,6 +20,7 @@ class Home extends Component {
     state = {
         folders: [],
         files: [],
+        sharedFiles: [],
         error: '',
         editingFile: null,
         showFileModel: false,
@@ -57,8 +58,11 @@ class Home extends Component {
                 error: getFilesResponse.message
             })
         }
-        const getSHaredFilesResponse = responseUtil.getResponse(await getSharedFiles(this.getUserId()));
+        const getSHaredFilesResponse = responseUtil.getResponse(await getSharedFiles(await this.getUserId()));
         if (getSHaredFilesResponse.status === 'success') {
+            this.setState({
+                sharedFiles: getSHaredFilesResponse.data
+            });
             const allFiles = this.state.files;
             getSHaredFilesResponse.data.map((file) => {
                 allFiles.push(file);
@@ -97,14 +101,22 @@ class Home extends Component {
         }
     };
 
+    isSharedFile = ( fileId ) => {
+        return this.state.sharedFiles.includes(fileId);
+    };
     handleFileActions = async (event) => {
         if (event.target.id !== undefined) {
-            if (event.target.className === "file-content")
-                this.handleEditFile(this.state.files[event.target.id].id);
-            else if (event.target.className === "file-delete") {
-                this.handleDeleteFile(this.state.files[event.target.id].id);
-            } else if (event.target.className === "file-share") {
-                this.handleShareFile(event.target.id);
+            if(!this.isSharedFile(this.state.files[event.target.id])){
+                if (event.target.className === "file-content")
+                    this.handleEditFile(this.state.files[event.target.id].id);
+                else if (event.target.className === "file-delete") {
+                    this.handleDeleteFile(this.state.files[event.target.id].id);
+                } else if (event.target.className === "file-share") {
+                    this.handleShareFile(event.target.id);
+                }
+            }
+            else{
+                //modify details
             }
         }
     };
@@ -274,18 +286,10 @@ class Home extends Component {
         })
     };
 
-    logOut = (props) => {
-        console.log(props);
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        this.props.history.replace('/login');
-    };
-
     render() {
         return (
             <>
-                <Header/>
-                <button className={"logout"} onClick={this.logOut}>Logout</button>
+                <Header history={this.props.history}/>
                 <Sidebar handleAddFile={this.handleAddNewFile} handleAddFolder={this.handleAddNewFolder}/>
                 <MainSection folders={this.state.folders} files={this.state.files}
                              handleFileClick={this.handleFileActions} handleFolderClick={this.handleFolderActions}/>
