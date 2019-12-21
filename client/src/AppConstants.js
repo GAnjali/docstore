@@ -1,17 +1,44 @@
+//url
 export const HOME_URL = "/";
 export const LOGIN_URL = "/login";
 export const SIGNUP_URL = "/signup";
 
-export const DOCSTORE = "Docstore";
+//api endpoints
+export const LOGIN_API_ENDPOINT = "/users/login";
+export const SIGNUP_API_ENDPOINT = "/users";
+
+//messages
 export const USER_ADDED = "User Added!";
 export const TOKEN_GENERATED = "Token generated";
-export const EMAIL_PLACEHOLDER = "Username";
+
+//placeholders
+export const EMAIL_PLACEHOLDER = "Email";
 export const PASSWORD_PLACEHOLDER = "Password";
+export const FILE_NAME_PLACEHOLDER = "Enter file name...";
+export const FOLDER_NAME_PLACEHOLDER = "Enter Folder name...";
+export const FILE_CONTENT_PLACEHOLDER = "File content...";
+
+//status codes
 export const STATUS_CODE_201 = 201;
 export const STATUS_CODE_200 = 200;
+
+export const DOCSTORE = "Docstore";
 export const SIGNUP = "SIGNUP";
 export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
+export const SAVE = "SAVE";
+export const SHARE = "Share";
+export const DELETE = "Delete";
+export const FILES_HEADER = "Files";
+export const NEW_FOLDER = "New Folder";
 export const NEED_AN_ACCOUNT = "Need an account?";
-
-export const LOGIN_API_ENDPOINT = process.env.REACT_URL_SERVER_URL + "/users/login";
-export const SIGNUP_API_ENDPOINT = process.env.REACT_APP_SERVER_URL + "/users";
+export const NO_CONTENTS_FOUND = "No contents found";
+export const SHARE_WITH_OTHERS = "Share with others";
+export const PEOPLE = "People";
+export const SHARE_TYPE = "Share type";
+export const VIEW = "View";
+export const EDIT = "Edit";
+export const MY_STORE = "My Store";
+export const NEW = "+ New";
+export const FILE = "File";
+export const FOLDER = "Folder";

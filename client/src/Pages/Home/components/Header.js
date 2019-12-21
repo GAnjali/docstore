@@ -1,19 +1,23 @@
 import React from "react";
-import '../styles/Home.css';
+import "../styles/Home.css";
+import { DOCSTORE, LOGIN_URL, LOGOUT } from "../../../AppConstants";
+import { removeToken, removeUser } from "../../../Util/localStorageUtil";
 
-const Header = (props) => {
-    const logout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        props.history.replace('/login');
-    };
+const Header = props => {
+  const logout = () => {
+    removeToken();
+    removeUser();
+    props.history.replace(LOGIN_URL);
+  };
 
-    return (
-        <nav className="navbar">
-            <h2>Docstore</h2>
-            <button className={"logout"} onClick={logout}>Logout</button>
-        </nav>
-    );
+  return (
+    <nav className="navbar">
+      <h2>{DOCSTORE}</h2>
+      <button className={"logout"} onClick={logout}>
+        {LOGOUT}
+      </button>
+    </nav>
+  );
 };
 
 export default Header;

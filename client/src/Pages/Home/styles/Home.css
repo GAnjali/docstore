@@ -1,607 +1,606 @@
 .parentDiv {
-    height: 100%;
+  height: 100%;
 }
 
 .navbar {
-    background: #e1e6e5;
-    height: 10vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    opacity: 0.7;
+  background: #e1e6e5;
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0.7;
 }
 
 h2 {
-    color: black;
-    font-family: 'Product Sans',Arial,sans-serif;
-    text-align: center;
-    font-size: 5vh;
+  color: black;
+  font-family: "Product Sans", Arial, sans-serif;
+  text-align: center;
+  font-size: 5vh;
 }
 
-
 .sidebar-block {
-    position: fixed;
-    margin: auto;
-    text-align: center;
-    float: left;
-    width: 17%;
+  position: fixed;
+  margin: auto;
+  text-align: center;
+  float: left;
+  width: 17%;
 }
 
 .sidebar-tabs {
-    opacity: 0.4;
-    background-color: #e1e6e5;
-    border: solid transparent;
-    border-width: 1px 1px 1px 0;
-    border-radius: 0 66px 66px 0;;
-    height: 8vh;
-    margin-top: 2vh;
-    align-items: center;
+  opacity: 0.4;
+  background-color: #e1e6e5;
+  border: solid transparent;
+  border-width: 1px 1px 1px 0;
+  border-radius: 0 66px 66px 0;
+  height: 8vh;
+  margin-top: 2vh;
+  align-items: center;
 }
 
 .sidebar-tabs p {
-position: absolute;
-    top: 63%;
-    transform: translate(0, -50%);
-    padding-top: 2vh;
-    color: black;
-    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 26px;
+  position: absolute;
+  top: 63%;
+  transform: translate(0, -50%);
+  padding-top: 2vh;
+  color: black;
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 26px;
 }
 
 .main-section {
-    height: 87vh;
-    margin-left: 40vh;
-    margin-right: auto;
+  height: 87vh;
+  margin-left: 40vh;
+  margin-right: auto;
 }
 
 .folders-block {
-    margin-top: 5vh;
-    float: left;
+  margin-top: 5vh;
+  float: left;
 }
 
 .heading {
-    font-size: 4vh;
-    padding-left: 2vh;
-    color: #afafaf;
+  font-size: 4vh;
+  padding-left: 2vh;
+  color: #afafaf;
 }
 
 hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-    width: inherit;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+  width: inherit;
 }
 
 .folders-list {
-    margin-top: 4vh;
+  margin-top: 4vh;
 }
 
 .folder {
-    height: 8vh;
-    width: 35vh;
-    float: left;
-    border-radius: 1vh;
-    box-shadow: 0px 0px 10px 0px #afafaf;
-    margin-top: 2vh;
-    margin-left: 3vh;
+  height: 8vh;
+  width: 35vh;
+  float: left;
+  border-radius: 1vh;
+  box-shadow: 0px 0px 10px 0px #afafaf;
+  margin-top: 2vh;
+  margin-left: 3vh;
 }
 
 .folder-icon {
-    height: 4vh;
-    position: absolute;
-    padding-top: 2.5vh;
-    padding-left: 2.5vh;
-    float: left;
+  height: 4vh;
+  position: absolute;
+  padding-top: 2.5vh;
+  padding-left: 2.5vh;
+  float: left;
 }
 
 .folder p {
-    margin-left: 7vh;
-    margin-right: 5vh;
-    font-size: 2.5vh;
-    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
-    padding-left: 1.5vh;
-    margin-top: 3.5vh;
-    color: rgba(0, 0, 0, .72);
-    position: absolute;
+  margin-left: 7vh;
+  margin-right: 5vh;
+  font-size: 2.5vh;
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  padding-left: 1.5vh;
+  margin-top: 3.5vh;
+  color: rgba(0, 0, 0, 0.72);
+  position: absolute;
 }
 
 .files-block {
-    margin-top: 5vh;
-    float: left;
-    clear: left;
+  margin-top: 5vh;
+  float: left;
+  clear: left;
 }
 
 .files-list {
-    margin-top: 4vh;
+  margin-top: 4vh;
 }
 
 .file {
-    height: 30vh;
-    width: 35vh;
-    float: left;
-    border-radius: 1vh;
-    box-shadow: 0px 0px 10px 0px #afafaf;
-    margin-top: 3vh;
-    margin-left: 3vh;
-    margin-bottom: 2vh;
+  height: 30vh;
+  width: 35vh;
+  float: left;
+  border-radius: 1vh;
+  box-shadow: 0px 0px 10px 0px #afafaf;
+  margin-top: 3vh;
+  margin-left: 3vh;
+  margin-bottom: 2vh;
 }
 
 .file-icon {
-    margin-top: 8vh;
-    margin-left: 12vh;
-    height: 8vh;
+  margin-top: 8vh;
+  margin-left: 12vh;
+  height: 8vh;
 }
 
 .file-content {
-    font-size: 2vh;
-    height: 70%;
-    margin: 0;
-    padding-left: 3vh;
-    padding-top: 3vh;
-    word-wrap: break-word;
-    padding-right: 3.5vh;
-    position: relative;
+  font-size: 2vh;
+  height: 70%;
+  margin: 0;
+  padding-left: 3vh;
+  padding-top: 3vh;
+  word-wrap: break-word;
+  padding-right: 3.5vh;
+  position: relative;
 }
 
 .file hr {
-    width: 100%;
-    display: block;
-    margin: 0;
+  width: 100%;
+  display: block;
+  margin: 0;
 }
 
 .file-title {
-    font-size: 2.5vh;
-    text-align: center;
-    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
-    color: rgba(0, 0, 0, .72);
-    margin-top: 1.5vh;
+  font-size: 2.5vh;
+  text-align: center;
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.72);
+  margin-top: 1.5vh;
 }
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 .sharingmodal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-    margin-left: auto;
-    margin-right: auto;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.sharingmodel-heading{
-    font-size: 4vh;
-    color: black;
-    float: left;
-    position: absolute;
-    margin-left: 4vh;
-    margin-top: 2vh;
+.sharingmodel-heading {
+  font-size: 4vh;
+  color: black;
+  float: left;
+  position: absolute;
+  margin-left: 4vh;
+  margin-top: 2vh;
 }
 
 .people-span {
-    float: left;
-    margin-top: 11vh;
-    position: absolute;
-    clear: left;
-    margin-left: 4vh;
-    font-size: 3vh;
+  float: left;
+  margin-top: 11vh;
+  position: absolute;
+  clear: left;
+  margin-left: 4vh;
+  font-size: 3vh;
 }
 .sharingmodel-body {
-    float: left;
-    position: absolute;
-    margin-top: 17vh;
-    clear: left;
-    height: 10vh;
-    margin-left: 4vh;
-    width: 100%;
+  float: left;
+  position: absolute;
+  margin-top: 17vh;
+  clear: left;
+  height: 10vh;
+  margin-left: 4vh;
+  width: 100%;
 }
 .sharewith-textarea {
-
-    width: 70%;
-    height: 50%;
-    font-size: 3vh;
-    box-shadow: 0px 0px 5px 0px #afafaf;
-    border: 0;
+  width: 70%;
+  height: 50%;
+  font-size: 3vh;
+  box-shadow: 0px 0px 5px 0px #afafaf;
+  border: 0;
 }
 
 .sharing-text-area {
-    width: 97%;
-    padding-left: 2vh;
-    padding-top: 2vh;
+  width: 97%;
+  padding-left: 2vh;
+  padding-top: 2vh;
 }
 
 .share-button {
-    margin-top: 37%;
-    margin-left: 80%;
-    font-size: 1.5vw;
-    height: 4vh;
-    clear: left;
-    border:0;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 37%;
+  margin-left: 80%;
+  font-size: 1.5vw;
+  height: 4vh;
+  clear: left;
+  border: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
 
 textarea:focus,
 input:focus,
 button:focus,
 label:focus,
 .btn:active,
-.btn.active
-{
-    outline:0px !important;
-    -webkit-appearance:none;
+.btn.active {
+  outline: 0px !important;
+  -webkit-appearance: none;
 }
 
 /* Style The Dropdown Button */
 .dropbtn {
-    color: black;
-    height: 6vh;
-    font-size: 1.5vw;
-    margin-left: 1vw;
-margin-bottom: 1vh;
-    border: none;
+  color: black;
+  height: 6vh;
+  font-size: 1.5vw;
+  margin-left: 1vw;
+  margin-bottom: 1vh;
+  border: none;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .sharetype-dropdown {
-    position: relative;
-    float: right;
-    display: inline-block;
-    margin-right: 4.5vw;
+  position: relative;
+  float: right;
+  display: inline-block;
+  margin-right: 4.5vw;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    display: none;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+  display: none;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 /* Links inside the dropdown */
 .dropdown-content p {
-    height: 2vh;
-    color: black;
-    padding: 10px 16px;
-    font-size: 2.2vh;
-    text-decoration: none;
-    display: block;
-    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  height: 2vh;
+  color: black;
+  padding: 10px 16px;
+  font-size: 2.2vh;
+  text-decoration: none;
+  display: block;
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
 
 /* Show the dropdown menu on hover */
 .sharetype-dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+  background-color: #3e8e41;
 }
 
 .newoptions:hover .new-button {
-    background-color: #e1e6e5;
+  background-color: #e1e6e5;
 }
 
 .sharetype-dropdown:hover .dropbtn {
-    background-color: #e1e6e5;
+  background-color: #e1e6e5;
 }
-.sharingmodal-content hr{
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 0;
-    width: 100%;
-    padding: 0;
-    position: absolute;
+.sharingmodal-content hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  position: absolute;
 }
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 40vw;
-    height: 50vh;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    animation-name: animatetop;
-    animation-duration: 0.4s;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 40vw;
+  height: 50vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
 }
 
 .logout {
-    cursor: pointer;
-    position: absolute;
-    width: 15vh;
-    margin-left: 90%;
-    font-size: 2vh;
-    height: 5vh;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 6vh;
+  cursor: pointer;
+  position: absolute;
+  width: 15vh;
+  margin-left: 90%;
+  font-size: 2vh;
+  height: 5vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 6vh;
 }
 
 .foldermodal-content {
-    background-color: #fefefe;
-    border: 1px solid #888;
-    width: 35vw;
-    height: 18vh;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-    margin-top: 10%;
-    margin-left: 33%;
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 35vw;
+  height: 18vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  margin-top: 10%;
+  margin-left: 33%;
 }
 
 .sharingmodal-content {
-    background-color: #fefefe;
-    position: relative;
-    margin: auto;
-    padding-left: 0;
-    border: 1px solid #888;
-    width: 50%;
-    height: 32%;
-    top: 15%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-    color: black;
+  background-color: #fefefe;
+  position: relative;
+  margin: auto;
+  padding-left: 0;
+  border: 1px solid #888;
+  width: 50%;
+  height: 32%;
+  top: 15%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  color: black;
 }
 
-.sharingwith-text-area{
-    width: 60%;
-    padding-left: 2vh;
-    float: left;
-    padding-top: 6vh;
-    border: 0;
+.sharingwith-text-area {
+  width: 60%;
+  padding-left: 2vh;
+  float: left;
+  padding-top: 6vh;
+  border: 0;
 }
 /* Modal Header */
 .modal-header {
-    color: white;
-    position: relative;
-    width: 99%;
+  color: white;
+  position: relative;
+  width: 99%;
 }
 
 .model-title {
-    padding-top: 3vh;
-    padding-left: 2vh;
-    width: 98%;
+  padding-top: 3vh;
+  padding-left: 2vh;
+  width: 98%;
 }
 
 .close {
-    right: 1%;
-    color: black;
-    position: absolute;
-    margin-left: 95%;
-    margin-top: 0vh;
-    font-size: 32px;
-    font-weight: bold;
+  right: 1%;
+  color: black;
+  position: absolute;
+  margin-left: 95%;
+  margin-top: 0vh;
+  font-size: 32px;
+  font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* Modal Body */
 .modal-body {
-    width: 100%;
-    text-align: left;
-    border: 0;
-    margin: 0;
-    height: 50%
+  width: 100%;
+  text-align: left;
+  border: 0;
+  margin: 0;
+  height: 50%;
 }
 
 .model-filecontent {
-    width: 96%;
-    padding-left: 2vh;
-    border: 0;
-    word-wrap: break-word;
-    height: 100%;
+  width: 96%;
+  padding-left: 2vh;
+  border: 0;
+  word-wrap: break-word;
+  height: 100%;
 }
 
 /* Modal  */
-.modal- {
-    box-shadow: 0px 0px 10px 0px #afafaf;
-    margin-top: 6vh;
-    float: right;
-    border: 0;
-    /* padding: 1px; */
-    clear: right;
-    margin-right: 3vh;
+.modal-save {
+  box-shadow: 0px 0px 10px 0px #afafaf;
+  margin-top: 6vh;
+  float: right;
+  border: 0;
+  /* padding: 1px; */
+  clear: right;
+  margin-right: 3vh;
 }
 
 .sharingmodal- {
-    margin-top: 1vh;
-    float: right;
-    clear: right;
-    margin-right: 6vh;
+  margin-top: 1vh;
+  float: right;
+  clear: right;
+  margin-right: 6vh;
 }
-
 
 /* Add Animation */
 @keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0
-    }
-    to {
-        top: 0;
-        opacity: 1
-    }
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
-.folderoptions{
-    position: absolute;
-height: 2vh;
-    padding-top: 02vh;
-    padding-left: 3vh;
-    /* align-content: end; */
-    float: right;
-    margin-left: 29vh;
-    margin-bottom: 2vh;
+.folderoptions {
+  position: absolute;
+  height: 2vh;
+  padding-top: 02vh;
+  padding-left: 3vh;
+  /* align-content: end; */
+  float: right;
+  margin-left: 29vh;
+  margin-bottom: 2vh;
 }
 .fileoptions {
-    position: absolute;
-    top: 2vh;
-    right: 0.6vh;
-    display: inline-block;
+  position: absolute;
+  top: 2vh;
+  right: 0.6vh;
+  display: inline-block;
 }
 
 .newoptions {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
-.new-button{
-    color: black;
-    font-size: 12px;
-    border: none;
-    cursor: pointer;
-    padding-top: 1vh;
-    padding-bottom: 2vh;
-    padding-left: 2vh;
-    padding-right: 2vh;
-    margin-bottom: 2vh;
-    margin-top: 2vh;
-    height: 5vh;
-    width: 17vh;
-    border-radius: 6vh;
-    box-shadow: 0px 0px 10px 0px #afafaf;
+.new-button {
+  color: black;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+  padding-top: 1vh;
+  padding-bottom: 2vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  margin-bottom: 2vh;
+  margin-top: 2vh;
+  height: 5vh;
+  width: 17vh;
+  border-radius: 6vh;
+  box-shadow: 0px 0px 10px 0px #afafaf;
 }
 
-.newoptions-content{
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 10vw;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+.newoptions-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 10vw;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
-.newoptions-content a{
-    height: 2vh;
-    color: black;
-    padding: 10px 16px;
-    font-size: 2.2vh;
-    text-decoration: none;
-    display: block;
-    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+.newoptions-content a {
+  height: 2vh;
+  color: black;
+  padding: 10px 16px;
+  font-size: 2.2vh;
+  text-decoration: none;
+  display: block;
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
 }
 
-.newoptions-content a:hover {background-color: #f1f1f1}
+.newoptions-content a:hover {
+  background-color: #f1f1f1;
+}
 
 .fileoptions-icon {
-    height: 3vh;
+  height: 3vh;
 }
 
-.folderoptions-icon{
-    height: 2.8vh;
+.folderoptions-icon {
+  height: 2.8vh;
 }
 
-.fileoptions-content{
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    height: 20px;
-    width: 80px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    text-align: center;
-    font-size: 3vh;
-    color: #888888;
+.fileoptions-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  height: 20px;
+  width: 80px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  text-align: center;
+  font-size: 3vh;
+  color: #888888;
 }
 
-.folderoptions-content{
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    height: 40px;
-    width: 80px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    text-align: center;
-    font-size: 3vh;
-    color: #888888;
+.folderoptions-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  height: 40px;
+  width: 80px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  text-align: center;
+  font-size: 3vh;
+  color: #888888;
 }
 
-.fileoptions-content button{
-    height: 22px;
-    width: 80px;
-    font-size: 10px;
-    float: left;
-    clear: left;
-    border-color: white;
+.fileoptions-content button {
+  height: 22px;
+  width: 80px;
+  font-size: 10px;
+  float: left;
+  clear: left;
+  border-color: white;
 }
 
-.folderoptions-content button{
-    height: 22px;
-    width: 80px;
-    font-size: 10px;
-    float: left;
-    clear: left;
-    border-color: white;
+.folderoptions-content button {
+  height: 22px;
+  width: 80px;
+  font-size: 10px;
+  float: left;
+  clear: left;
+  border-color: white;
 }
 
-.newoptions-content button{
-    height: 22px;
-    width: 80px;
-    font-size: 10px;
-    float: left;
-    clear: left;
-    border-color: white;
+.newoptions-content button {
+  height: 22px;
+  width: 80px;
+  font-size: 10px;
+  float: left;
+  clear: left;
+  border-color: white;
 }
 
 .fileoptions:hover .fileoptions-content {
-    display: block;
+  display: block;
 }
 
 .folderoptions:hover .fileoptions-content {
-    display: block;
+  display: block;
 }
 
 .newoptions:hover .newoptions-content {
-    display: block;
+  display: block;
 }
 
 .emptysection {
-    top: 50%;
-    margin-left: 25%;
-    font-size: 3vh;
-    position: absolute;
-    color: #afafaf;
-    font-family: 'Product Sans',Arial,sans-serif;;
+  top: 50%;
+  margin-left: 25%;
+  font-size: 3vh;
+  position: absolute;
+  color: #afafaf;
+  font-family: "Product Sans", Arial, sans-serif;
 }
