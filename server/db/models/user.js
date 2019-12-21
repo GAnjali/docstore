@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     user.associate = function (models) {
         user.hasMany(models.folder, {
             foreignKey: 'userid'
-        })
+        });
         user.hasMany(models.file, {
             foreignKey: 'userid'
         })

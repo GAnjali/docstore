@@ -33,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
             as: 'parentfolder',
             onDelete: 'CASCADE'
         });
+        file.hasMany(models.share, {
+            foreignKey: 'fileid'
+        })
     };
     return file;
 };

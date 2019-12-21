@@ -16,12 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     share.associate = function (models) {
         share.belongsTo(models.file, {
             foreignKey: 'id',
-            as: 'sharingfile',
             onDelete: 'CASCADE'
         });
         share.belongsTo(models.user, {
             foreignKey: 'id',
-            as: 'sharingwith',
             onDelete: 'CASCADE'
         });
     };
