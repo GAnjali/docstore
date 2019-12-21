@@ -33,7 +33,7 @@ class Login extends Component {
 
   handleLogin = async e => {
     e.preventDefault();
-    const response = await login(this.state.username, this.state.password);
+    const response = await login(this.state.email, this.state.password);
     this.handleResponse(response, this.props.history);
   };
 

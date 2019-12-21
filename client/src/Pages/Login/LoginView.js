@@ -37,7 +37,7 @@ const LoginView = props => {
             onClick={props.handleLogin}
           />
         </form>
-        <div className={"signupLink"}>
+        <div className={"signup-link"}>
           {NEED_AN_ACCOUNT}
           <Link
             onClick={() => {
