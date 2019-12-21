@@ -37,7 +37,8 @@ class Login extends Component {
 
     handleResponse = (response, history) => {
         if (response.status === 200 && response.data.message === "Token generated") {
-            setUser(this.state.email);
+            console.log(this.state.username)
+            setUser(this.state.username);
             setToken(response.data.data);
             history.replace('/dashboard');
         } else {
