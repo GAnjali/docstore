@@ -1,6 +1,6 @@
 import React from 'react';
-import folderIcon from "../../../Util/foldericon.png"
-import optionsIcon from "../../../Util/optionsIcon.jpg";
+import folderIcon from "../styles/icons/foldericon.png"
+import optionsIcon from "../styles/icons/optionsIcon.jpg";
 
 const Folders = (props) => {
     return (
