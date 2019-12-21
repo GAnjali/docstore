@@ -1,5 +1,5 @@
 import React from "react";
-import {APP_NAME, EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER} from "../../AppConstants";
+import {APP_NAME, EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, SIGNUP} from "../../AppConstants";
 
 const SignupView = props => {
   return (
@@ -24,7 +24,7 @@ const SignupView = props => {
           {props.hasError && <h6 className={"error"}>{props.error}</h6>}
           <input
             className="form-submit"
-            value="SIGNUP"
+            value={SIGNUP}
             type="submit"
             onClick={props.handleFormSignup}
           />
