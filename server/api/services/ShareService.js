@@ -20,6 +20,16 @@ class ShareService {
         }
     }
 
+    static async getAllByFileUser(fileId, userId) {
+        try {
+            return await database.share.findAll({
+                where: {fileid: fileId, userid: userId}
+            });
+        } catch (error) {
+            throw error;
+        }
+    }
+
     static async update(sharingItem) {
         try {
             await database.share.update({sharetype: sharingItem.sharetype}, {
