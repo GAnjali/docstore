@@ -16,7 +16,7 @@ class Login extends Component {
     componentDidMount() {
         const token = getToken();
         if (token !== null && token.length !== 0 && token !== undefined) {
-            this.props.history.replace('/dashboard')
+            this.props.history.replace('/')
         }
     }
 
@@ -37,10 +37,9 @@ class Login extends Component {
 
     handleResponse = (response, history) => {
         if (response.status === 200 && response.data.message === "Token generated") {
-            console.log(this.state.username)
             setUser(this.state.username);
             setToken(response.data.data);
-            history.replace('/dashboard');
+            history.replace('/');
         } else {
             this.setState({
                 hasError: true,

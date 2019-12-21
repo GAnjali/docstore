@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../Login/Login.css';
-import register from "./APIService";
+import register from "./SignupService";
 import SignupView from "./SignupView";
 import {getToken} from "../../Util/localStorageUtil";
 
@@ -16,7 +16,7 @@ class Index extends Component {
     componentDidMount() {
         const token = getToken();
         if (token!==null && token.length !== 0 && token!==undefined) {
-            this.props.history.replace('/dashboard')
+            this.props.history.replace('/')
         }
     }
 
