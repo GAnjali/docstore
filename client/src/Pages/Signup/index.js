@@ -51,7 +51,10 @@ class Index extends Component {
     } else {
       this.setState({
         hasError: true,
-        error: (response.response!==undefined)?response.response.data.message():response.message
+        error:
+          response !== undefined && response.response !== undefined
+            ? response.response.data.message
+            : response.message
       });
     }
   };

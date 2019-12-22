@@ -4,7 +4,7 @@
 
 .navbar {
   background: #e1e6e5;
-  height: 10vh;
+  height: 8vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +15,7 @@ h2 {
   color: black;
   font-family: "Product Sans", Arial, sans-serif;
   text-align: center;
-  font-size: 5vh;
+  font-size: 3vh;
 }
 
 .sidebar-block {
@@ -65,7 +65,7 @@ h2 {
 }
 
 .heading {
-  font-size: 4vh;
+  font-size: 3vh;
   padding-left: 2vh;
   color: #afafaf;
 }
@@ -342,10 +342,10 @@ label:focus,
 .logout {
   cursor: pointer;
   position: absolute;
-  width: 15vh;
-  margin-left: 90%;
-  font-size: 2vh;
-  height: 5vh;
+  width: 11vh;
+  margin-left: 91%;
+  font-size: 1vh;
+  height: 3vh;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 6vh;
 }
@@ -381,7 +381,7 @@ label:focus,
   width: 60%;
   padding-left: 2vh;
   float: left;
-  padding-top: 6vh;
+  padding-top: 8vh;
   border: 0;
 }
 /* Modal Header */
@@ -434,7 +434,7 @@ label:focus,
 /* Modal  */
 .modal-save {
   box-shadow: 0px 0px 10px 0px #afafaf;
-  margin-top: 6vh;
+  margin-top: 8vh;
   float: right;
   border: 0;
   /* padding: 1px; */
