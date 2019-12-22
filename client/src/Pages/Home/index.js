@@ -133,7 +133,7 @@ class Home extends Component {
             this.handleEditFile(this.state.files[event.target.id].id);
             break;
           case "file-delete":
-            this.handleEditFile(this.state.files[event.target.id].id);
+            this.handleDeleteFile(this.state.files[event.target.id].id);
             break;
           case "file-share":
             this.handleShareFile(event.target.id);
