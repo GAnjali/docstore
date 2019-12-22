@@ -1,4 +1,4 @@
-import {FOLDERS_BY_ID_API_ENDPOINT, GET_FILES_API_ENDPOINT} from "../../../AppConstants";
+import {FOLDERS_BY_ID_API_ENDPOINT, GET_FILES_API_ENDPOINT, GET_FOLDERS_API_ENDPOINT} from "../../../AppConstants";
 
 const axios = require('axios');
 
@@ -11,7 +11,7 @@ const config = {
 export const getFolders = async (parentfolderid) => {
     try {
         let response;
-        response = await axios.get(process.env.REACT_APP_SERVER_URL + GET_FILES_API_ENDPOINT + parentfolderid, config);
+        response = await axios.get(process.env.REACT_APP_SERVER_URL + GET_FOLDERS_API_ENDPOINT + parentfolderid, config);
         return response;
     } catch (e) {
         return e;
