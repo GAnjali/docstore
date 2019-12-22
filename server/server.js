@@ -21,10 +21,7 @@ app.use('/files', fileRoutes);
 app.use('/shares', shareRoutes);
 app.use('/sharedfiles', sharedFilesRoutes);
 
-app.get('/', (req, res) => {
-    return res.status(200).send({'message': 'YAY! Congratulations! Your first endpoint is working'});
-});
-app.listen(3000);
-console.log('app running on port ', 3000);
+app.listen(1234);
+console.log('app running on port ', 1234);
 
 export default app;

@@ -48,7 +48,7 @@ class Login extends Component {
     } else {
       this.setState({
         hasError: true,
-        error: response.response.data.message
+        error: (response.response.data!==undefined)?response.response.data.message:response.message
       });
     }
   };
