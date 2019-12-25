@@ -5,7 +5,7 @@ class SharedFilesService {
   static async getSharedFiles(userId) {
     try {
       const shares = await ShareService.getAllByUser(userId);
-      Promise.all(
+      return Promise.all(
         shares.map(async share => {
           const file = await FileService.getOne(share.fileid);
           return file.dataValues;
