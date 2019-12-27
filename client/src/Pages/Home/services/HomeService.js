@@ -37,3 +37,14 @@ export const addShare = async (fileid, sharetype, userid) => {
     return e;
   }
 };
+
+export const getShare = async(userId, fileId) => {
+  try {
+    const response = await axios.get(
+        process.env.REACT_APP_SERVER_URL + SHARES_API_ENDPOINT + userId+"/fileid="+ fileId, config
+    );
+    return response;
+  } catch (e) {
+    return e;
+  }
+};

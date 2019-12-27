@@ -36,7 +36,7 @@ const ShareModel = props => {
               <p onClick={handleShareType} id={"View"}>
                 {VIEW}
               </p>
-              <p onClick={handleShareType} id={"Edit"}>
+              <p onClick={handleShareType} id={"Modify"}>
                 {EDIT}
               </p>
             </div>

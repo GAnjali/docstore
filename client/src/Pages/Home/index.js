@@ -11,7 +11,7 @@ import {
   getSharedFiles
 } from "./services/FileService";
 import { addFolder, deleteFolder, getFolders } from "./services/FolderService";
-import { getUserByEmail, addShare } from "./services/HomeService";
+import {getUserByEmail, addShare, getShare} from "./services/HomeService";
 import MainSection from "./components/MainSection";
 import { isLoggedIn } from "../../Util/AuthService";
 import FileModel from "./components/FileModel";
@@ -127,25 +127,32 @@ class Home extends Component {
 
   handleFileActions = async event => {
     if (event.target.id !== undefined) {
-      if (!this.isSharedFile(this.state.files[event.target.id])) {
+      const isSharedFile = this.isSharedFile(this.state.files[event.target.id]);
         switch (event.target.className) {
           case "file-content":
-            this.handleEditFile(this.state.files[event.target.id].id);
+            this.handleEditFile(this.state.files[event.target.id].id, isSharedFile);
             break;
           case "file-delete":
-            this.handleDeleteFile(this.state.files[event.target.id].id);
+            this.handleDeleteFile(this.state.files[event.target.id].id, isSharedFile);
             break;
           case "file-share":
-            this.handleShareFile(event.target.id);
+            this.handleShareFile(event.target.id, isSharedFile);
             break;
         }
-      } else {
-        //modify details
-      }
     }
   };
 
-  handleEditFile = async fileId => {
+  handleEditFile = async (fileId, isSharedFile) => {
+    if(isSharedFile) {
+      const share = await getShare(await this.getUserId(), fileId);
+      const shareType = share.data.data[0].sharetype;
+      if(shareType!=="Modify"){
+        alert("You not permitted to Modify this File, You can only View");
+        this.setState({
+          error: "You not permitted to Modify this File, You can only View"
+        })
+      }
+    }
     const getFileByIdResponse = responseUtil.getResponse(
       await getFileByid(fileId)
     );
