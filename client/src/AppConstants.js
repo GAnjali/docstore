@@ -4,7 +4,7 @@ export const LOGIN_URL = "/login";
 export const SIGNUP_URL = "/signup";
 
 //api endpoints
-export const LOGIN_API_ENDPOINT = "/users/login";
+export const LOGIN_API_ENDPOINT = "/login";
 export const SIGNUP_API_ENDPOINT = "/users";
 export const GET_FILES_API_ENDPOINT = "/files/parentfolder=";
 export const GET_SHARED_FILES_API_ENDPOINT = "/sharedfiles/userid=";
