@@ -4,7 +4,7 @@ import {
   EMAIL_PLACEHOLDER,
   PASSWORD_PLACEHOLDER,
   SIGNUP
-} from "../../AppConstants";
+} from "../../../AppConstants";
 
 const SignupView = props => {
   return (

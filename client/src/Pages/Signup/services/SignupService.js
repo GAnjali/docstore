@@ -1,4 +1,4 @@
-import { SIGNUP_API_ENDPOINT } from "../../AppConstants";
+import { SIGNUP_API_ENDPOINT } from "../../../AppConstants";
 
 const axios = require("axios");
 

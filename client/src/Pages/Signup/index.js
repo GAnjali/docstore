@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "../Login/Login.css";
-import register from "./SignupService";
-import SignupView from "./SignupView";
+import "../Login/styles/Login.css";
+import register from "./services/SignupService";
+import SignupView from "./components/SignupView";
 import { getToken } from "../../Util/localStorageUtil";
 import {
   HOME_URL,

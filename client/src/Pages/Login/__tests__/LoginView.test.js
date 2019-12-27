@@ -1,6 +1,6 @@
 import React from "react";
 import {shallow} from "enzyme";
-import LoginView from "../LoginView";
+import LoginView from "../components/LoginView";
 
 describe("LoginView tests", () => {
     const props = {

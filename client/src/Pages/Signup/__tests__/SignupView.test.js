@@ -1,6 +1,6 @@
 import React from "react";
 import {shallow} from "enzyme";
-import Signup from "../SignupView";
+import Signup from "../components/SignupView";
 
 describe("SignupView tests", () => {
     const props = {

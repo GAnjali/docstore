@@ -7,7 +7,7 @@ import {
   NEED_AN_ACCOUNT,
   PASSWORD_PLACEHOLDER,
   SIGNUP_URL
-} from "../../AppConstants";
+} from "../../../AppConstants";
 
 const LoginView = props => {
   return (
