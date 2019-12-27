@@ -31,7 +31,7 @@ class ShareController {
       if (allSharings.length > 0) {
         responseUtil.setSuccess(200, "Sharings retrieved", allSharings);
       } else {
-        responseUtil.setSuccess(200, "No Shares found");
+        responseUtil.setSuccess(404, "No Shares found");
       }
       return responseUtil.send(res);
     } catch (error) {
@@ -49,7 +49,7 @@ class ShareController {
       if (sharing.length > 0) {
         responseUtil.setSuccess(200, "Sharing retrieved", sharing);
       } else {
-        responseUtil.setSuccess(200, "No Share found");
+        responseUtil.setSuccess(404, "No Share found");
       }
       return responseUtil.send(res);
     } catch (error) {
