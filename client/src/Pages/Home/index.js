@@ -11,7 +11,7 @@ import {
   getSharedFiles
 } from "./services/FileService";
 import { addFolder, deleteFolder, getFolders } from "./services/FolderService";
-import {getUserByEmail, addShare, getShare} from "./services/HomeService";
+import { getUserByEmail, addShare, getShare } from "./services/HomeService";
 import MainSection from "./components/MainSection";
 import { isLoggedIn } from "../../Util/AuthService";
 import FileModel from "./components/FileModel";
@@ -20,11 +20,14 @@ import FolderModel from "./components/FolderModel";
 import ResponseUtil from "../../Util/ResponseUtil";
 import { getUser } from "../../Util/localStorageUtil";
 import { LOGIN_URL, SUCCESS } from "../../AppConstants";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as folderActions from "./actions/folderActions";
+import PropTypes from "prop-types";
 
 const responseUtil = new ResponseUtil();
 
 const intialState = {
-  folders: [],
   files: [],
   sharedFiles: [],
   error: "",
@@ -56,7 +59,8 @@ class Home extends Component {
 
   updateComponent = parentFolderId => {
     this.getFiles(parentFolderId);
-    this.getFolders(parentFolderId);
+    // this.getFolders(parentFolderId);
+    this.props.folderActions.fetchFolders(parentFolderId);
   };
 
   getFiles = async parentFolderId => {
@@ -93,21 +97,6 @@ class Home extends Component {
     }
   };
 
-  getFolders = async parentFolderId => {
-    const getFoldersResponse = responseUtil.getResponse(
-      await getFolders(parentFolderId)
-    );
-    if (getFoldersResponse.status === SUCCESS) {
-      this.setState({
-        folders: getFoldersResponse.data
-      });
-    } else {
-      this.setState({
-        error: getFoldersResponse.message
-      });
-    }
-  };
-
   getUserId = async () => {
     const getUserResponse = responseUtil.getResponse(
       await getUserByEmail(getUser())
@@ -128,29 +117,35 @@ class Home extends Component {
   handleFileActions = async event => {
     if (event.target.id !== undefined) {
       const isSharedFile = this.isSharedFile(this.state.files[event.target.id]);
-        switch (event.target.className) {
-          case "file-content":
-            this.handleEditFile(this.state.files[event.target.id].id, isSharedFile);
-            break;
-          case "file-delete":
-            this.handleDeleteFile(this.state.files[event.target.id].id, isSharedFile);
-            break;
-          case "file-share":
-            this.handleShareFile(event.target.id, isSharedFile);
-            break;
-        }
+      switch (event.target.className) {
+        case "file-content":
+          this.handleEditFile(
+            this.state.files[event.target.id].id,
+            isSharedFile
+          );
+          break;
+        case "file-delete":
+          this.handleDeleteFile(
+            this.state.files[event.target.id].id,
+            isSharedFile
+          );
+          break;
+        case "file-share":
+          this.handleShareFile(event.target.id, isSharedFile);
+          break;
+      }
     }
   };
 
   handleEditFile = async (fileId, isSharedFile) => {
-    if(isSharedFile) {
+    if (isSharedFile) {
       const share = await getShare(await this.getUserId(), fileId);
       const shareType = share.data.data[0].sharetype;
-      if(shareType!=="Modify"){
+      if (shareType !== "Modify") {
         alert("You not permitted to Modify this File, You can only View");
         this.setState({
           error: "You not permitted to Modify this File, You can only View"
-        })
+        });
       }
     }
     const getFileByIdResponse = responseUtil.getResponse(
@@ -226,17 +221,17 @@ class Home extends Component {
 
   handleFolderActions = async event => {
     if (event.target.className === "folder-delete") {
-      this.handleDeleteFolder(this.state.folders[event.target.id].id);
+      this.handleDeleteFolder(this.props.folders[event.target.id].id);
     } else if (event.target.className !== "folder-share") {
       localStorage.setItem(
         "parentfolderid",
-        this.state.folders[event.target.id].id
+        this.props.folders[event.target.id].id
       );
       localStorage.setItem(
         "parentfoldername",
-        this.state.folders[event.target.id].name
+        this.props.folders[event.target.id].name
       );
-      this.updateComponent(this.state.folders[event.target.id].id);
+      this.updateComponent(this.props.folders[event.target.id].id);
     }
   };
 
@@ -343,7 +338,7 @@ class Home extends Component {
           handleAddFolder={this.handleAddNewFolder}
         />
         <MainSection
-          folders={this.state.folders}
+          folders={this.props.folders}
           files={this.state.files}
           handleFileClick={this.handleFileActions}
           handleFolderClick={this.handleFolderActions}
@@ -376,4 +371,25 @@ class Home extends Component {
   }
 }
 
-export default Home;
+
+Home.propTypes = {
+  folderActions: PropTypes.object,
+  folders: PropTypes.array,
+};
+
+function mapStateToProps(state) {
+  return {
+    folders: state.folders,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    folderActions: bindActionCreators(folderActions, dispatch),
+  };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Home);

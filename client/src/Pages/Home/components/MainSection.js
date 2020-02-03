@@ -8,19 +8,23 @@ const MainSection = props => {
   if (folders.length !== 0 || files.length !== 0) {
     return (
       <div className={"main-section"}>
-        {folders !== undefined && folders.length > 0 && (
-          <Folders
-            folders={folders}
-            handleFolderClick={props.handleFolderClick}
-          />
-        )}
-        {files !== undefined && files.length > 0 && (
-          <Files
-            files={files}
-            handleFileClick={props.handleFileClick}
-            handleSave={props.handleSave}
-          />
-        )}
+        {folders !== undefined &&
+          folders.length > 0 &&
+          typeof folders !== "string" && (
+            <Folders
+              folders={folders}
+              handleFolderClick={props.handleFolderClick}
+            />
+          )}
+        {folders !== undefined &&
+          folders.length > 0 &&
+          typeof folders !== "string" && (
+            <Files
+              files={files}
+              handleFileClick={props.handleFileClick}
+              handleSave={props.handleSave}
+            />
+          )}
       </div>
     );
   }
