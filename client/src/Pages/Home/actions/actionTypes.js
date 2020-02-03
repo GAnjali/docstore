@@ -1,0 +1,2 @@
+export const FETCH_FOLDERS = "FETCH_FOLDERS";
+export const RECEIVE_FOLDERS = "RECEIVE_FOLDERS";
