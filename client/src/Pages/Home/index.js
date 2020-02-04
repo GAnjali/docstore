@@ -4,29 +4,22 @@ import "./styles/Home.css";
 import Sidebar from "./components/Sidebar";
 import {
   deleteFile,
-  getFileByid,
-  getFiles,
   updateFile,
-  addFile,
-  getSharedFiles
+  addFile
 } from "./services/FileService";
-import { addFolder, deleteFolder, getFolders } from "./services/FolderService";
-import { getUserByEmail, addShare, getShare } from "./services/HomeService";
+import { addFolder, deleteFolder } from "./services/FolderService";
+import { getUserByEmail, addShare } from "./services/HomeService";
 import MainSection from "./components/MainSection";
 import { isLoggedIn } from "../../Util/AuthService";
 import FileModel from "./components/FileModel";
 import ShareModel from "./components/ShareModel";
 import FolderModel from "./components/FolderModel";
-import ResponseUtil from "../../Util/ResponseUtil";
-import { getUser } from "../../Util/localStorageUtil";
-import { LOGIN_URL, SUCCESS } from "../../AppConstants";
+import { LOGIN_URL } from "../../AppConstants";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as folderActions from "./actions/folderActions";
 import * as fileActions from "./actions/fileActions";
 import PropTypes from "prop-types";
-
-const responseUtil = new ResponseUtil();
 
 const intialState = {
   sharedFiles: [],
@@ -58,110 +51,8 @@ class Home extends Component {
   }
 
   updateComponent = parentFolderId => {
-    // this.getFiles(parentFolderId);
-    // this.getFolders(parentFolderId);
     this.props.fileActions.fetchFiles(parentFolderId);
     this.props.folderActions.fetchFolders(parentFolderId);
-  };
-
-  getFiles = async parentFolderId => {
-    const getFilesResponse = responseUtil.getResponse(
-      await getFiles(parentFolderId)
-    );
-    if (getFilesResponse.status === SUCCESS) {
-      this.setState({
-        files: getFilesResponse.data
-      });
-    } else {
-      this.setState({
-        error: getFilesResponse.message
-      });
-    }
-    const getSHaredFilesResponse = responseUtil.getResponse(
-      await getSharedFiles(await this.getUserId())
-    );
-    if (getSHaredFilesResponse.status === SUCCESS) {
-      this.setState({
-        sharedFiles: getSHaredFilesResponse.data
-      });
-      const allFiles = this.state.files;
-      getSHaredFilesResponse.data.map(file => {
-        allFiles.push(file);
-      });
-      this.setState({
-        files: allFiles
-      });
-    } else {
-      this.setState({
-        error: getSHaredFilesResponse
-      });
-    }
-  };
-
-  getUserId = async () => {
-    const getUserResponse = responseUtil.getResponse(
-      await getUserByEmail(getUser())
-    );
-    if (getUserResponse.status === SUCCESS) {
-      return getUserResponse.data.id;
-    } else {
-      this.setState({
-        error: getUserResponse.message
-      });
-    }
-  };
-
-  isSharedFile = fileId => {
-    return this.state.sharedFiles.includes(fileId);
-  };
-
-  handleFileActions = async event => {
-    if (event.target.id !== undefined) {
-      const isSharedFile = this.isSharedFile(this.props.files[event.target.id]);
-      switch (event.target.className) {
-        case "file-content":
-          this.handleEditFile(
-            this.props.files[event.target.id].id,
-            isSharedFile
-          );
-          break;
-        case "file-delete":
-          this.handleDeleteFile(
-            this.props.files[event.target.id].id,
-            isSharedFile
-          );
-          break;
-        case "file-share":
-          this.handleShareFile(event.target.id, isSharedFile);
-          break;
-      }
-    }
-  };
-
-  handleEditFile = async (fileId, isSharedFile) => {
-    if (isSharedFile) {
-      const share = await getShare(await this.getUserId(), fileId);
-      const shareType = share.data.data[0].sharetype;
-      if (shareType !== "Modify") {
-        alert("You not permitted to Modify this File, You can only View");
-        this.setState({
-          error: "You not permitted to Modify this File, You can only View"
-        });
-      }
-    }
-    const getFileByIdResponse = responseUtil.getResponse(
-      await getFileByid(fileId)
-    );
-    if (getFileByIdResponse.status === SUCCESS) {
-      this.setState({
-        editingFile: getFileByIdResponse.data,
-        showFileModel: true
-      });
-    } else {
-      this.setState({
-        error: getFileByIdResponse.message
-      });
-    }
   };
 
   handleSaveFile = async () => {
@@ -176,13 +67,13 @@ class Home extends Component {
       }
       await addFile(this.state.editingFile).then(() => {
         this.setState(
-          {
-            showFileModel: false,
-            newFile: false
-          },
-          () => {
-            this.updateComponent(localStorage.getItem("parentfolderid"));
-          }
+            {
+              showFileModel: false,
+              newFile: false
+            },
+            () => {
+              this.updateComponent(localStorage.getItem("parentfolderid"));
+            }
         );
       });
     }
@@ -225,12 +116,12 @@ class Home extends Component {
       this.handleDeleteFolder(this.props.folders[event.target.id].id);
     } else if (event.target.className !== "folder-share") {
       localStorage.setItem(
-        "parentfolderid",
-        this.props.folders[event.target.id].id
+          "parentfolderid",
+          this.props.folders[event.target.id].id
       );
       localStorage.setItem(
-        "parentfoldername",
-        this.props.folders[event.target.id].name
+          "parentfoldername",
+          this.props.folders[event.target.id].name
       );
       this.updateComponent(this.props.folders[event.target.id].id);
     }
@@ -250,17 +141,21 @@ class Home extends Component {
   handleSaveFolder = async () => {
     const newFolder = { name: this.state.newFolderName };
     await addFolder(newFolder)
-      .then(() => {
-        this.setState({
-          showFolderModel: false
+        .then(() => {
+          this.setState({
+            showFolderModel: false
+          });
+          this.updateComponent(
+              localStorage.getItem(
+                  "                                                                                                                                  parentfolderid"
+              )
+          );
+        })
+        .catch(err => {
+          this.setState({
+            error: err.message
+          });
         });
-        this.updateComponent(localStorage.getItem("parentfolderid"));
-      })
-      .catch(err => {
-        this.setState({
-          error: err.message
-        });
-      });
   };
 
   handleAddNewFolder = () => {
@@ -299,9 +194,9 @@ class Home extends Component {
     const getUserResponse = await getUserByEmail(this.state.sharingWithUser);
     if (getUserResponse.status === 200) {
       const shareResponse = await addShare(
-        this.state.sharingFile.id,
-        this.state.shareType,
-        getUserResponse.data.data.id
+          this.state.sharingFile.id,
+          this.state.shareType,
+          getUserResponse.data.data.id
       );
       if (shareResponse.status === 200) {
         alert(shareResponse.data.message);
@@ -332,58 +227,54 @@ class Home extends Component {
 
   render() {
     return (
-      <>
-        <Header history={this.props.history} />
-        <Sidebar
-          handleAddFile={this.handleAddNewFile}
-          handleAddFolder={this.handleAddNewFolder}
-        />
-        <MainSection
-          folders={this.props.folders}
-          files={this.props.files}
-          handleFileClick={this.handleFileActions}
-          handleFolderClick={this.handleFolderActions}
-        />
-        <FolderModel
-          show={this.state.showFolderModel}
-          newFolder={this.state.newFolderName}
-          handleFolderNameChange={this.handleChange}
-          handleSaveFolder={this.handleSaveFolder}
-          handleClose={this.handleClose}
-        />
-        <FileModel
-          editingFile={this.state.editingFile}
-          show={this.state.showFileModel}
-          handleTitleChange={this.handleTitleChange}
-          handleContentChange={this.handleContentChange}
-          handleSaveFile={this.handleSaveFile}
-          handleClose={this.handleClose}
-        />
-        <ShareModel
-          show={this.state.showSharingModel}
-          sharingFile={this.state.sharingFile}
-          handleInput={this.handleChange}
-          handleShareType={this.handleShareType}
-          handleShare={this.handleShare}
-          handleClose={this.handleClose}
-        />
-      </>
+        <>
+          <Header history={this.props.history} />
+          <Sidebar
+              handleAddFile={this.handleAddNewFile}
+              handleAddFolder={this.handleAddNewFolder}
+          />
+          <MainSection
+              handleFolderClick={this.handleFolderActions}
+          />
+          <FolderModel
+              show={this.state.showFolderModel}
+              newFolder={this.state.newFolderName}
+              handleFolderNameChange={this.handleChange}
+              handleSaveFolder={this.handleSaveFolder}
+              handleClose={this.handleClose}
+          />
+          <FileModel
+              editingFile={this.state.editingFile}
+              show={this.state.showFileModel}
+              handleTitleChange={this.handleTitleChange}
+              handleContentChange={this.handleContentChange}
+              handleSaveFile={this.handleSaveFile}
+              handleClose={this.handleClose}
+          />
+          <ShareModel
+              show={this.state.showSharingModel}
+              sharingFile={this.state.sharingFile}
+              handleInput={this.handleChange}
+              handleShareType={this.handleShareType}
+              handleShare={this.handleShare}
+              handleClose={this.handleClose}
+          />
+        </>
     );
   }
 }
-
 
 Home.propTypes = {
   folderActions: PropTypes.object,
   folders: PropTypes.array,
   fileActions: PropTypes.object,
-  files: PropTypes.array,
+  files: PropTypes.array
 };
 
 function mapStateToProps(state) {
   return {
     folders: state.folders,
-    files: state.files,
+    files: state.files
   };
 }
 

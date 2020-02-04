@@ -42,9 +42,15 @@ const getSharedFilesFromAPI = async parentFolderId => {
 };
 
 const updateFiles = (files, sharedFiles) => {
-  sharedFiles.map(file => {
-    files.push(file);
-  });
+  if (
+    sharedFiles !== undefined &&
+    sharedFiles.length > 0 &&
+    typeof sharedFiles !== "string"
+  ) {
+    sharedFiles.map(file => {
+      files.push(file);
+    });
+  }
   return files;
 };
 
@@ -55,10 +61,10 @@ export function fetchFiles(parentFolderId) {
       files = response;
       dispatch(receiveFiles(response));
     });
-    getSharedFilesFromAPI(parentFolderId).then(response => {
-      dispatch(receiveSharedFiles(response));
-      dispatch(receiveFiles(updateFiles(files, response)));
-    });
+    // getSharedFilesFromAPI(parentFolderId).then(response => {
+    //   dispatch(receiveSharedFiles(response));
+    //   dispatch(receiveFiles(updateFiles(files, response)));
+    // });
   };
 }
 
