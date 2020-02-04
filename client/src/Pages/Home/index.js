@@ -23,12 +23,12 @@ import { LOGIN_URL, SUCCESS } from "../../AppConstants";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as folderActions from "./actions/folderActions";
+import * as fileActions from "./actions/fileActions";
 import PropTypes from "prop-types";
 
 const responseUtil = new ResponseUtil();
 
 const intialState = {
-  files: [],
   sharedFiles: [],
   error: "",
   editingFile: null,
@@ -58,8 +58,9 @@ class Home extends Component {
   }
 
   updateComponent = parentFolderId => {
-    this.getFiles(parentFolderId);
+    // this.getFiles(parentFolderId);
     // this.getFolders(parentFolderId);
+    this.props.fileActions.fetchFiles(parentFolderId);
     this.props.folderActions.fetchFolders(parentFolderId);
   };
 
@@ -116,17 +117,17 @@ class Home extends Component {
 
   handleFileActions = async event => {
     if (event.target.id !== undefined) {
-      const isSharedFile = this.isSharedFile(this.state.files[event.target.id]);
+      const isSharedFile = this.isSharedFile(this.props.files[event.target.id]);
       switch (event.target.className) {
         case "file-content":
           this.handleEditFile(
-            this.state.files[event.target.id].id,
+            this.props.files[event.target.id].id,
             isSharedFile
           );
           break;
         case "file-delete":
           this.handleDeleteFile(
-            this.state.files[event.target.id].id,
+            this.props.files[event.target.id].id,
             isSharedFile
           );
           break;
@@ -214,7 +215,7 @@ class Home extends Component {
   handleShareFile = fileindex => {
     this.setState({
       showSharingModel: true,
-      sharingFile: this.state.files[fileindex]
+      sharingFile: this.props.files[fileindex]
     });
     //share service request
   };
@@ -339,7 +340,7 @@ class Home extends Component {
         />
         <MainSection
           folders={this.props.folders}
-          files={this.state.files}
+          files={this.props.files}
           handleFileClick={this.handleFileActions}
           handleFolderClick={this.handleFolderActions}
         />
@@ -375,17 +376,21 @@ class Home extends Component {
 Home.propTypes = {
   folderActions: PropTypes.object,
   folders: PropTypes.array,
+  fileActions: PropTypes.object,
+  files: PropTypes.array,
 };
 
 function mapStateToProps(state) {
   return {
     folders: state.folders,
+    files: state.files,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     folderActions: bindActionCreators(folderActions, dispatch),
+    fileActions: bindActionCreators(fileActions, dispatch)
   };
 }
 
