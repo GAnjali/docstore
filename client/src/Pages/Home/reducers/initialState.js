@@ -1,4 +1,5 @@
 export default {
   files: [],
-  folders: []
+  folders: [],
+  sharedFiles: []
 };
