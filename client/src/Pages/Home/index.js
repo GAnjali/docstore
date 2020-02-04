@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Header from "./components/Header";
 import "./styles/Home.css";
 import Sidebar from "./components/Sidebar";
-import { deleteFile, updateFile, addFile } from "./services/FileService";
-import { addFolder, deleteFolder } from "./services/FolderService";
+import { addFile } from "./services/FileService";
+import { addFolder } from "./services/FolderService";
 import { getUserByEmail, addShare } from "./services/HomeService";
 import MainSection from "./components/MainSection";
 import { isLoggedIn } from "../../Util/AuthService";
@@ -27,7 +27,6 @@ const intialState = {
   sharingFile: null,
   sharingWithUser: null,
   shareType: "View",
-  newFile: false,
   newFolderName: ""
 };
 
@@ -53,19 +52,10 @@ class Home extends Component {
 
   handleSaveFile = async () => {
     if (this.state.showFileModel) {
-      if (!this.state.newFile) {
-        await updateFile(this.state.editingFile).then(() => {
-          this.setState({
-            showFileModel: false
-          });
-          this.updateComponent(localStorage.getItem("parentfolderid"));
-        });
-      }
       await addFile(this.state.editingFile).then(() => {
         this.setState(
           {
-            showFileModel: false,
-            newFile: false
+            showFileModel: false
           },
           () => {
             this.updateComponent(localStorage.getItem("parentfolderid"));
@@ -83,20 +73,8 @@ class Home extends Component {
     };
     this.setState({
       showFileModel: true,
-      editingFile: newFile,
-      newFile: true
+      editingFile: newFile
     });
-  };
-
-  handleDeleteFile = async fileId => {
-    const deleteResponse = await deleteFile(fileId);
-    if (deleteResponse.status === 200) {
-      this.updateComponent(localStorage.getItem("parentfolderid"));
-    } else {
-      this.setState({
-        error: deleteResponse.message
-      });
-    }
   };
 
   handleShareFile = fileindex => {
@@ -114,11 +92,7 @@ class Home extends Component {
         this.setState({
           showFolderModel: false
         });
-        this.updateComponent(
-          localStorage.getItem(
-            "                                                                                                                                  parentfolderid"
-          )
-        );
+        this.updateComponent(localStorage.getItem("parentfolderid"));
       })
       .catch(err => {
         this.setState({
