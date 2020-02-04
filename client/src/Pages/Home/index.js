@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import Header from "./components/Header";
 import "./styles/Home.css";
 import Sidebar from "./components/Sidebar";
-import {
-  deleteFile,
-  updateFile,
-  addFile
-} from "./services/FileService";
+import { deleteFile, updateFile, addFile } from "./services/FileService";
 import { addFolder, deleteFolder } from "./services/FolderService";
 import { getUserByEmail, addShare } from "./services/HomeService";
 import MainSection from "./components/MainSection";
@@ -67,13 +63,13 @@ class Home extends Component {
       }
       await addFile(this.state.editingFile).then(() => {
         this.setState(
-            {
-              showFileModel: false,
-              newFile: false
-            },
-            () => {
-              this.updateComponent(localStorage.getItem("parentfolderid"));
-            }
+          {
+            showFileModel: false,
+            newFile: false
+          },
+          () => {
+            this.updateComponent(localStorage.getItem("parentfolderid"));
+          }
         );
       });
     }
@@ -111,51 +107,24 @@ class Home extends Component {
     //share service request
   };
 
-  handleFolderActions = async event => {
-    if (event.target.className === "folder-delete") {
-      this.handleDeleteFolder(this.props.folders[event.target.id].id);
-    } else if (event.target.className !== "folder-share") {
-      localStorage.setItem(
-          "parentfolderid",
-          this.props.folders[event.target.id].id
-      );
-      localStorage.setItem(
-          "parentfoldername",
-          this.props.folders[event.target.id].name
-      );
-      this.updateComponent(this.props.folders[event.target.id].id);
-    }
-  };
-
-  handleDeleteFolder = async folderid => {
-    const deleteFolderResponse = await deleteFolder(folderid);
-    if (deleteFolderResponse.status === 200) {
-      this.updateComponent(localStorage.getItem("parentfolderid"));
-    } else {
-      this.setState({
-        error: deleteFolderResponse.message
-      });
-    }
-  };
-
   handleSaveFolder = async () => {
     const newFolder = { name: this.state.newFolderName };
     await addFolder(newFolder)
-        .then(() => {
-          this.setState({
-            showFolderModel: false
-          });
-          this.updateComponent(
-              localStorage.getItem(
-                  "                                                                                                                                  parentfolderid"
-              )
-          );
-        })
-        .catch(err => {
-          this.setState({
-            error: err.message
-          });
+      .then(() => {
+        this.setState({
+          showFolderModel: false
         });
+        this.updateComponent(
+          localStorage.getItem(
+            "                                                                                                                                  parentfolderid"
+          )
+        );
+      })
+      .catch(err => {
+        this.setState({
+          error: err.message
+        });
+      });
   };
 
   handleAddNewFolder = () => {
@@ -194,9 +163,9 @@ class Home extends Component {
     const getUserResponse = await getUserByEmail(this.state.sharingWithUser);
     if (getUserResponse.status === 200) {
       const shareResponse = await addShare(
-          this.state.sharingFile.id,
-          this.state.shareType,
-          getUserResponse.data.data.id
+        this.state.sharingFile.id,
+        this.state.shareType,
+        getUserResponse.data.data.id
       );
       if (shareResponse.status === 200) {
         alert(shareResponse.data.message);
@@ -227,39 +196,37 @@ class Home extends Component {
 
   render() {
     return (
-        <>
-          <Header history={this.props.history} />
-          <Sidebar
-              handleAddFile={this.handleAddNewFile}
-              handleAddFolder={this.handleAddNewFolder}
-          />
-          <MainSection
-              handleFolderClick={this.handleFolderActions}
-          />
-          <FolderModel
-              show={this.state.showFolderModel}
-              newFolder={this.state.newFolderName}
-              handleFolderNameChange={this.handleChange}
-              handleSaveFolder={this.handleSaveFolder}
-              handleClose={this.handleClose}
-          />
-          <FileModel
-              editingFile={this.state.editingFile}
-              show={this.state.showFileModel}
-              handleTitleChange={this.handleTitleChange}
-              handleContentChange={this.handleContentChange}
-              handleSaveFile={this.handleSaveFile}
-              handleClose={this.handleClose}
-          />
-          <ShareModel
-              show={this.state.showSharingModel}
-              sharingFile={this.state.sharingFile}
-              handleInput={this.handleChange}
-              handleShareType={this.handleShareType}
-              handleShare={this.handleShare}
-              handleClose={this.handleClose}
-          />
-        </>
+      <>
+        <Header history={this.props.history} />
+        <Sidebar
+          handleAddFile={this.handleAddNewFile}
+          handleAddFolder={this.handleAddNewFolder}
+        />
+        <MainSection />
+        <FolderModel
+          show={this.state.showFolderModel}
+          newFolder={this.state.newFolderName}
+          handleFolderNameChange={this.handleChange}
+          handleSaveFolder={this.handleSaveFolder}
+          handleClose={this.handleClose}
+        />
+        <FileModel
+          editingFile={this.state.editingFile}
+          show={this.state.showFileModel}
+          handleTitleChange={this.handleTitleChange}
+          handleContentChange={this.handleContentChange}
+          handleSaveFile={this.handleSaveFile}
+          handleClose={this.handleClose}
+        />
+        <ShareModel
+          show={this.state.showSharingModel}
+          sharingFile={this.state.sharingFile}
+          handleInput={this.handleChange}
+          handleShareType={this.handleShareType}
+          handleShare={this.handleShare}
+          handleClose={this.handleClose}
+        />
+      </>
     );
   }
 }

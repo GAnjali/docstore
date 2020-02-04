@@ -18,6 +18,7 @@ import {
 import { getUser } from "../../../Util/localStorageUtil";
 import ResponseUtil from "../../../Util/ResponseUtil";
 import FileModel from "./FileModel";
+import { deleteFolder } from "../services/FolderService";
 const responseUtil = new ResponseUtil();
 
 const intialState = {
@@ -38,7 +39,7 @@ class MainSection extends Component {
 
   getUserId = async () => {
     const getUserResponse = responseUtil.getResponse(
-        await getUserByEmail(getUser())
+      await getUserByEmail(getUser())
     );
     if (getUserResponse.status === SUCCESS) {
       return getUserResponse.data.id;
@@ -60,7 +61,7 @@ class MainSection extends Component {
       }
     }
     const getFileByIdResponse = responseUtil.getResponse(
-        await getFileByid(fileId)
+      await getFileByid(fileId)
     );
     if (getFileByIdResponse.status === SUCCESS) {
       this.setState({
@@ -107,14 +108,14 @@ class MainSection extends Component {
       switch (event.target.className) {
         case "file-content":
           this.handleEditFile(
-              this.props.files[event.target.id].id,
-              isSharedFile
+            this.props.files[event.target.id].id,
+            isSharedFile
           );
           break;
         case "file-delete":
           this.handleDeleteFile(
-              this.props.files[event.target.id].id,
-              isSharedFile
+            this.props.files[event.target.id].id,
+            isSharedFile
           );
           break;
         case "file-share":
@@ -147,43 +148,70 @@ class MainSection extends Component {
     });
   };
 
+  handleFolderActions = async event => {
+    if (event.target.className === "folder-delete") {
+      this.handleDeleteFolder(this.props.folders[event.target.id].id);
+    } else if (event.target.className !== "folder-share") {
+      localStorage.setItem(
+        "parentfolderid",
+        this.props.folders[event.target.id].id
+      );
+      localStorage.setItem(
+        "parentfoldername",
+        this.props.folders[event.target.id].name
+      );
+      this.updateComponent(this.props.folders[event.target.id].id);
+    }
+  };
+
+  handleDeleteFolder = async folderid => {
+    const deleteFolderResponse = await deleteFolder(folderid);
+    if (deleteFolderResponse.status === 200) {
+      this.updateComponent(localStorage.getItem("parentfolderid"));
+    } else {
+      this.setState({
+        error: deleteFolderResponse.message
+      });
+    }
+  };
+
   render() {
     const { folders, files } = this.props;
     if (folders.length !== 0 || files.length !== 0) {
       return (
-          <div className={"main-section"}>
-            {folders !== undefined &&
+        <div className={"main-section"}>
+          {folders !== undefined &&
             folders.length > 0 &&
             typeof folders !== "string" && (
-                <Folders
-                    folders={folders}
-                    handleFolderClick={this.props.handleFolderClick}
-                />
+              <Folders
+                folders={folders}
+                handleFolderClick={this.handleFolderActions}
+              />
             )}
-            {files !== undefined &&
+          {files !== undefined &&
             files.length > 0 &&
             typeof files !== "string" && (
-                <Files
-                    files={files}
-                    handleFileClick={this.handleFileActions}
-                    handleSave={this.props.handleSave}
-                />
+              <Files
+                files={files}
+                handleFileClick={this.handleFileActions}
+                handleSave={this.props.handleSave}
+              />
             )}
-            <FileModel
-                editingFile={this.state.editingFile}
-                show={this.state.showFileModel}
-                handleTitleChange={this.handleTitleChange}
-                handleContentChange={this.handleContentChange}
-                handleSaveFile={this.handleSaveFile}
-                handleClose={this.handleClose}
-            />
-          </div>
+          <FileModel
+            editingFile={this.state.editingFile}
+            show={this.state.showFileModel}
+            handleTitleChange={this.handleTitleChange}
+            handleContentChange={this.handleContentChange}
+            handleSaveFile={this.handleSaveFile}
+            handleClose={this.handleClose}
+          />
+        </div>
       );
     }
     return (
-        <div className={"main-section"}>
-          <span className={"emptysection"}>{NO_CONTENTS_FOUND}</span>
-        </div>
+      <div className={"main-section"}>
+        <span className={"emptysection"}>{NO_CONTENTS_FOUND}</span>
+      </div>
     );
   }
 }
