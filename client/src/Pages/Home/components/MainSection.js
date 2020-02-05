@@ -91,17 +91,6 @@ class MainSection extends Component {
     }
   };
 
-  handleSaveFile = async () => {
-    if (this.state.showFileModel) {
-      await updateFile(this.state.editingFile).then(() => {
-        this.setState({
-          showFileModel: false
-        });
-        this.updateComponent(localStorage.getItem("parentfolderid"));
-      });
-    }
-  };
-
   handleFileActions = async event => {
     if (event.target.id !== undefined) {
       const isSharedFile = this.isSharedFile(this.props.files[event.target.id]);
@@ -123,29 +112,6 @@ class MainSection extends Component {
           break;
       }
     }
-  };
-  handleTitleChange = event => {
-    const newTitle = event.target.value;
-    this.setState(prevState => {
-      const fileOnEdit = prevState.editingFile;
-      fileOnEdit.name = newTitle;
-      return { editingFile: fileOnEdit };
-    });
-  };
-
-  handleClose = () => {
-    this.setState({
-      showFileModel: false
-    });
-  };
-
-  handleContentChange = event => {
-    const newContent = event.target.value;
-    this.setState(prevState => {
-      const fileOnEdit = prevState.editingFile;
-      fileOnEdit.content = newContent;
-      return { editingFile: fileOnEdit };
-    });
   };
 
   handleFolderActions = async event => {
@@ -175,6 +141,12 @@ class MainSection extends Component {
     }
   };
 
+  handleClose = () => {
+    this.setState({
+      showFileModel: false
+    });
+  };
+
   render() {
     const { folders, files } = this.props;
     if (folders.length !== 0 || files.length !== 0) {
@@ -199,11 +171,9 @@ class MainSection extends Component {
             )}
           <FileModel
             editingFile={this.state.editingFile}
-            show={this.state.showFileModel}
-            handleTitleChange={this.handleTitleChange}
-            handleContentChange={this.handleContentChange}
-            handleSaveFile={this.handleSaveFile}
+            showModel={this.state.showFileModel}
             handleClose={this.handleClose}
+            updateComponent={this.updateComponent}
           />
         </div>
       );
