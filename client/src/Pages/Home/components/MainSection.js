@@ -159,45 +159,6 @@ class MainSection extends Component {
     });
   };
 
-  handleShareType = event => {
-    this.setState({
-      shareType: event.target.id
-    });
-  };
-
-  handleShare = async () => {
-    console.log(this.state);
-    const getUserResponse = await getUserByEmail(this.state.sharingWithUser);
-    if (getUserResponse.status === 200) {
-      const shareResponse = await addShare(
-        this.state.sharingFile.id,
-        this.state.shareType,
-        getUserResponse.data.data.id
-      );
-      if (shareResponse.status === 200) {
-        this.setState({
-          showSharingModel: false
-        });
-        alert(shareResponse.data.message);
-      } else {
-        this.setState({
-          error: getUserResponse.message
-        });
-      }
-    } else {
-      this.setState({
-        error: getUserResponse.message
-      });
-    }
-  };
-
-  handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
   render() {
     const { folders, files } = this.props;
     if (folders.length !== 0 || files.length !== 0) {
@@ -230,9 +191,6 @@ class MainSection extends Component {
           <ShareModel
             show={this.state.showSharingModel}
             sharingFile={this.state.sharingFile}
-            handleInput={this.handleChange}
-            handleShareType={this.handleShareType}
-            handleShare={this.handleShare}
             handleClose={this.handleClose}
           />
         </div>

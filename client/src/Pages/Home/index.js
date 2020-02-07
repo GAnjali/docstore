@@ -23,8 +23,6 @@ const intialState = {
   editingFile: null,
   showFileModel: false,
   showFolderModel: false,
-  sharingWithUser: null,
-  shareType: "View",
   newFolderName: "",
   newFile: false
 };

@@ -8,19 +8,61 @@ import {
   SHARE_WITH_OTHERS,
   VIEW
 } from "../../../AppConstants";
+import { addShare, getUserByEmail } from "../services/HomeService";
 
 class ShareModel extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      sharingWithUser: null,
+      error: "",
+      shareType: "View",
+      sharingFile: props.sharingFile
+    };
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({ sharingFile: props.sharingFile });
+  }
+
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleShareType = event => {
+    this.setState({
+      shareType: event.target.id
+    });
+  };
+
+  handleShare = async () => {
+    const getUserResponse = await getUserByEmail(this.state.sharingWithUser);
+    if (getUserResponse.status === 200) {
+      const shareResponse = await addShare(
+        this.state.sharingFile.id,
+        this.state.shareType,
+        getUserResponse.data.data.id
+      );
+      if (shareResponse.status === 200) {
+        this.props.handleClose;
+        alert(shareResponse.data.message);
+      } else {
+        this.setState({
+          error: getUserResponse.message
+        });
+      }
+    } else {
+      this.setState({
+        error: getUserResponse.message
+      });
+    }
+  };
+
   render() {
-    const {
-      handleClose,
-      handleInput,
-      handleShareType,
-      handleShare
-    } = this.props;
+    const { handleClose } = this.props;
     let style = {};
     if (this.props.show === true) {
       style = { display: "block" };
@@ -38,21 +80,21 @@ class ShareModel extends Component {
               className={"sharewith-textarea"}
               name={"sharingWithUser"}
               placeholder={EMAIL_PLACEHOLDER}
-              onChange={handleInput}
+              onChange={this.handleChange}
             />
             <div className="sharetype-dropdown">
               <button className="dropbtn">{SHARE_TYPE}</button>
               <div className="dropdown-content">
-                <p onClick={handleShareType} id={"View"}>
+                <p onClick={this.handleShareType} id={"View"}>
                   {VIEW}
                 </p>
-                <p onClick={handleShareType} id={"Modify"}>
+                <p onClick={this.handleShareType} id={"Modify"}>
                   {EDIT}
                 </p>
               </div>
             </div>
           </div>
-          <button className={"share-button"} onClick={handleShare}>
+          <button className={"share-button"} onClick={this.handleShare}>
             {SHARE}
           </button>
         </div>
