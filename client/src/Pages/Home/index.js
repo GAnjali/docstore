@@ -22,9 +22,7 @@ const intialState = {
   error: "",
   editingFile: null,
   showFileModel: false,
-  showSharingModel: false,
   showFolderModel: false,
-  sharingFile: null,
   sharingWithUser: null,
   shareType: "View",
   newFolderName: "",
@@ -63,14 +61,6 @@ class Home extends Component {
     });
   };
 
-  handleShareFile = fileindex => {
-    this.setState({
-      showSharingModel: true,
-      sharingFile: this.props.files[fileindex]
-    });
-    //share service request
-  };
-
   handleAddNewFolder = () => {
     this.setState({
       showFolderModel: true
@@ -82,41 +72,6 @@ class Home extends Component {
       showFileModel: false,
       showFolderModel: false,
       showSharingModel: false
-    });
-  };
-
-  handleShare = async () => {
-    const getUserResponse = await getUserByEmail(this.state.sharingWithUser);
-    if (getUserResponse.status === 200) {
-      const shareResponse = await addShare(
-        this.state.sharingFile.id,
-        this.state.shareType,
-        getUserResponse.data.data.id
-      );
-      if (shareResponse.status === 200) {
-        alert(shareResponse.data.message);
-      } else {
-        this.setState({
-          error: getUserResponse.message
-        });
-      }
-    } else {
-      this.setState({
-        error: getUserResponse.message
-      });
-    }
-  };
-
-  handleShareType = event => {
-    this.setState({
-      shareType: event.target.id
-    });
-  };
-
-  handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
     });
   };
 
@@ -139,14 +94,6 @@ class Home extends Component {
           showModel={this.state.showFileModel}
           isNewFile={true}
           updateComponent={this.updateComponent}
-          handleClose={this.handleClose}
-        />
-        <ShareModel
-          show={this.state.showSharingModel}
-          sharingFile={this.state.sharingFile}
-          handleInput={this.handleChange}
-          handleShareType={this.handleShareType}
-          handleShare={this.handleShare}
           handleClose={this.handleClose}
         />
       </>

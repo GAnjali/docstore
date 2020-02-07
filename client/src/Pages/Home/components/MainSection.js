@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import * as folderActions from "../actions/folderActions";
 import * as fileActions from "../actions/fileActions";
 
-import { getShare, getUserByEmail } from "../services/HomeService";
+import { addShare, getShare, getUserByEmail } from "../services/HomeService";
 import {
   addFile,
   deleteFile,
@@ -19,12 +19,15 @@ import { getUser } from "../../../Util/localStorageUtil";
 import ResponseUtil from "../../../Util/ResponseUtil";
 import FileModel from "./FileModel";
 import { deleteFolder } from "../services/FolderService";
+import ShareModel from "./ShareModel";
 const responseUtil = new ResponseUtil();
 
 const intialState = {
   editingFile: null,
   showFileModel: false,
-  error: ""
+  error: "",
+  showSharingModel: false,
+  sharingFile: null
 };
 
 class MainSection extends Component {
@@ -32,6 +35,11 @@ class MainSection extends Component {
     super(props);
     this.state = intialState;
   }
+
+  updateComponent = parentFolderId => {
+    this.props.fileActions.fetchFiles(parentFolderId);
+    this.props.folderActions.fetchFolders(parentFolderId);
+  };
 
   isSharedFile = fileId => {
     return this.props.sharedFiles.includes(fileId);
@@ -75,11 +83,6 @@ class MainSection extends Component {
     }
   };
 
-  updateComponent = parentFolderId => {
-    this.props.fileActions.fetchFiles(parentFolderId);
-    this.props.folderActions.fetchFolders(parentFolderId);
-  };
-
   handleDeleteFile = async fileId => {
     const deleteResponse = await deleteFile(fileId);
     if (deleteResponse.status === 200) {
@@ -89,6 +92,14 @@ class MainSection extends Component {
         error: deleteResponse.message
       });
     }
+  };
+
+  handleShareFile = fileindex => {
+    this.setState({
+      showSharingModel: true,
+      sharingFile: this.props.files[fileindex]
+    });
+    //share service request
   };
 
   handleFileActions = async event => {
@@ -143,7 +154,47 @@ class MainSection extends Component {
 
   handleClose = () => {
     this.setState({
-      showFileModel: false
+      showFileModel: false,
+      showSharingModel: false
+    });
+  };
+
+  handleShareType = event => {
+    this.setState({
+      shareType: event.target.id
+    });
+  };
+
+  handleShare = async () => {
+    console.log(this.state);
+    const getUserResponse = await getUserByEmail(this.state.sharingWithUser);
+    if (getUserResponse.status === 200) {
+      const shareResponse = await addShare(
+        this.state.sharingFile.id,
+        this.state.shareType,
+        getUserResponse.data.data.id
+      );
+      if (shareResponse.status === 200) {
+        this.setState({
+          showSharingModel: false
+        });
+        alert(shareResponse.data.message);
+      } else {
+        this.setState({
+          error: getUserResponse.message
+        });
+      }
+    } else {
+      this.setState({
+        error: getUserResponse.message
+      });
+    }
+  };
+
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
     });
   };
 
@@ -175,6 +226,14 @@ class MainSection extends Component {
             isNewFile={false}
             handleClose={this.handleClose}
             updateComponent={this.updateComponent}
+          />
+          <ShareModel
+            show={this.state.showSharingModel}
+            sharingFile={this.state.sharingFile}
+            handleInput={this.handleChange}
+            handleShareType={this.handleShareType}
+            handleShare={this.handleShare}
+            handleClose={this.handleClose}
           />
         </div>
       );
