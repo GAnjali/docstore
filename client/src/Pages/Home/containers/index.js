@@ -1,17 +1,13 @@
 import React, { Component } from "react";
-import Header from "./components/Header";
-import "./styles/Home.css";
-import Sidebar from "./components/Sidebar";
-import MainSection from "./components/MainSection";
-import { isLoggedIn } from "../../Util/AuthService";
-import FileModel from "./components/FileModel";
-import FolderModel from "./components/FolderModel";
-import { LOGIN_URL } from "../../AppConstants";
+import "./../styles/Home.css";
+import { isLoggedIn } from "../../../Util/AuthService";
+import { LOGIN_URL } from "../../../AppConstants";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as folderActions from "./actions/folderActions";
-import * as fileActions from "./actions/fileActions";
+import * as folderActions from "./../actions/folderActions";
+import * as fileActions from "./../actions/fileActions";
 import PropTypes from "prop-types";
+import HomeComponent from "../components";
 
 const intialState = {
   sharedFiles: [],
@@ -70,28 +66,18 @@ class Home extends Component {
   };
 
   render() {
-    return (
-      <>
-        <Header history={this.props.history} />
-        <Sidebar
-          handleAddFile={this.handleAddNewFile}
-          handleAddFolder={this.handleAddNewFolder}
-        />
-        <MainSection />
-        <FolderModel
-          show={this.state.showFolderModel}
-          updateComponent={this.updateComponent}
-          handleClose={this.handleClose}
-        />
-        <FileModel
-          editingFile={this.state.editingFile}
-          showModel={this.state.showFileModel}
-          isNewFile={true}
-          updateComponent={this.updateComponent}
-          handleClose={this.handleClose}
-        />
-      </>
-    );
+    const props = {
+      history: this.props.history,
+      handleAddFile: this.handleAddNewFile,
+      handleAddFolder: this.handleAddNewFolder,
+      showFolderModel: this.state.showFolderModel,
+      updateComponent: this.updateComponent,
+      handleClose: this.handleClose,
+      editingFile: this.state.editingFile,
+      showFileModel: this.state.showFileModel,
+      isNewFile: true
+    };
+    return HomeComponent(props);
   }
 }
 
