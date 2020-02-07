@@ -47,8 +47,7 @@ class ShareModel extends Component {
         getUserResponse.data.data.id
       );
       if (shareResponse.status === 200) {
-        this.props.handleClose;
-        alert(shareResponse.data.message);
+        this.props.handleClose();
       } else {
         this.setState({
           error: getUserResponse.message
