@@ -8,12 +8,10 @@ import { connect } from "react-redux";
 import * as folderActions from "../actions/folderActions";
 import * as fileActions from "../actions/fileActions";
 
-import { addShare, getShare, getUserByEmail } from "../services/HomeService";
+import { getShare, getUserByEmail } from "../services/HomeService";
 import {
-  addFile,
   deleteFile,
   getFileByid,
-  updateFile
 } from "../services/FileService";
 import { getUser } from "../../../Util/localStorageUtil";
 import ResponseUtil from "../../../Util/ResponseUtil";
