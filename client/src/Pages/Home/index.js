@@ -27,7 +27,8 @@ const intialState = {
   sharingFile: null,
   sharingWithUser: null,
   shareType: "View",
-  newFolderName: ""
+  newFolderName: "",
+  newFile: false
 };
 
 class Home extends Component {
@@ -48,21 +49,6 @@ class Home extends Component {
   updateComponent = parentFolderId => {
     this.props.fileActions.fetchFiles(parentFolderId);
     this.props.folderActions.fetchFolders(parentFolderId);
-  };
-
-  handleSaveFile = async () => {
-    if (this.state.showFileModel) {
-      await addFile(this.state.editingFile).then(() => {
-        this.setState(
-          {
-            showFileModel: false
-          },
-          () => {
-            this.updateComponent(localStorage.getItem("parentfolderid"));
-          }
-        );
-      });
-    }
   };
 
   handleAddNewFile = () => {
@@ -104,24 +90,6 @@ class Home extends Component {
   handleAddNewFolder = () => {
     this.setState({
       showFolderModel: true
-    });
-  };
-
-  handleContentChange = event => {
-    const newContent = event.target.value;
-    this.setState(prevState => {
-      const fileOnEdit = prevState.editingFile;
-      fileOnEdit.content = newContent;
-      return { editingFile: fileOnEdit };
-    });
-  };
-
-  handleTitleChange = event => {
-    const newTitle = event.target.value;
-    this.setState(prevState => {
-      const fileOnEdit = prevState.editingFile;
-      fileOnEdit.name = newTitle;
-      return { editingFile: fileOnEdit };
     });
   };
 
@@ -186,10 +154,9 @@ class Home extends Component {
         />
         <FileModel
           editingFile={this.state.editingFile}
-          show={this.state.showFileModel}
-          handleTitleChange={this.handleTitleChange}
-          handleContentChange={this.handleContentChange}
-          handleSaveFile={this.handleSaveFile}
+          showModel={this.state.showFileModel}
+          isNewFile={true}
+          updateComponent={this.updateComponent}
           handleClose={this.handleClose}
         />
         <ShareModel

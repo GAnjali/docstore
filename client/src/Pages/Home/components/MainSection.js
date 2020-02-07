@@ -172,6 +172,7 @@ class MainSection extends Component {
           <FileModel
             editingFile={this.state.editingFile}
             showModel={this.state.showFileModel}
+            isNewFile={false}
             handleClose={this.handleClose}
             updateComponent={this.updateComponent}
           />

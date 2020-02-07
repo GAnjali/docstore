@@ -4,7 +4,7 @@ import {
   FILE_NAME_PLACEHOLDER,
   SAVE
 } from "../../../AppConstants";
-import { updateFile } from "../services/FileService";
+import { addFile, updateFile } from "../services/FileService";
 
 class FileModel extends Component {
   constructor(props) {
@@ -38,10 +38,17 @@ class FileModel extends Component {
 
   handleSaveFile = async () => {
     if (this.props.showModel) {
-      await updateFile(this.state.editingFile).then(() => {
-        this.props.handleClose();
-        this.props.updateComponent(localStorage.getItem("parentfolderid"));
-      });
+      if (this.props.isNewFile) {
+        await addFile(this.state.editingFile).then(() => {
+          this.props.handleClose();
+          this.props.updateComponent(localStorage.getItem("parentfolderid"));
+        });
+      } else {
+        await updateFile(this.state.editingFile).then(() => {
+          this.props.handleClose();
+          this.props.updateComponent(localStorage.getItem("parentfolderid"));
+        });
+      }
     }
   };
 
