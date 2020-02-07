@@ -71,22 +71,6 @@ class Home extends Component {
     //share service request
   };
 
-  handleSaveFolder = async () => {
-    const newFolder = { name: this.state.newFolderName };
-    await addFolder(newFolder)
-      .then(() => {
-        this.setState({
-          showFolderModel: false
-        });
-        this.updateComponent(localStorage.getItem("parentfolderid"));
-      })
-      .catch(err => {
-        this.setState({
-          error: err.message
-        });
-      });
-  };
-
   handleAddNewFolder = () => {
     this.setState({
       showFolderModel: true
@@ -147,9 +131,7 @@ class Home extends Component {
         <MainSection />
         <FolderModel
           show={this.state.showFolderModel}
-          newFolder={this.state.newFolderName}
-          handleFolderNameChange={this.handleChange}
-          handleSaveFolder={this.handleSaveFolder}
+          updateComponent={this.updateComponent}
           handleClose={this.handleClose}
         />
         <FileModel
