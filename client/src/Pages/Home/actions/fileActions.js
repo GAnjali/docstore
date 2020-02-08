@@ -55,16 +55,18 @@ const updateFiles = (files, sharedFiles) => {
 };
 
 export function fetchFiles(parentFolderId) {
-  let files = {};
+  let files = [];
   return dispatch => {
     getFilesFromAPI(parentFolderId).then(response => {
-      files = response;
-      dispatch(receiveFiles(response));
+      if (!response.includes("404")) {
+        files = response;
+        dispatch(receiveFiles(response));
+      }
     });
-    // getSharedFilesFromAPI(parentFolderId).then(response => {
-    //   dispatch(receiveSharedFiles(response));
-    //   dispatch(receiveFiles(updateFiles(files, response)));
-    // });
+    getSharedFilesFromAPI(parentFolderId).then(response => {
+      dispatch(receiveSharedFiles(response));
+      dispatch(receiveFiles(updateFiles(files, response)));
+    });
   };
 }
 
