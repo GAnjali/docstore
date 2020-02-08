@@ -7,15 +7,11 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as folderActions from "../actions/folderActions";
 import * as fileActions from "../actions/fileActions";
-
 import { getShare, getUserByEmail } from "../services/HomeService";
-import {
-  deleteFile,
-  getFileByid,
-} from "../services/FileService";
+import { deleteFile, getFileByid } from "../services/FileService";
 import { getUser } from "../../../Util/localStorageUtil";
 import ResponseUtil from "../../../Util/ResponseUtil";
-import FileModel from "./FileModel";
+import FileModel from "./../containers/FileModel";
 import { deleteFolder } from "../services/FolderService";
 import ShareModel from "./ShareModel";
 const responseUtil = new ResponseUtil();

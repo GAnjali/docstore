@@ -3,7 +3,7 @@ import Header from "./Header";
 import Sidebar from "./Sidebar";
 import MainSection from "./MainSection";
 import FolderModel from "./FolderModel";
-import FileModel from "./FileModel";
+import FileModel from "./../containers/FileModel";
 
 const HomeComponent = props => {
   return (
