@@ -38,7 +38,7 @@ class FolderModel extends Component {
     return (
       <FolderModelComponent
         style={style}
-        handleClose={this.props.handleClose}
+        handleClose={handleClose}
         handleChange={this.handleChange}
         handleSaveFolder={this.handleSaveFolder}
       />

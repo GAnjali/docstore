@@ -42,10 +42,11 @@ class MainSection extends Component {
     );
     if (getUserResponse.status === SUCCESS) {
       return getUserResponse.data.id;
+    } else {
+      this.setState({
+        error: getUserResponse.message
+      });
     }
-    // else {
-    //         error: getUserResponse.message
-    // }
   };
 
   handleEditFile = async (fileId, isSharedFile) => {
