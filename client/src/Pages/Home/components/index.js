@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../containers/Header";
 import Sidebar from "./Sidebar";
-import MainSection from "./MainSection";
+import MainSection from "../containers/MainSection";
 import FileModel from "./../containers/FileModel";
 import FolderModel from "../containers/FolderModel";
 
