@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-import {
-  FOLDER_NAME_PLACEHOLDER,
-  NEW_FOLDER,
-  SAVE
-} from "../../../AppConstants";
 import { addFolder } from "../services/FolderService";
+import FolderModelComponent from "../components/FolderModelComponent";
 
 class FolderModel extends Component {
   constructor(props) {
@@ -40,25 +36,12 @@ class FolderModel extends Component {
       style = { display: "block" };
     }
     return (
-      <div id="myModal" className="sharingmodal" style={style}>
-        <div className="foldermodal-content">
-          <div className="modal-header">
-            <span className={"newFolder"}>{NEW_FOLDER}</span>
-            <span className="close" onClick={handleClose}>
-              &times;
-            </span>
-            <textarea
-              className={"sharingwith-text-area"}
-              name={"newFolderName"}
-              placeholder={FOLDER_NAME_PLACEHOLDER}
-              onChange={this.handleChange}
-            />
-            <div className="modal-save">
-              <button onClick={this.handleSaveFolder}>{SAVE}</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <FolderModelComponent
+        style={style}
+        handleClose={this.props.handleClose}
+        handleChange={this.handleChange}
+        handleSaveFolder={this.handleSaveFolder}
+      />
     );
   }
 }

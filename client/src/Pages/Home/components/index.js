@@ -2,8 +2,8 @@ import React from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import MainSection from "./MainSection";
-import FolderModel from "./FolderModel";
 import FileModel from "./../containers/FileModel";
+import FolderModel from "../containers/FolderModel";
 
 const HomeComponent = props => {
   return (

@@ -1,19 +1,19 @@
 import React from "react";
 import {shallow} from "enzyme";
-import FolderModel from "../FolderModel";
+import FolderModelComponent from "../FolderModelComponent";
 
-describe("FolderModel component tests", () => {
+describe("FolderModelComponent component tests", () => {
     const props = {
         handleFolderNameChange: jest.fn(),
         handleSaveFolder: jest.fn()
     };
 
     it("Should render without crashing", () => {
-        shallow(<FolderModel props/>);
+        shallow(<FolderModelComponent props/>);
     });
 
-    it('should match the FolderModel snapshot', function () {
-        const folderModelComponent = shallow(<FolderModel props/>);
+    it('should match the FolderModelComponent snapshot', function () {
+        const folderModelComponent = shallow(<FolderModelComponent props/>);
         expect(folderModelComponent).toMatchSnapshot();
     });
 });
