@@ -6,8 +6,6 @@ import {
 import React from "react";
 
 const FileModelComponent = props => {
-  console.log(props);
-  console.log(props.style);
   return (
     <div id="myModal" className="modal" style={props.style}>
       <div className="modal-content">

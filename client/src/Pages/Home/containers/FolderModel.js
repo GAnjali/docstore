@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { addFolder } from "../services/FolderService";
-import FolderModelComponent from "../components/FolderModelComponent";
+import FolderModelComponent from "../components/FolderModel";
 
 class FolderModel extends Component {
   constructor(props) {
