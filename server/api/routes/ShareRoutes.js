@@ -6,10 +6,6 @@ const shareRoutes = Router();
 
 shareRoutes.post("/", AuthUtil.verifyToken, ShareController.add);
 shareRoutes.get("/:userid", AuthUtil.verifyToken, ShareController.getAllByUser);
-shareRoutes.get(
-  "/:userid/fileid=:fileid",
-  AuthUtil.verifyToken,
-  ShareController.getAllByFileUser
-);
+shareRoutes.get("/:userid/fileid=:fileid", AuthUtil.verifyToken, ShareController.getAllByFileUser);
 
 export default shareRoutes;
