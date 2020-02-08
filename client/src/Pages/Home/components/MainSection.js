@@ -1,7 +1,7 @@
 import Folders from "./Folders";
 import Files from "./Files";
 import FileModel from "../containers/FileModel";
-import ShareModel from "./ShareModel";
+import ShareModel from "../containers/ShareModel";
 import { NO_CONTENTS_FOUND } from "../../../AppConstants";
 import React from "react";
 
