@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import "./styles/Login.css";
-import { login } from "./services/LoginService";
-import LoginView from "./components/LoginView";
-import { getToken, setToken, setUser } from "../../Util/localStorageUtil";
-import { HOME_URL, STATUS_CODE_200, TOKEN_GENERATED } from "../../AppConstants";
+import "../styles/Login.css";
+import { login } from "../services/LoginService";
+import LoginView from "../components/LoginView";
+import { getToken, setToken, setUser } from "../../../Util/localStorageUtil";
+import {
+  HOME_URL,
+  STATUS_CODE_200,
+  TOKEN_GENERATED
+} from "../../../AppConstants";
 
 const intialState = {
   email: "",

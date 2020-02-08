@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import "../Login/styles/Login.css";
-import register from "./services/SignupService";
-import SignupView from "./components/SignupView";
-import { getToken } from "../../Util/localStorageUtil";
+import "../../Login/styles/Login.css";
+import register from "../services/SignupService";
+import SignupView from "../components/SignupView";
+import { getToken } from "../../../Util/localStorageUtil";
 import {
   HOME_URL,
   LOGIN_URL,
   USER_ADDED,
   STATUS_CODE_201
-} from "../../AppConstants";
+} from "../../../AppConstants";
 
 const intialState = {
   email: "",
